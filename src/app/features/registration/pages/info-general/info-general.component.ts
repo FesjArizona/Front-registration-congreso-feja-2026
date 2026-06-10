@@ -9,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class InfoGeneralComponent {
 
+  email: string = "fesjarizona@gmail.com"
+
 }

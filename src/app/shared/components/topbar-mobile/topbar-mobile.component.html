@@ -1,0 +1,19 @@
+<div class="topbar-mobile d-flex flex-row align-items-center justify-content-between py-4 py-md-5 gap-5">
+  <div>
+    <h4 class="stepper-title m-0">Información General</h4>
+    <p class="stepper-description m-0">Siguiente - Datos Personales</p>
+  </div>
+  <div>
+    <div class="progress-container">
+      <svg class="progress-svg" viewBox="0 0 100 100">
+        <circle class="circle-bg" cx="50" cy="50" r="40" />
+        <circle class="circle-prog" cx="50" cy="50" r="40" [attr.stroke-dasharray]="circumference"
+          [attr.stroke-dashoffset]="strokeDashoffset" />
+      </svg>
+
+      <div class="progress-text">
+        {{ currentStep }} de {{ totalSteps }}
+      </div>
+    </div>
+  </div>
+</div>

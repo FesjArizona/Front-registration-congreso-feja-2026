@@ -1,9 +1,14 @@
-<div class="registration-container">
-  <aside class="sidebar">
+<div class="registration-container p-0 p-lg-5 d-flex flex-column flex-lg-row justify-content-between align-items-lg-start align-items-center gap-4">
+  <aside class="sidebar col-12 col-md-4  d-none d-lg-flex align-items-start justify-content-center p-0">
     <app-stepper-sidebar></app-stepper-sidebar>
   </aside>
 
-  <main class="content-area">
+  <section class="sidebar-mobile col-12 d-flex d-lg-none align-items-center justify-content-center p-0">
+    <app-topbar-mobile class="col-11 col-md-10"></app-topbar-mobile>
+  </section>
+
+  <main class="content-area col-12 col-md-10 col-lg-8">
     <router-outlet></router-outlet>
+    <app-footer-bar></app-footer-bar>
   </main>
 </div>
