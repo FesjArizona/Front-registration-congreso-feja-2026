@@ -1,26 +1,28 @@
-<aside class="stepper-sidebar d-flex flex-column align-items-center gap-4 py-5">
-  <img src="../../../../assets/images/logo_fesjaz.webp" alt="Stepper Logo Image" class="logo-image">
-  <h4 class="stepper-title m-0">Registro al Congreso</h4>
+<aside class="stepper-sidebar d-flex flex-column align-items-center gap-5 py-5">
+  <div class="d-flex flex-column align-items-center justify-content-center gap-2">
+    <img src="../../../../assets/images/logo_fesjaz.webp" alt="Stepper Logo Image" class="logo-image">
+    <h4 class="stepper-title m-0">Registro al Congreso</h4>
+  </div>
   <ul class="stepper-list nav flex-column gap-5">
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number active">1</span>
-      <a href="" class="step-label active">Datos Personales</a>
+      <span class="step-number" [class.active]="currentStep === 1">1</span>
+      <p class="step-label m-0" [class.active]="currentStep === 1">Datos Personales</p>
     </li>
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number">2</span>
-      <a href="" class="step-label">Contacto de Emergencia</a>
+      <span class="step-number" [class.active]="currentStep === 2">2</span>
+      <p class="step-label m-0" [class.active]="currentStep === 2">Contacto de Emergencia</p>
     </li>
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number">3</span>
-      <a href="" class="step-label">Resumen</a>
+      <span class="step-number" [class.active]="currentStep === 3">3</span>
+      <p class="step-label m-0" [class.active]="currentStep === 3">Resumen</p>
     </li>
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number">4</span>
-      <a href="" class="step-label">Confirmación</a>
+      <span class="step-number" [class.active]="currentStep === 4">4</span>
+      <p class="step-label m-0" [class.active]="currentStep === 4">Confirmación</p>
     </li>
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number">5</span>
-      <a href="" class="step-label">Recibido</a>
+      <span class="step-number" [class.active]="currentStep === 5">5</span>
+      <p class="step-label m-0" [class.active]="currentStep === 5">Recibido</p>
     </li>
   </ul>
 </aside>

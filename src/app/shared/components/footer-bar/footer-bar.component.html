@@ -1,3 +1,19 @@
-<p>
-  footer-bar works!
-</p>
+<div class="stepper-footer">
+  <button
+    type="button"
+    class="btn-step btn-prev"
+    [disabled]="isFirstStep"
+    (click)="onPrevious()"
+    aria-label="Paso anterior">
+    <span class="arrow-icon left"></span>
+  </button>
+
+  <button
+    type="button"
+    class="btn-step btn-next"
+    [disabled]="!isCurrentStepValid"
+    (click)="onNext()"
+    aria-label="Siguiente paso">
+    <span class="arrow-icon right"></span>
+  </button>
+</div>

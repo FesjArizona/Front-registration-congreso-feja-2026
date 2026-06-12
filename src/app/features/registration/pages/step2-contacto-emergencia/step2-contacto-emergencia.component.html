@@ -1,1 +1,56 @@
-<p>step2-contacto-emergencia works!</p>
+<div class="container d-flex flex-column align-items-start justify-content-center gap-4 p-3">
+  <form [formGroup]="paso2Form" class="w-100 d-flex flex-column gap-4 bg-white">
+    <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+      <p class="m-0 fw-medium fs-5 text-capitalize">Información de contacto de emergencia</p>
+      <p  class="m-0 fw-medium fs-6">Todos los asistentes deben completar esta sección.</p>
+      <p class="m-0 fw-medium fs-6">Tu seguridad es muy importante para nosotros, así que asegúrate de llenar los datos de contacto de alguien que podamos localizar en caso de emergencia.</p>
+    </div>
+    <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+      <p class="m-0 fw-medium fs-5 text-capitalize">Datos de Emergencia</p>
+    </div>
+    <div class="d-flex flex-column gap-4">
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
+        <div class="col-10 col-md">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="nameContact" placeholder="Ralph Smith" formControlName="nameContact"
+              [class.is-invalid]="paso2Form.get('nameContact')?.invalid && paso2Form.get('nameContact')?.touched">
+            <label for="nameContact">Nombre del Contacto</label>
+            <div class="invalid-feedback">El nombre es requerido.</div>
+          </div>
+        </div>
+        <div class="col-10 col-md">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="phoneContact" placeholder="111-222-3333" formControlName="phoneContact"
+              [class.is-invalid]="paso2Form.get('phoneContact')?.invalid && paso2Form.get('phoneContact')?.touched">
+            <label for="phoneContact">Numero de Teléfono</label>
+            <div class="invalid-feedback">El numero de teléfono es requerido.</div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
+        <div class="col-10 col-md">
+          <div class="form-floating">
+            <select class="form-select form-control" id="relationship" formControlName="relationship"
+              [class.is-invalid]="paso2Form.get('relationship')?.invalid && paso2Form.get('relationship')?.touched">
+              <option selected disabled>Relación con el Contacto</option>
+              <option value="fam">Familiar</option>
+              <option value="amg">Amigo</option>
+              <option value="otro">Otro</option>
+            </select>
+            <label for="relationship">Relación con el Contacto</label>
+            <div class="invalid-feedback">La relación es requerida.</div>
+          </div>
+        </div>
+        <div class="col-10 col-md">
+          <!-- <div class="form-floating">
+            <input type="tel" id="phone" class="form-control" formControlName="phone" placeholder="111-222-3333"
+              [class.is-invalid]="paso2Form.get('phone')?.invalid && paso2Form.get('phone')?.touched" minlength="10"
+              maxlength="12">
+            <label for="phone">Teléfono</label>
+            <div class="invalid-feedback">El teléfono es requerido.</div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
