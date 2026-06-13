@@ -9,20 +9,50 @@
   }
   .stepper-list {
     .stepper-item {
+      &:last-child {
+        .step-number::after {
+          display: none !important;
+        }
+      }
       .step-number {
-        display: inline-block;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 50px;
         height: 50px;
-        line-height: 50px;
         font-weight: 600;
         border-radius: 50%;
         background-color: #E7ECF2;
         color: #97A09F;
-        text-align: center;
         font-size: 18px;
+        transition: all 0.3s ease;
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 3px;
+          height: 48px;
+          background-color: #E7ECF2;
+          transition: background-color 0.3s ease;
+        }
         &.active {
           background-color: #121628 !important;
           color: #fff !important;
+        }
+        &.solved {
+          background-color: #3ca290 !important;
+          color: #fff !important;
+          &::after {
+            background-color: #3ca290 !important;
+          }
+        }
+        .solved-icon {
+          width: 24px;
+          height: 24px;
+          stroke: #fff;
         }
       }
       .step-label {
@@ -30,6 +60,10 @@
         color: #606676;
         font-weight: 600;
         text-decoration: none;
+        transition: all 0.3s ease;
+        &.solved {
+          color: #3ca290 !important;
+        }
       }
       .active {
         color: #121628 !important;
