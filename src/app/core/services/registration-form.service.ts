@@ -1,0 +1,39 @@
+import { Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RegistrationFormService {
+  public stepperForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.stepperForm = this.fb.group({
+      paso1: this.fb.group({
+        name: ['', Validators.required],
+        lastname: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12)]],
+        age: ['', Validators.required],
+        gender: ['', Validators.required],
+        state: ['', Validators.required],
+        conference: ['', Validators.required],
+        city: ['', Validators.required],
+        church: ['', Validators.required],
+        sizeShirt: ['', Validators.required],
+        includesLunch: ['', Validators.required],
+        isChaperone: ['', Validators.required]
+      }),
+      paso2: this.fb.group({
+        nameContact: ['',   Validators.required],
+        phoneContact: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12)]],
+        relationship: ['', Validators.required]
+      }),
+      paso3: this.fb.group({
+        comentarios: ['']
+      }),
+      paso4: this.fb.group({}),
+      paso5: this.fb.group({})
+    });
+  }
+}
