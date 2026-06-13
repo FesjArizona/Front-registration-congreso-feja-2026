@@ -4,12 +4,12 @@
   </aside>
 
   <section class="sidebar-mobile col-12 d-flex d-lg-none align-items-center justify-content-center p-0">
-    <app-topbar-mobile class="col-11 col-md-10"></app-topbar-mobile>
+    <app-topbar-mobile class="col-11 col-md-10" [currentStep]="activeStep" [totalSteps]="totalSteps"></app-topbar-mobile>
   </section>
 
   <main class="content-area col-12 col-md-10 col-lg-8">
     <router-outlet></router-outlet>
-    <div class="stepper-container">
+    <div class="stepper-container" *ngIf="activeStep < 4">
   <app-footer-bar
     [isFirstStep]="activeStep === 0"
     [isCurrentStepValid]="isCurrentStepValid"

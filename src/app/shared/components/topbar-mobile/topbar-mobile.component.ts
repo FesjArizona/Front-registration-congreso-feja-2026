@@ -13,6 +13,26 @@ export class TopbarMobileComponent {
   @Input() currentStep: number = 0;
   @Input() totalSteps: number = 5;
 
+  readonly stepTitles = [
+    'Información General',
+    'Datos Personales',
+    'Contacto de Emergencia',
+    'Resumen',
+    'Confirmación',
+    'Recibido'
+  ];
+
+  get currentTitle(): string {
+    return this.stepTitles[this.currentStep] || '';
+  }
+
+  get nextTitle(): string {
+    if (this.currentStep < this.totalSteps) {
+      return `Siguiente - ${this.stepTitles[this.currentStep + 1]}`;
+    }
+    return '';
+  }
+
   // Circunferencia del círculo (2 * Math.PI * r) -> 2 * 3.1416 * 40 = ~251.2
   readonly circumference = 251.2;
 

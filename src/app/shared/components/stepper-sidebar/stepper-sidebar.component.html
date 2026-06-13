@@ -4,25 +4,70 @@
     <h4 class="stepper-title m-0">Registro al Congreso</h4>
   </div>
   <ul class="stepper-list nav flex-column gap-5">
-    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number" [class.active]="currentStep === 1">1</span>
-      <p class="step-label m-0" [class.active]="currentStep === 1">Datos Personales</p>
+    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 1" [class.solved]="isStepSolved(1)">
+      <span class="step-number" [class.active]="currentStep === 1" [class.solved]="isStepSolved(1)">
+        @if (isStepSolved(1)) {
+          <svg class="solved-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="16 9 11 14 8 11"></polyline>
+          </svg>
+        } @else {
+          1
+        }
+      </span>
+      <p class="step-label m-0" [class.active]="currentStep === 1" [class.solved]="isStepSolved(1)">Datos Personales</p>
     </li>
-    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number" [class.active]="currentStep === 2">2</span>
-      <p class="step-label m-0" [class.active]="currentStep === 2">Contacto de Emergencia</p>
+    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 2" [class.solved]="isStepSolved(2)">
+      <span class="step-number" [class.active]="currentStep === 2" [class.solved]="isStepSolved(2)">
+        @if (isStepSolved(2)) {
+          <svg class="solved-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="16 9 11 14 8 11"></polyline>
+          </svg>
+        } @else {
+          2
+        }
+      </span>
+      <p class="step-label m-0" [class.active]="currentStep === 2" [class.solved]="isStepSolved(2)">Contacto de Emergencia</p>
     </li>
-    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number" [class.active]="currentStep === 3">3</span>
-      <p class="step-label m-0" [class.active]="currentStep === 3">Resumen</p>
+    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 3" [class.solved]="isStepSolved(3)">
+      <span class="step-number" [class.active]="currentStep === 3" [class.solved]="isStepSolved(3)">
+        @if (isStepSolved(3)) {
+          <svg class="solved-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="16 9 11 14 8 11"></polyline>
+          </svg>
+        } @else {
+          3
+        }
+      </span>
+      <p class="step-label m-0" [class.active]="currentStep === 3" [class.solved]="isStepSolved(3)">Resumen</p>
     </li>
-    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number" [class.active]="currentStep === 4">4</span>
-      <p class="step-label m-0" [class.active]="currentStep === 4">Confirmación</p>
+    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 4" [class.solved]="isStepSolved(4)">
+      <span class="step-number" [class.active]="currentStep === 4" [class.solved]="isStepSolved(4)">
+        @if (isStepSolved(4)) {
+          <svg class="solved-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="16 9 11 14 8 11"></polyline>
+          </svg>
+        } @else {
+          4
+        }
+      </span>
+      <p class="step-label m-0" [class.active]="currentStep === 4" [class.solved]="isStepSolved(4)">Confirmación</p>
     </li>
-    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start">
-      <span class="step-number" [class.active]="currentStep === 5">5</span>
-      <p class="step-label m-0" [class.active]="currentStep === 5">Recibido</p>
+    <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 5" [class.solved]="isStepSolved(5)">
+      <span class="step-number" [class.active]="currentStep === 5" [class.solved]="isStepSolved(5)">
+        @if (isStepSolved(5)) {
+          <svg class="solved-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="16 9 11 14 8 11"></polyline>
+          </svg>
+        } @else {
+          5
+        }
+      </span>
+      <p class="step-label m-0" [class.active]="currentStep === 5" [class.solved]="isStepSolved(5)">Recibido</p>
     </li>
   </ul>
 </aside>

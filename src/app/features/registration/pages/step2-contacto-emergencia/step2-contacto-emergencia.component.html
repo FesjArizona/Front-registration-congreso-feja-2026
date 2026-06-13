@@ -33,22 +33,16 @@
             <select class="form-select form-control" id="relationship" formControlName="relationship"
               [class.is-invalid]="paso2Form.get('relationship')?.invalid && paso2Form.get('relationship')?.touched">
               <option selected disabled>Relación con el Contacto</option>
-              <option value="fam">Familiar</option>
-              <option value="amg">Amigo</option>
-              <option value="otro">Otro</option>
+              <option value="spouse">Esposo(a)</option>
+              <option value="family">Familiar</option>
+              <option value="friend">Amigo</option>
+              <option value="other">Otro</option>
             </select>
             <label for="relationship">Relación con el Contacto</label>
             <div class="invalid-feedback">La relación es requerida.</div>
           </div>
         </div>
         <div class="col-10 col-md">
-          <!-- <div class="form-floating">
-            <input type="tel" id="phone" class="form-control" formControlName="phone" placeholder="111-222-3333"
-              [class.is-invalid]="paso2Form.get('phone')?.invalid && paso2Form.get('phone')?.touched" minlength="10"
-              maxlength="12">
-            <label for="phone">Teléfono</label>
-            <div class="invalid-feedback">El teléfono es requerido.</div>
-          </div> -->
         </div>
       </div>
     </div>

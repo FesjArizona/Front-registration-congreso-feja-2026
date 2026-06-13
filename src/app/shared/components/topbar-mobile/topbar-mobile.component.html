@@ -1,7 +1,11 @@
 <div class="topbar-mobile d-flex flex-row align-items-center justify-content-between py-4 py-md-5 gap-5">
   <div>
-    <h4 class="stepper-title m-0">Información General</h4>
-    <p class="stepper-description m-0">Siguiente - Datos Personales</p>
+    <h4 class="stepper-title m-0">{{ currentTitle }}</h4>
+    @if (currentStep < totalSteps) {
+      <p class="stepper-description m-0">{{ nextTitle }}</p>
+    } @else {
+      <p class="stepper-description m-0">¡Registro completado!</p>
+    }
   </div>
   <div>
     <div class="progress-container">
