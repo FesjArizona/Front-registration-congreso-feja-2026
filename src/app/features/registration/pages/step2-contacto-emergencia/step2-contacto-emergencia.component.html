@@ -20,7 +20,7 @@
         </div>
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input type="text" class="form-control" id="phoneContact" placeholder="111-222-3333" formControlName="phoneContact"
+            <input type="tel" class="form-control" id="phoneContact" placeholder="111-222-3333" formControlName="phoneContact"
               [class.is-invalid]="paso2Form.get('phoneContact')?.invalid && paso2Form.get('phoneContact')?.touched">
             <label for="phoneContact">Numero de Teléfono</label>
             <div class="invalid-feedback">El numero de teléfono es requerido.</div>
