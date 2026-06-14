@@ -33,10 +33,12 @@
             <select class="form-select form-control" id="relationship" formControlName="relationship"
               [class.is-invalid]="paso2Form.get('relationship')?.invalid && paso2Form.get('relationship')?.touched">
               <option selected disabled>Relación con el Contacto</option>
-              <option value="spouse">Esposo(a)</option>
-              <option value="family">Familiar</option>
-              <option value="friend">Amigo</option>
-              <option value="other">Otro</option>
+              <option value="esposo(a)">Esposo(a)</option>
+              <option value="padres">Padres</option>
+              <option value="hermano">Hermano(a)</option>
+              <option value="familia">Familiar</option>
+              <option value="amigo">Amigo(a)</option>
+              <option value="otro">Otro</option>
             </select>
             <label for="relationship">Relación con el Contacto</label>
             <div class="invalid-feedback">La relación es requerida.</div>

@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { RegistrationFormService } from '../../../../core/services/registration-form.service';
 
 @Component({
@@ -9,8 +10,24 @@ import { RegistrationFormService } from '../../../../core/services/registration-
   templateUrl: './step5-recibido.component.html',
   styleUrl: './step5-recibido.component.scss'
 })
-export class Step5RecibidoComponent {
+export class Step5RecibidoComponent implements OnInit, OnDestroy {
   private formService = inject(RegistrationFormService);
+  private router = inject(Router);
+  private redirectTimer: ReturnType<typeof setTimeout> | null = null;
+
+  ngOnInit(): void {
+    this.redirectTimer = setTimeout(() => {
+      this.formService.stepperForm.reset();
+      this.router.navigate(['/']);
+    }, 10000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.redirectTimer) {
+      clearTimeout(this.redirectTimer);
+      this.redirectTimer = null;
+    }
+  }
 
   get primerNombre(): string {
     const name: string = this.formService.stepperForm.get('paso1')?.value?.name || '';
