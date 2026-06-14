@@ -116,11 +116,14 @@ export class Step3ResumenComponent {
   }
 
   get relacionContacto(): string {
-    const rel = this.paso2Value.relationship;
+    const rel = this.paso2Value.relationship.value || this.paso2Value.relationship || '';
     if (!rel) return 'No especificado';
     const relationships: { [key: string]: string } = {
+      'esposo': 'Esposo(a)',
+      'padres': 'Padres',
+      'hermano': 'Hermano(a)',
       'familia': 'Familiar',
-      'amigo': 'Amigo',
+      'amigo': 'Amigo(a)',
       'otro': 'Otro'
     };
     return relationships[rel.toLowerCase()] || rel;
