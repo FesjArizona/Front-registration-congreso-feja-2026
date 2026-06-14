@@ -116,7 +116,7 @@
             </div>
             <div class="col-10 col-md">
               <div class="form-floating">
-                <input type="tel" id="church" class="form-control" formControlName="church" placeholder="Iglesia donde asiste"
+                <input type="text" id="church" class="form-control" formControlName="church" placeholder="Iglesia donde asiste"
                     [class.is-invalid]="paso1Form.get('church')?.invalid && paso1Form.get('church')?.touched">
                 <label for="church">Iglesia donde asiste</label>
                 <div class="invalid-feedback">La iglesia es requerida.</div>
@@ -142,25 +142,27 @@
               <div>
                 <p>¿Deseas incluir el lunchtime del sábado mediodía?*</p>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="radiofood" id="yesfood" formControlName="includesLunch"
-                  [value]="true"
-                  [class.is-invalid]="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched">
-                <label class="form-check-label" for="yesfood">
-                  Sí
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="radiofood" id="nofood" formControlName="includesLunch"
-                  [value]="false"
-                  [class.is-invalid]="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched">
-                <label class="form-check-label" for="nofood">
-                  No
-                </label>
-              </div>
-              <div *ngIf="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched"
-                class="text-danger small mt-1">
-                Por favor, selecciona si deseas incluir el almuerzo.
+              <div class="d-flex flex-column gap-2">
+                <div class="form-check d-flex flex-row align-items-center gap-3">
+                  <input class="form-check-input" type="radio" name="radiofood" id="yesfood" formControlName="includesLunch"
+                    [value]="true"
+                    [class.is-invalid]="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched">
+                  <label class="form-check-label m-0" for="yesfood">
+                    Sí
+                  </label>
+                </div>
+                <div class="form-check d-flex flex-row align-items-center gap-3">
+                  <input class="form-check-input" type="radio" name="radiofood" id="nofood" formControlName="includesLunch"
+                    [value]="false"
+                    [class.is-invalid]="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched">
+                  <label class="form-check-label m-0" for="nofood">
+                    No
+                  </label>
+                </div>
+                <div *ngIf="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched"
+                  class="text-danger small mt-1">
+                  Por favor, selecciona si deseas incluir el almuerzo.
+                </div>
               </div>
             </div>
           </div>
@@ -170,25 +172,27 @@
               <div>
                 <p>¿Serías el acompañante adulto (chaperón) de tu grupo de jóvenes?</p>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioChaperone" id="chapyes" formControlName="isChaperone"
-                  [value]="true"
-                  [class.is-invalid]="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched">
-                <label class="form-check-label" for="chapyes">
-                  Sí
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="radioChaperone" id="chapno" formControlName="isChaperone"
-                  [value]="false"
-                  [class.is-invalid]="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched">
-                <label class="form-check-label" for="chapno">
-                  No
-                </label>
-              </div>
-              <div *ngIf="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched"
-                class="text-danger small mt-1">
-                Debes seleccionar una opción.
+              <div class="d-flex flex-column gap-2">
+                <div class="form-check d-flex flex-row align-items-center gap-3">
+                  <input class="form-check-input" type="radio" name="radioChaperone" id="chapyes" formControlName="isChaperone"
+                    [value]="true"
+                    [class.is-invalid]="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched">
+                  <label class="form-check-label" for="chapyes">
+                    Sí
+                  </label>
+                </div>
+                <div class="form-check d-flex flex-row align-items-center gap-3">
+                  <input class="form-check-input" type="radio" name="radioChaperone" id="chapno" formControlName="isChaperone"
+                    [value]="false"
+                    [class.is-invalid]="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched">
+                  <label class="form-check-label" for="chapno">
+                    No
+                  </label>
+                </div>
+                <div *ngIf="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched"
+                  class="text-danger small mt-1">
+                  Debes seleccionar una opción.
+                </div>
               </div>
             </div>
           </div>
