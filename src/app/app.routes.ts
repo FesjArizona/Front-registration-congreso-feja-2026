@@ -2,18 +2,29 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    // Define la ruta principal (ej. tu-dominio.com/registro)
-    path: 'registro',
-    loadChildren: () => import('./features/registration/registration.routes').then(m => m.REGISTRATION_ROUTES)
-  },
-  {
-    // Opcional: Redirección por defecto si el usuario entra a la raíz de la app (tu-dominio.com/)
     path: '',
-    redirectTo: 'registro', // Los envía directamente al flujo del congreso
+    redirectTo: 'registro',
     pathMatch: 'full'
   },
+  // Ruta de Login limpia (apunta a tu AuthComponent dentro de la carpeta admin/auth)
   {
-    // Opcional: Ruta "comodín" (Catch-all) por si el usuario escribe una URL que no existe
+    path: 'login',
+    loadComponent: () =>
+      import('./admin/auth/auth/auth.component').then(m => m.AuthComponent)
+  },
+  // Rama Registro
+  {
+    path: 'registro',
+    loadChildren: () =>
+      import('./features/registration/registration.routes').then(m => m.REGISTRATION_ROUTES)
+  },
+  // Rama Admin protegida
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.routes').then(m => m.ADMIN_ROUTES)
+  },
+  {
     path: '**',
     redirectTo: 'registro'
   }

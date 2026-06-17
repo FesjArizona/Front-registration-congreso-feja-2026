@@ -1,0 +1,85 @@
+<div class="dashboard-wrapper">
+
+  <!-- Header -->
+  <div class="mb-4">
+    <h4 class="dashboard-title mb-1">Resumen de Registro</h4>
+    <p class="dashboard-subtitle mb-0">Vista general de información de registros</p>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3" *ngFor="let card of statsList">
+      <div class="stat-card h-100">
+        <div class="stat-icon mb-2">
+          <img src="{{ baseUrlIcon + card.icon }}" style="width: 25px; filter: hue-rotate(144deg);">
+        </div>
+        <p class="stat-label mb-1">{{ card.label }}</p>
+        <h3 class="stat-value mb-0">{{ card.value }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Section -->
+  <div class="row g-3">
+
+    <!-- Recent Activity -->
+    <div class="col-12 col-lg-7">
+      <div class="panel h-100 rounded-4">
+        <h6 class="panel-title mb-4">Actividad reciente</h6>
+
+        <div class="overflow-clip">
+        <!-- Table header — hidden on mobile -->
+        <div class="activity-table-header d-none d-md-flex">
+          <span class="col-header">USUARIO</span>
+          <span class="col-header">CONTACTO</span>
+          <span class="col-header">FECHA</span>
+          <span class="col-header">CHECK-IN</span>
+        </div>
+
+        <!-- Activity rows -->
+          <div class="activity-row" *ngFor="let item of activitiesList">
+            <div class="activity-cell activity-usuario">
+              <span class="mobile-label d-md-none">USUARIO</span>
+              {{ item.usuario }}
+            </div>
+            <div class="activity-cell activity-contacto">
+              <span class="mobile-label d-md-none">CONTACTO</span>
+              {{ item.contacto }}
+            </div>
+            <div class="activity-cell activity-fecha">
+              <span class="mobile-label d-md-none">FECHA</span>
+              {{ item.fecha }}
+            </div>
+            <div class="activity-cell activity-checkin">
+              <span class="mobile-label d-md-none">CHECK-IN</span>
+              <span class="status-badge" [ngClass]="getBadgeClass(item.checkIn)">
+                {{ item.checkIn }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Staff Panel -->
+    <div class="col-12 col-lg-5">
+      <div class="panel h-100 d-flex flex-column align-items-stretch justify-content-start gap-3 rounded-4">
+        <h6 class="panel-title m-0">Equipo Staff registrado</h6>
+        <hr>
+        <div class="overflow-clip d-flex flex-column gap-3">
+          <div class="staff-row" *ngFor="let staff of staffList">
+            <div class="staff-avatar">{{ staff.initials }}</div>
+            <div class="staff-info flex-grow-1">
+              <p class="staff-name mb-0">{{ staff.nombre }}</p>
+              <p class="staff-cargo mb-0">{{ staff.cargo }}</p>
+            </div>
+            <span class="status-badge badge-completed">{{ staff.estado }}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

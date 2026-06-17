@@ -1,0 +1,140 @@
+:host {
+  --brand: #6C5DD3;
+  --brand-dark: #5b4bc4;
+  --brand-soft: rgba(108, 93, 211, .12);
+
+  display: block;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1f2330;
+}
+
+.btn-brand {
+  background: #efc970;
+  border-color: #beab7e;
+  color: #fff;
+  font-weight: 500;
+
+  &:hover,
+  &:focus {
+    background: var(--brand-dark);
+    border-color: var(--brand-dark);
+    color: #fff;
+  }
+}
+
+::ng-deep .form-control:focus,
+::ng-deep .form-select:focus {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 .2rem var(--brand-soft);
+}
+
+table {
+  thead tr th {
+    font-size: .72rem;
+    letter-spacing: .04em;
+    color: #8a8f98;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  tbody td {
+    font-size: .875rem;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+}
+
+.avatar-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: .78rem;
+  flex-shrink: 0;
+}
+
+.badge-soft-success {
+  background: #e3f3fc;
+  color: #1ea0e0;
+  font-weight: 600;
+}
+
+.badge-soft-secondary {
+  background: #f1f2f5;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.icon-action {
+  border: none;
+  background: transparent;
+  width: 32px;
+  height: 32px;
+  border-radius: .5rem;
+  color: #8a8f98;
+
+  &:hover {
+    background: #f4f3fc;
+  }
+
+  &.delete:hover {
+    background: #fdeceb;
+    color: #e0625b;
+  }
+}
+
+.pagination {
+  .page-link {
+    color: #1f2330;
+    border: none;
+    border-radius: 50% !important;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+    padding: 0;
+
+    &:hover {
+      background: #f1f0fb;
+    }
+  }
+
+  .page-item.active .page-link {
+    background: #efc970;
+    color: #fff;
+  }
+
+  .page-item.disabled .page-link {
+    color: #c9cbd3;
+    background: transparent;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+.empty-state td {
+  text-align: center;
+  color: #8a8f98;
+  padding: 2.5rem 0;
+}
+
+.delete-icon-wrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fdeceb;
+  color: #e0625b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin: 0 auto;
+}
