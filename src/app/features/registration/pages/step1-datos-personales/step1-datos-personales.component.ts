@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { RegistrationFormService } from '../../../../core/services/registration-form.service';
+import { ApiResponse } from '../../../../core/models/api-response.interface';
+import { ApiService } from './../../../../core/services/api.service';
+import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-step1-datos-personales',
@@ -12,10 +17,80 @@ import { RegistrationFormService } from '../../../../core/services/registration-
 })
 export class Step1DatosPersonalesComponent implements OnInit {
   paso1Form!: FormGroup;
+  eventId: string | null = null;
+  states = signal<States[]>([]);
+  conferences = signal<Conferences[]>([]);
+  cities = signal<string[]>([]);
+  sizes = signal<Sizes[]>([]);
 
-  constructor(private registrationFormService: RegistrationFormService) {}
+  constructor(
+    private registrationFormService: RegistrationFormService,
+    private route: ActivatedRoute,
+    private apiService: ApiService
+  ) { }
 
   ngOnInit() {
+    this.route.parent?.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+    });
     this.paso1Form = this.registrationFormService.stepperForm.get('paso1') as FormGroup;
+    this.getStates()
+    this.getSizes()
+    this.addStateEvent()
+  }
+
+  addStateEvent() {
+    this.paso1Form.get('state')?.valueChanges.subscribe((stateId) => {
+      if (stateId) {
+        const state = this.states().find(s => s.id === parseInt(stateId));
+        if (state != undefined) {
+          this.apiService.getCities(state.nombre).subscribe({
+            next: (response: ApiResponse<string[]>) => {
+              this.cities.set(response.data)
+            },
+            error: (error: HttpErrorResponse) => {
+            },
+            complete: () => {
+            },
+          })
+        }
+
+        this.apiService.getConferences(stateId).subscribe({
+          next: (response: ApiResponse<Conferences[]>) => {
+            this.conferences.set(response.data)
+          },
+          error: (error: HttpErrorResponse) => {
+          },
+          complete: () => {
+          },
+        })
+      }
+    });
+  }
+
+
+  getSizes() {
+    this.apiService.getSizes().subscribe({
+      next: (response: ApiResponse<Sizes[]>) => {
+        this.sizes.set(response.data)
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+    })
+  }
+
+  getStates() {
+    this.apiService.getStates().subscribe({
+      next: (response: ApiResponse<States[]>) => {
+        this.states.set(response.data)
+
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+    })
   }
 }
