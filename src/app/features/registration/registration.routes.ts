@@ -3,7 +3,7 @@ import { RegistrationLayoutComponent } from './registration-layout/registration-
 
 export const REGISTRATION_ROUTES: Routes = [
   {
-    path: '',
+    path: ':id',
     component: RegistrationLayoutComponent,
     children: [
       {

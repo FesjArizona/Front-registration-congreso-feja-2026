@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StepperSidebarComponent } from '../../../shared/components/stepper-sidebar/stepper-sidebar.component';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { RouterOutlet, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { TopbarMobileComponent } from '../../../shared/components/topbar-mobile/topbar-mobile.component';
 import { FooterBarComponent } from '../../../shared/components/footer-bar/footer-bar.component';
 import { FormGroup } from '@angular/forms';
@@ -37,7 +37,8 @@ export class RegistrationLayoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private registrationFormService: RegistrationFormService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.listenToRouteChanges();
   }
@@ -102,7 +103,8 @@ export class RegistrationLayoutComponent implements OnInit, OnDestroy {
 
   private navigateToStep(stepIndex: number): void {
     const route = this.stepRoutes[stepIndex];
-    this.router.navigate(['/registro', route]);
+    const eventId = this.route.snapshot.paramMap.get('id') || this.route.snapshot.parent?.paramMap.get('id');
+    this.router.navigate(['/registro', eventId, route]);
 
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });

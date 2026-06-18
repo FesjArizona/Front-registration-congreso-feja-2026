@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegistrationFormService } from '../../../../core/services/registration-form.service';
 import { Router } from '@angular/router';
+import { EmergencyData, UserDataRegister } from '../../../../core/models/registration-to-save.interface';
 
 @Component({
   selector: 'app-step4-confirmacion',
@@ -130,6 +131,28 @@ export class Step4ConfirmacionComponent {
   }
 
   finalizar(): void {
-    this.router.navigate(['/registro/recibido']);
+    const data: UserDataRegister = {
+      conferencia_id: this.paso1Value.conference,
+      talla_camiseta_id: this.paso1Value.sizeShirt,
+      nombre: this.paso1Value.name,
+      apellidos: this.paso1Value.lastname,
+      correo: this.paso1Value.email,
+      telefono: this.paso1Value.phone,
+      fecha_nacimiento: this.paso1Value.age,
+      genero: this.paso1Value.gender,
+      estado_id: this.paso1Value.state,
+      ciudad: this.paso1Value.city,
+      iglesia: this.paso1Value.church,
+      incluir_lunchtime: this.paso1Value.includesLunch,
+      es_chaperon: this.paso1Value.isChaperone,
+      contacto_emergencia: {
+        nombre_contacto: this.paso2Value.nameContact,
+        telefono_contacto: this.paso2Value.phoneContact,
+        relacion: this.paso2Value.relationship
+      }
+    }
+
+    console.log(data)
+    // this.router.navigate(['/registro/recibido']);
   }
 }
