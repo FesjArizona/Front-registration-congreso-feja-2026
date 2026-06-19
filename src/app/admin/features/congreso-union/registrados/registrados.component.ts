@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Participante } from '../../../core/models/participants.model';
+import { Conferencia, CONFERENCIAS_DISPONIBLES, Estado, ESTADO_POR_CONFERENCIA, ESTADOS_DISPONIBLES, Participante } from '../../../core/models/participants.model';
 import { ParticipantesService } from '../../../core/services/participants.service';
 
 
@@ -19,15 +19,8 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   participantes: Participante[] = [];
 
-  estadosDisponibles: string[] = [
-    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
-    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-  ];
+  conferenciasDisponibles: Conferencia[] = CONFERENCIAS_DISPONIBLES;
+  estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
 
   private readonly avatarPalette: string[] = [
     '#F2994A', '#2D9CDB', '#9B51E0', '#EB5757', '#F2C94C',
@@ -37,6 +30,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   // ---------- filtros ----------
   busqueda = '';
   filtroEstado = '';
+  filtroConferencia = '';
   filtroCheckin = '';
 
   // ---------- paginación ----------
@@ -47,6 +41,8 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   // ---------- formulario del modal ----------
   form: FormGroup;
   editandoId: number | null = null;
+  /** Participante completo que se está editando, para no perder campos que este formulario no expone (camiseta, talla, comida) */
+  private participanteOriginal: Participante | null = null;
   participanteAEliminar: Participante | null = null;
 
   private participantModal: any;
@@ -60,8 +56,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
       telefono: ['', Validators.required],
-      contacto: ['', [Validators.required, Validators.email]],
-      estado: ['', Validators.required],
+      conferencia: ['', Validators.required],
       checkin: ['Pendiente', Validators.required],
       registro: ['', Validators.required],
     });
@@ -92,10 +87,11 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       const coincideBusqueda = !termino ||
         p.nombre.toLowerCase().includes(termino) ||
         p.telefono.includes(termino) ||
-        p.contacto.toLowerCase().includes(termino);
+        p.conferencia.toLowerCase().includes(termino);
       const coincideEstado = !this.filtroEstado || p.estado === this.filtroEstado;
+      const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
       const coincideCheckin = !this.filtroCheckin || p.checkin === this.filtroCheckin;
-      return coincideBusqueda && coincideEstado && coincideCheckin;
+      return coincideBusqueda && coincideEstado && coincideConferencia && coincideCheckin;
     });
   }
 
@@ -148,11 +144,11 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   // ---------- modal crear / editar ----------
   abrirModalNuevo(): void {
     this.editandoId = null;
+    this.participanteOriginal = null;
     this.form.reset({
       nombre: '',
       telefono: '',
-      contacto: '',
-      estado: '',
+      conferencia: '',
       checkin: 'Pendiente',
       registro: this.hoyIso(),
     });
@@ -161,15 +157,21 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   abrirModalEditar(p: Participante): void {
     this.editandoId = p.id;
+    this.participanteOriginal = p;
     this.form.setValue({
       nombre: p.nombre,
       telefono: p.telefono,
-      contacto: p.contacto,
-      estado: p.estado,
+      conferencia: p.conferencia,
       checkin: p.checkin,
       registro: this.ddmmyyyyAIso(p.registro),
     });
     this.participantModal?.show();
+  }
+
+  /** Estado derivado en vivo, según la conferencia seleccionada en el formulario (solo lectura en el modal) */
+  get estadoCalculado(): Estado | '' {
+    const conferencia = this.form.get('conferencia')?.value as Conferencia | '';
+    return conferencia ? ESTADO_POR_CONFERENCIA[conferencia] : '';
   }
 
   guardar(): void {
@@ -180,14 +182,18 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
     const valores = this.form.value;
     const registro = this.isoADdmmyyyy(valores.registro);
+    const conferencia: Conferencia = valores.conferencia;
+    const estado = ESTADO_POR_CONFERENCIA[conferencia];
 
-    if (this.editandoId !== null) {
+    if (this.editandoId !== null && this.participanteOriginal) {
+      // Se parte del registro original para no perder camiseta/talla/comida,
+      // que este formulario no edita.
       this.participantesService.actualizarParticipante({
-        id: this.editandoId,
+        ...this.participanteOriginal,
         nombre: valores.nombre,
         telefono: valores.telefono,
-        contacto: valores.contacto,
-        estado: valores.estado,
+        conferencia,
+        estado,
         checkin: valores.checkin,
         registro,
       });
@@ -195,10 +201,13 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       this.participantesService.agregarParticipante({
         nombre: valores.nombre,
         telefono: valores.telefono,
-        contacto: valores.contacto,
-        estado: valores.estado,
+        conferencia,
+        estado,
         checkin: valores.checkin,
         registro,
+        camiseta: 'Pendiente',
+        talla: 'MD',
+        comida: 'Pendiente',
       });
       this.paginaActual = 1;
     }

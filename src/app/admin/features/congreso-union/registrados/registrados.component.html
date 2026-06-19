@@ -50,7 +50,7 @@
             <th>ID</th>
             <th>Nombre</th>
             <th>Teléfono</th>
-            <th>Contacto</th>
+            <th>Conferencia</th>
             <th>Estado</th>
             <th>Check-in</th>
             <th>Registro</th>
@@ -72,7 +72,7 @@
             <td>{{ p.telefono }}</td>
             <td>
               <span class="d-inline-flex align-items-center gap-1 text-secondary">
-                <i class="bi bi-envelope"></i>{{ p.contacto }}
+                <i class="bi bi-envelope"></i>{{ p.conferencia }}
               </span>
             </td>
             <td>{{ p.estado }}</td>
@@ -101,23 +101,23 @@
     <!-- Footer: total + paginación -->
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-3 pt-2">
       <div class="text-secondary small">Total encontrados: {{ participantesFiltrados.length }}</div>
+      <ul class="pagination mb-0">
+        <li class="page-item" [class.disabled]="paginaActual === 1">
+          <button class="page-link" (click)="anterior()"><img src="../../../../../assets/icons/registered/chevron-left.svg"></button>
+        </li>
+        <li
+          *ngFor="let p of rangoPaginas"
+          class="page-item"
+          [class.disabled]="p === '...'"
+          [class.active]="p === paginaActual">
+          <button *ngIf="p !== '...'" class="page-link" (click)="irAPagina(p)">{{ p }}</button>
+          <span *ngIf="p === '...'" class="page-link border-0 bg-transparent">…</span>
+        </li>
+        <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
+          <button class="page-link" (click)="siguiente()"><img src="../../../../../assets/icons/registered/chevron-right.svg"></button>
+        </li>
+      </ul>
       <div class="d-flex align-items-center gap-3 flex-wrap">
-        <ul class="pagination mb-0">
-          <li class="page-item" [class.disabled]="paginaActual === 1">
-            <button class="page-link" (click)="anterior()"><i class="bi bi-chevron-left"></i></button>
-          </li>
-          <li
-            *ngFor="let p of rangoPaginas"
-            class="page-item"
-            [class.disabled]="p === '...'"
-            [class.active]="p === paginaActual">
-            <button *ngIf="p !== '...'" class="page-link" (click)="irAPagina(p)">{{ p }}</button>
-            <span *ngIf="p === '...'" class="page-link border-0 bg-transparent">…</span>
-          </li>
-          <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
-            <button class="page-link" (click)="siguiente()"><i class="bi bi-chevron-right"></i></button>
-          </li>
-        </ul>
         <div class="d-flex align-items-center gap-2 text-secondary small">
           <span>Mostrar por página</span>
           <select

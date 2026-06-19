@@ -16,8 +16,8 @@
 
   &:hover,
   &:focus {
-    background: var(--brand-dark);
-    border-color: var(--brand-dark);
+        background: #f1cf7f;
+    border-color: #beab7e;
     color: #fff;
   }
 }
@@ -58,14 +58,14 @@ table {
 }
 
 .badge-soft-success {
-  background: #e3f3fc;
-  color: #1ea0e0;
+  background: #dcfce7;
+  color: #15803d;
   font-weight: 600;
 }
 
 .badge-soft-secondary {
-  background: #f1f2f5;
-  color: #6b7280;
+  background: #ffe0074d;
+  color: #938307;
   font-weight: 600;
 }
 
@@ -91,7 +91,7 @@ table {
   .page-link {
     color: #1f2330;
     border: none;
-    border-radius: 50% !important;
+    border-radius: 5px !important;
     width: 25px;
     height: 25px;
     display: flex;
@@ -106,8 +106,9 @@ table {
   }
 
   .page-item.active .page-link {
-    background: #efc970;
-    color: #fff;
+    background: transparent;
+    /* color: #fff; */
+    border: 1px solid #373737 !important;
   }
 
   .page-item.disabled .page-link {
@@ -118,6 +119,11 @@ table {
       background: transparent;
     }
   }
+}
+
+.page-link:focus {
+  all: unset;
+  cursor: pointer;
 }
 
 .empty-state td {

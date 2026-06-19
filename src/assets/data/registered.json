@@ -3,1800 +3,2400 @@
     "id": 1,
     "nombre": "Trevor Chung",
     "telefono": "9697354961",
-    "contacto": "trevor.chung45@gmail.com",
-    "estado": "Kansas",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "05/12/2026"
+    "registro": "05/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 2,
     "nombre": "Omar Hughes",
     "telefono": "3342331444",
-    "contacto": "omar.hughes85@gmail.com",
+    "conferencia": "Nevada",
     "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "01/02/2026"
+    "registro": "01/02/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 3,
     "nombre": "Emma Gonzalez",
     "telefono": "9703905715",
-    "contacto": "emma.gonzalez35@gmail.com",
-    "estado": "Virginia",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "08/08/2026"
+    "registro": "08/08/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 4,
     "nombre": "Riley Ramirez",
     "telefono": "4460967357",
-    "contacto": "riley.ramirez99@gmail.com",
-    "estado": "Nevada",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "09/03/2026"
+    "registro": "09/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 5,
     "nombre": "Emma Wallace",
     "telefono": "2445662585",
-    "contacto": "emma.wallace21@gmail.com",
-    "estado": "Missouri",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "12/06/2026"
+    "registro": "12/06/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 6,
     "nombre": "Cody Sanchez",
     "telefono": "4466589567",
-    "contacto": "cody.sanchez68@gmail.com",
-    "estado": "Ohio",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "13/02/2026"
+    "registro": "13/02/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 7,
     "nombre": "Chloe Torres",
     "telefono": "8995970241",
-    "contacto": "chloe.torres83@gmail.com",
-    "estado": "Illinois",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "02/11/2026"
+    "registro": "02/11/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 8,
     "nombre": "Ethan Webb",
     "telefono": "5728765136",
-    "contacto": "ethan.webb45@gmail.com",
-    "estado": "New Jersey",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "06/06/2026"
+    "registro": "06/06/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 9,
     "nombre": "Henry Hernandez",
     "telefono": "8173347748",
-    "contacto": "henry.hernandez99@gmail.com",
-    "estado": "Utah",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "20/11/2026"
+    "registro": "20/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 10,
     "nombre": "Liam Alvarez",
     "telefono": "4131575764",
-    "contacto": "liam.alvarez30@gmail.com",
-    "estado": "New Jersey",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "09/11/2026"
+    "registro": "09/11/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 11,
     "nombre": "Derek Mendoza",
     "telefono": "1240251661",
-    "contacto": "derek.mendoza14@gmail.com",
-    "estado": "Massachusetts",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "09/02/2026"
+    "registro": "09/02/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 12,
     "nombre": "Emma Ruiz",
     "telefono": "2351531223",
-    "contacto": "emma.ruiz93@gmail.com",
-    "estado": "New York",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "21/08/2026"
+    "registro": "21/08/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 13,
     "nombre": "Hannah Sanchez",
     "telefono": "1599707677",
-    "contacto": "hannah.sanchez81@gmail.com",
-    "estado": "Ohio",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "24/10/2026"
+    "registro": "24/10/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 14,
     "nombre": "Evelyn Vasquez",
     "telefono": "7010379415",
-    "contacto": "evelyn.vasquez38@gmail.com",
-    "estado": "Florida",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "03/01/2026"
+    "registro": "03/01/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 15,
     "nombre": "Davion Garcia",
     "telefono": "3694860228",
-    "contacto": "davion.garcia97@gmail.com",
-    "estado": "Nevada",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "13/07/2026"
+    "registro": "13/07/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 16,
     "nombre": "Cody Ramos",
     "telefono": "7567496105",
-    "contacto": "cody.ramos80@gmail.com",
-    "estado": "Alabama",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "22/09/2026"
+    "registro": "22/09/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 17,
     "nombre": "Jordan Ramirez",
     "telefono": "2461042543",
-    "contacto": "jordan.ramirez47@gmail.com",
-    "estado": "Nevada",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "15/01/2026"
+    "registro": "15/01/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 18,
     "nombre": "Tristan Simmons",
     "telefono": "4919706735",
-    "contacto": "tristan.simmons90@gmail.com",
-    "estado": "Maryland",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "05/06/2026"
+    "registro": "05/06/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 19,
     "nombre": "Jordan Martinez",
     "telefono": "9592390865",
-    "contacto": "jordan.martinez51@gmail.com",
-    "estado": "New York",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "04/06/2026"
+    "registro": "04/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 20,
     "nombre": "Mia Perez",
     "telefono": "1248786714",
-    "contacto": "mia.perez82@gmail.com",
-    "estado": "Colorado",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "24/08/2026"
+    "registro": "24/08/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 21,
     "nombre": "Avianna Wallace",
     "telefono": "1540137296",
-    "contacto": "avianna.wallace94@gmail.com",
-    "estado": "New Mexico",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "09/09/2026"
+    "registro": "09/09/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 22,
     "nombre": "Cody Gutierrez",
     "telefono": "5141907136",
-    "contacto": "cody.gutierrez79@gmail.com",
-    "estado": "Wisconsin",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "23/05/2026"
+    "registro": "23/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 23,
     "nombre": "Harper Foster",
     "telefono": "8086172302",
-    "contacto": "harper.foster66@gmail.com",
-    "estado": "North Dakota",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "04/04/2026"
+    "registro": "04/04/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 24,
     "nombre": "Ethan Phelps",
     "telefono": "2452066459",
-    "contacto": "ethan.phelps85@gmail.com",
-    "estado": "Oklahoma",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "19/04/2026"
+    "registro": "19/04/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 25,
     "nombre": "Terri Phelps",
     "telefono": "1252860896",
-    "contacto": "terri.phelps18@gmail.com",
+    "conferencia": "Arizona",
     "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "03/09/2026"
+    "registro": "03/09/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 26,
     "nombre": "Ava Ramirez",
     "telefono": "8168204967",
-    "contacto": "ava.ramirez37@gmail.com",
-    "estado": "Ohio",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "24/10/2026"
+    "registro": "24/10/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 27,
     "nombre": "Brandon Vargas",
     "telefono": "2748309234",
-    "contacto": "brandon.vargas22@gmail.com",
-    "estado": "Connecticut",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "12/07/2026"
+    "registro": "12/07/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 28,
     "nombre": "Owen Ramos",
     "telefono": "9822598054",
-    "contacto": "owen.ramos93@gmail.com",
-    "estado": "Tennessee",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "02/07/2026"
+    "registro": "02/07/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 29,
     "nombre": "Tristan Gomez",
     "telefono": "1469306919",
-    "contacto": "tristan.gomez34@gmail.com",
-    "estado": "Illinois",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "05/07/2026"
+    "registro": "05/07/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 30,
     "nombre": "Olivia Ramirez",
     "telefono": "2986972437",
-    "contacto": "olivia.ramirez19@gmail.com",
-    "estado": "New Hampshire",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "02/11/2026"
+    "registro": "02/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 31,
     "nombre": "Tyler Floyd",
     "telefono": "5161807235",
-    "contacto": "tyler.floyd40@gmail.com",
-    "estado": "Hawaii",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "16/08/2026"
+    "registro": "16/08/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 32,
     "nombre": "Emma Cruz",
     "telefono": "4875962612",
-    "contacto": "emma.cruz31@gmail.com",
-    "estado": "Missouri",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "13/05/2026"
+    "registro": "13/05/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 33,
     "nombre": "Abigail Torres",
     "telefono": "8380507338",
-    "contacto": "abigail.torres29@gmail.com",
-    "estado": "Illinois",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "07/01/2026"
+    "registro": "07/01/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 34,
     "nombre": "Riley Tucker",
     "telefono": "3328710672",
-    "contacto": "riley.tucker50@gmail.com",
-    "estado": "Arkansas",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "19/08/2026"
+    "registro": "19/08/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 35,
     "nombre": "Nathan Romero",
     "telefono": "1676168421",
-    "contacto": "nathan.romero75@gmail.com",
-    "estado": "Colorado",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "03/10/2026"
+    "registro": "03/10/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 36,
     "nombre": "Avianna Hughes",
     "telefono": "4701485292",
-    "contacto": "avianna.hughes61@gmail.com",
-    "estado": "Delaware",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "19/10/2026"
+    "registro": "19/10/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 37,
     "nombre": "Lessie Fernandez",
     "telefono": "5647083348",
-    "contacto": "lessie.fernandez94@gmail.com",
-    "estado": "Pennsylvania",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "09/04/2026"
+    "registro": "09/04/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 38,
     "nombre": "Marcus Reed",
     "telefono": "2349409434",
-    "contacto": "marcus.reed43@gmail.com",
-    "estado": "Montana",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "22/11/2026"
+    "registro": "22/11/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 39,
     "nombre": "Mia Ramos",
     "telefono": "1311570307",
-    "contacto": "mia.ramos68@gmail.com",
-    "estado": "South Carolina",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "03/09/2026"
+    "registro": "03/09/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 40,
     "nombre": "Emma Jimenez",
     "telefono": "2139027119",
-    "contacto": "emma.jimenez54@gmail.com",
-    "estado": "California",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "12/05/2026"
+    "registro": "12/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 41,
     "nombre": "Liam Chavez",
     "telefono": "8316648259",
-    "contacto": "liam.chavez88@gmail.com",
-    "estado": "Tennessee",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "22/09/2026"
+    "registro": "22/09/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 42,
     "nombre": "Mia Foster",
     "telefono": "4771526597",
-    "contacto": "mia.foster43@gmail.com",
-    "estado": "Delaware",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "24/09/2026"
+    "registro": "24/09/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 43,
     "nombre": "Hannah Ramirez",
     "telefono": "2472659626",
-    "contacto": "hannah.ramirez97@gmail.com",
-    "estado": "South Dakota",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "17/08/2026"
+    "registro": "17/08/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 44,
     "nombre": "Mason Johnson",
     "telefono": "9986353481",
-    "contacto": "mason.johnson64@gmail.com",
-    "estado": "Louisiana",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "01/06/2026"
+    "registro": "01/06/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 45,
     "nombre": "Vanessa O'Neill",
     "telefono": "2125089309",
-    "contacto": "vanessa.oneill66@gmail.com",
-    "estado": "Oklahoma",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "18/01/2026"
+    "registro": "18/01/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 46,
     "nombre": "Davion Phelps",
     "telefono": "3373077218",
-    "contacto": "davion.phelps65@gmail.com",
-    "estado": "Florida",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "10/06/2026"
+    "registro": "10/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 47,
     "nombre": "Lessie Diaz",
     "telefono": "5736462531",
-    "contacto": "lessie.diaz81@gmail.com",
-    "estado": "Nebraska",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "08/03/2026"
+    "registro": "08/03/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 48,
     "nombre": "Olivia Ortiz",
     "telefono": "1106456634",
-    "contacto": "olivia.ortiz52@gmail.com",
-    "estado": "Nebraska",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "09/03/2026"
+    "registro": "09/03/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 49,
     "nombre": "Derek Cantrell",
     "telefono": "3021598245",
-    "contacto": "derek.cantrell35@gmail.com",
-    "estado": "New Jersey",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "10/04/2026"
+    "registro": "10/04/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 50,
     "nombre": "Ethan Ponce",
     "telefono": "3834820954",
-    "contacto": "ethan.ponce61@gmail.com",
-    "estado": "Michigan",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "28/02/2026"
+    "registro": "28/02/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 51,
     "nombre": "Vanessa Ramirez",
     "telefono": "7482848011",
-    "contacto": "vanessa.ramirez96@gmail.com",
-    "estado": "Ohio",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "01/02/2026"
+    "registro": "01/02/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 52,
     "nombre": "Mason Rodriguez",
     "telefono": "9519284858",
-    "contacto": "mason.rodriguez14@gmail.com",
-    "estado": "Connecticut",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "12/12/2026"
+    "registro": "12/12/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 53,
     "nombre": "Lucas Gutierrez",
     "telefono": "3196545325",
-    "contacto": "lucas.gutierrez59@gmail.com",
-    "estado": "Oregon",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "09/01/2026"
+    "registro": "09/01/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 54,
     "nombre": "Savannah Gutierrez",
     "telefono": "9597198563",
-    "contacto": "savannah.gutierrez78@gmail.com",
-    "estado": "Utah",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "12/07/2026"
+    "registro": "12/07/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 55,
     "nombre": "Avianna Foster",
     "telefono": "9249648005",
-    "contacto": "avianna.foster89@gmail.com",
-    "estado": "Massachusetts",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "24/05/2026"
+    "registro": "24/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 56,
     "nombre": "Nathan Flores",
     "telefono": "8159250505",
-    "contacto": "nathan.flores51@gmail.com",
-    "estado": "Montana",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "18/03/2026"
+    "registro": "18/03/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 57,
     "nombre": "Noah Ortiz",
     "telefono": "7739255769",
-    "contacto": "noah.ortiz61@gmail.com",
-    "estado": "Oklahoma",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "10/05/2026"
+    "registro": "10/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 58,
     "nombre": "Emma Gutierrez",
     "telefono": "6679017210",
-    "contacto": "emma.gutierrez66@gmail.com",
-    "estado": "New Hampshire",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "17/08/2026"
+    "registro": "17/08/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 59,
     "nombre": "Aubrey Martinez",
     "telefono": "3829742424",
-    "contacto": "aubrey.martinez46@gmail.com",
-    "estado": "North Carolina",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "03/04/2026"
+    "registro": "03/04/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 60,
     "nombre": "Brooke Flores",
     "telefono": "1855256552",
-    "contacto": "brooke.flores13@gmail.com",
+    "conferencia": "Arizona",
     "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "16/10/2026"
+    "registro": "16/10/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 61,
     "nombre": "Vanessa Phelps",
     "telefono": "7250964836",
-    "contacto": "vanessa.phelps90@gmail.com",
-    "estado": "Oregon",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "23/12/2026"
+    "registro": "23/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 62,
     "nombre": "Jack Castillo",
     "telefono": "2716495971",
-    "contacto": "jack.castillo28@gmail.com",
-    "estado": "Tennessee",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "25/02/2026"
+    "registro": "25/02/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 63,
     "nombre": "Vanessa Gutierrez",
     "telefono": "1939915527",
-    "contacto": "vanessa.gutierrez99@gmail.com",
-    "estado": "North Dakota",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "02/09/2026"
+    "registro": "02/09/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 64,
     "nombre": "Ava Chung",
     "telefono": "2960488639",
-    "contacto": "ava.chung69@gmail.com",
-    "estado": "Texas",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "25/08/2026"
+    "registro": "25/08/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 65,
     "nombre": "Layla Simmons",
     "telefono": "8995059760",
-    "contacto": "layla.simmons67@gmail.com",
-    "estado": "Kentucky",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "27/11/2026"
+    "registro": "27/11/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 66,
     "nombre": "Sophia Webb",
     "telefono": "6322520473",
-    "contacto": "sophia.webb66@gmail.com",
-    "estado": "California",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "08/05/2026"
+    "registro": "08/05/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 67,
     "nombre": "Charlotte Rivera",
     "telefono": "1346078411",
-    "contacto": "charlotte.rivera29@gmail.com",
-    "estado": "Iowa",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "23/03/2026"
+    "registro": "23/03/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 68,
     "nombre": "Savannah Hernandez",
     "telefono": "5570828113",
-    "contacto": "savannah.hernandez62@gmail.com",
-    "estado": "Michigan",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "14/01/2026"
+    "registro": "14/01/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 69,
     "nombre": "Emma Ortiz",
     "telefono": "7767538527",
-    "contacto": "emma.ortiz71@gmail.com",
-    "estado": "Alabama",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "10/07/2026"
+    "registro": "10/07/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 70,
     "nombre": "Owen Alvarez",
     "telefono": "6242173772",
-    "contacto": "owen.alvarez38@gmail.com",
-    "estado": "Louisiana",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "16/01/2026"
+    "registro": "16/01/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 71,
     "nombre": "Jack Gomez",
     "telefono": "8722962486",
-    "contacto": "jack.gomez31@gmail.com",
-    "estado": "New Jersey",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "20/09/2026"
+    "registro": "20/09/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 72,
     "nombre": "Matt Cruz",
     "telefono": "3847562279",
-    "contacto": "matt.cruz20@gmail.com",
-    "estado": "Tennessee",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "05/08/2026"
+    "registro": "05/08/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 73,
     "nombre": "Olivia Johnson",
     "telefono": "6412330148",
-    "contacto": "olivia.johnson51@gmail.com",
-    "estado": "Indiana",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "11/06/2026"
+    "registro": "11/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 74,
     "nombre": "Jordan Morales",
     "telefono": "7105574449",
-    "contacto": "jordan.morales20@gmail.com",
-    "estado": "New Mexico",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "24/09/2026"
+    "registro": "24/09/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 75,
     "nombre": "Elnora Diaz",
     "telefono": "2062073697",
-    "contacto": "elnora.diaz12@gmail.com",
-    "estado": "South Carolina",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "08/03/2026"
+    "registro": "08/03/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 76,
     "nombre": "Caleb Foster",
     "telefono": "5070585433",
-    "contacto": "caleb.foster69@gmail.com",
-    "estado": "Vermont",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "25/06/2026"
+    "registro": "25/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 77,
     "nombre": "Liam Castro",
     "telefono": "4518871744",
-    "contacto": "liam.castro49@gmail.com",
-    "estado": "Connecticut",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "10/10/2026"
+    "registro": "10/10/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 78,
     "nombre": "Brooke Morales",
     "telefono": "4070964768",
-    "contacto": "brooke.morales19@gmail.com",
-    "estado": "Pennsylvania",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "04/12/2026"
+    "registro": "04/12/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 79,
     "nombre": "Vanessa Flores",
     "telefono": "4361393222",
-    "contacto": "vanessa.flores54@gmail.com",
-    "estado": "Ohio",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "22/06/2026"
+    "registro": "22/06/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 80,
     "nombre": "Avianna Jimenez",
     "telefono": "8076144396",
-    "contacto": "avianna.jimenez11@gmail.com",
-    "estado": "Nebraska",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "04/07/2026"
+    "registro": "04/07/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 81,
     "nombre": "Amelia Bennett",
     "telefono": "5952059278",
-    "contacto": "amelia.bennett32@gmail.com",
-    "estado": "Washington",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "20/09/2026"
+    "registro": "20/09/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 82,
     "nombre": "Vanessa Vargas",
     "telefono": "7291584955",
-    "contacto": "vanessa.vargas85@gmail.com",
-    "estado": "Louisiana",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "28/04/2026"
+    "registro": "28/04/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 83,
     "nombre": "Ada Ramirez",
     "telefono": "9081544414",
-    "contacto": "ada.ramirez41@gmail.com",
-    "estado": "Wisconsin",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "19/10/2026"
+    "registro": "19/10/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 84,
     "nombre": "Marcus Morales",
     "telefono": "2444812497",
-    "contacto": "marcus.morales73@gmail.com",
-    "estado": "Massachusetts",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "16/04/2026"
+    "registro": "16/04/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 85,
     "nombre": "Henry Sanchez",
     "telefono": "6756711494",
-    "contacto": "henry.sanchez86@gmail.com",
-    "estado": "Vermont",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "18/01/2026"
+    "registro": "18/01/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 86,
     "nombre": "Grace Lopez",
     "telefono": "1367704871",
-    "contacto": "grace.lopez62@gmail.com",
-    "estado": "New York",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "23/08/2026"
+    "registro": "23/08/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 87,
     "nombre": "Paige Reed",
     "telefono": "7403028869",
-    "contacto": "paige.reed12@gmail.com",
-    "estado": "Colorado",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "08/07/2026"
+    "registro": "08/07/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 88,
     "nombre": "Derek Perez",
     "telefono": "7792729530",
-    "contacto": "derek.perez70@gmail.com",
-    "estado": "Oklahoma",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "14/12/2026"
+    "registro": "14/12/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 89,
     "nombre": "Chloe Gomez",
     "telefono": "7243788374",
-    "contacto": "chloe.gomez49@gmail.com",
-    "estado": "Kentucky",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "04/12/2026"
+    "registro": "04/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 90,
     "nombre": "Noah Rivera",
     "telefono": "1795212538",
-    "contacto": "noah.rivera37@gmail.com",
-    "estado": "West Virginia",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "09/12/2026"
+    "registro": "09/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 91,
     "nombre": "Riley Wallace",
     "telefono": "6128695961",
-    "contacto": "riley.wallace39@gmail.com",
-    "estado": "Mississippi",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "10/01/2026"
+    "registro": "10/01/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 92,
     "nombre": "Savannah Alvarez",
     "telefono": "5838636972",
-    "contacto": "savannah.alvarez15@gmail.com",
-    "estado": "Arkansas",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "23/03/2026"
+    "registro": "23/03/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 93,
     "nombre": "Trevor Wallace",
     "telefono": "3108307952",
-    "contacto": "trevor.wallace11@gmail.com",
-    "estado": "Oregon",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "16/08/2026"
+    "registro": "16/08/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 94,
     "nombre": "Wyatt Gomez",
     "telefono": "5515628633",
-    "contacto": "wyatt.gomez71@gmail.com",
-    "estado": "Delaware",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "13/08/2026"
+    "registro": "13/08/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 95,
     "nombre": "Avianna Ruiz",
     "telefono": "1230249217",
-    "contacto": "avianna.ruiz29@gmail.com",
-    "estado": "Oregon",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "03/04/2026"
+    "registro": "03/04/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 96,
     "nombre": "Davion Mendoza",
     "telefono": "8578226896",
-    "contacto": "davion.mendoza87@gmail.com",
-    "estado": "Rhode Island",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "25/09/2026"
+    "registro": "25/09/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 97,
     "nombre": "Jack Chavez",
     "telefono": "9196963901",
-    "contacto": "jack.chavez48@gmail.com",
-    "estado": "Pennsylvania",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "10/10/2026"
+    "registro": "10/10/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 98,
     "nombre": "Layla Johnson",
     "telefono": "4178659381",
-    "contacto": "layla.johnson36@gmail.com",
-    "estado": "South Dakota",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "09/11/2026"
+    "registro": "09/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 99,
     "nombre": "Ada Martinez",
     "telefono": "2030213097",
-    "contacto": "ada.martinez80@gmail.com",
+    "conferencia": "California Norte",
     "estado": "California",
     "checkin": "Completado",
-    "registro": "01/07/2026"
+    "registro": "01/07/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 100,
     "nombre": "Wyatt Murphy",
     "telefono": "7845366946",
-    "contacto": "wyatt.murphy47@gmail.com",
-    "estado": "Arizona",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "10/12/2026"
+    "registro": "10/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 101,
     "nombre": "Logan Murphy",
     "telefono": "8986950095",
-    "contacto": "logan.murphy19@gmail.com",
-    "estado": "Utah",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "09/11/2026"
+    "registro": "09/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 102,
     "nombre": "Riley Foster",
     "telefono": "6144594354",
-    "contacto": "riley.foster24@gmail.com",
-    "estado": "Ohio",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "21/03/2026"
+    "registro": "21/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 103,
     "nombre": "Sophia Garcia",
     "telefono": "1306702926",
-    "contacto": "sophia.garcia31@gmail.com",
-    "estado": "Maryland",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "15/02/2026"
+    "registro": "15/02/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 104,
     "nombre": "Abigail Murphy",
     "telefono": "7614170462",
-    "contacto": "abigail.murphy66@gmail.com",
-    "estado": "Colorado",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "14/12/2026"
+    "registro": "14/12/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 105,
     "nombre": "Lucas Castro",
     "telefono": "2075321966",
-    "contacto": "lucas.castro21@gmail.com",
-    "estado": "Iowa",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "25/11/2026"
+    "registro": "25/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 106,
     "nombre": "Sophia Ruiz",
     "telefono": "4248149900",
-    "contacto": "sophia.ruiz70@gmail.com",
-    "estado": "North Dakota",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "09/03/2026"
+    "registro": "09/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 107,
     "nombre": "Riley Gutierrez",
     "telefono": "5686850445",
-    "contacto": "riley.gutierrez54@gmail.com",
-    "estado": "Nebraska",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "11/11/2026"
+    "registro": "11/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 108,
     "nombre": "Omar Martinez",
     "telefono": "6711463258",
-    "contacto": "omar.martinez98@gmail.com",
-    "estado": "New York",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "22/07/2026"
+    "registro": "22/07/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 109,
     "nombre": "Jordan Mendoza",
     "telefono": "5452580287",
-    "contacto": "jordan.mendoza21@gmail.com",
-    "estado": "Massachusetts",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "11/02/2026"
+    "registro": "11/02/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 110,
     "nombre": "Vanessa Cruz",
     "telefono": "9594878379",
-    "contacto": "vanessa.cruz79@gmail.com",
-    "estado": "New Jersey",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "02/04/2026"
+    "registro": "02/04/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 111,
     "nombre": "Grace Reyes",
     "telefono": "1221670908",
-    "contacto": "grace.reyes44@gmail.com",
-    "estado": "Oklahoma",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "10/08/2026"
+    "registro": "10/08/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 112,
     "nombre": "Derek Castillo",
     "telefono": "1521521078",
-    "contacto": "derek.castillo90@gmail.com",
-    "estado": "Rhode Island",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "23/03/2026"
+    "registro": "23/03/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 113,
     "nombre": "Mia Mendoza",
     "telefono": "9648665968",
-    "contacto": "mia.mendoza62@gmail.com",
-    "estado": "Colorado",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "27/02/2026"
+    "registro": "27/02/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 114,
     "nombre": "Abigail Chung",
     "telefono": "5956268238",
-    "contacto": "abigail.chung47@gmail.com",
-    "estado": "North Carolina",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "14/08/2026"
+    "registro": "14/08/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 115,
     "nombre": "Caleb Perez",
     "telefono": "5916199809",
-    "contacto": "caleb.perez34@gmail.com",
-    "estado": "Rhode Island",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "28/02/2026"
+    "registro": "28/02/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 116,
     "nombre": "Sophia Webb",
     "telefono": "7077131430",
-    "contacto": "sophia.webb74@gmail.com",
-    "estado": "Louisiana",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "10/12/2026"
+    "registro": "10/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 117,
     "nombre": "Mia Vasquez",
     "telefono": "8129391249",
-    "contacto": "mia.vasquez29@gmail.com",
-    "estado": "New Hampshire",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "12/06/2026"
+    "registro": "12/06/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 118,
     "nombre": "Chloe Wallace",
     "telefono": "7628981661",
-    "contacto": "chloe.wallace68@gmail.com",
-    "estado": "Massachusetts",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "23/04/2026"
+    "registro": "23/04/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 119,
     "nombre": "Brandon Morales",
     "telefono": "8625905455",
-    "contacto": "brandon.morales15@gmail.com",
-    "estado": "Massachusetts",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "23/07/2026"
+    "registro": "23/07/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 120,
     "nombre": "Jack Foster",
     "telefono": "5948254671",
-    "contacto": "jack.foster14@gmail.com",
-    "estado": "Florida",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "28/02/2026"
+    "registro": "28/02/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 121,
     "nombre": "Wyatt Cantrell",
     "telefono": "2962491159",
-    "contacto": "wyatt.cantrell28@gmail.com",
-    "estado": "Nebraska",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "03/08/2026"
+    "registro": "03/08/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 122,
     "nombre": "Mason Gomez",
     "telefono": "7586857685",
-    "contacto": "mason.gomez50@gmail.com",
-    "estado": "South Dakota",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "28/09/2026"
+    "registro": "28/09/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 123,
     "nombre": "Lessie Fernandez",
     "telefono": "1293864877",
-    "contacto": "lessie.fernandez90@gmail.com",
-    "estado": "Utah",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "08/12/2026"
+    "registro": "08/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 124,
     "nombre": "Ada Gutierrez",
     "telefono": "5201928545",
-    "contacto": "ada.gutierrez91@gmail.com",
-    "estado": "Virginia",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "15/03/2026"
+    "registro": "15/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 125,
     "nombre": "Derek Flores",
     "telefono": "4880176825",
-    "contacto": "derek.flores15@gmail.com",
-    "estado": "Massachusetts",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "10/06/2026"
+    "registro": "10/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 126,
     "nombre": "Amelia Gutierrez",
     "telefono": "1625217504",
-    "contacto": "amelia.gutierrez77@gmail.com",
-    "estado": "Nebraska",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "06/03/2026"
+    "registro": "06/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 127,
     "nombre": "Ada Fernandez",
     "telefono": "9035194895",
-    "contacto": "ada.fernandez89@gmail.com",
-    "estado": "Utah",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "16/10/2026"
+    "registro": "16/10/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 128,
     "nombre": "Hannah Gonzalez",
     "telefono": "6385791669",
-    "contacto": "hannah.gonzalez42@gmail.com",
-    "estado": "Texas",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "26/08/2026"
+    "registro": "26/08/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 129,
     "nombre": "Logan Hughes",
     "telefono": "3347621138",
-    "contacto": "logan.hughes19@gmail.com",
-    "estado": "New Hampshire",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "19/05/2026"
+    "registro": "19/05/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 130,
     "nombre": "Trevor Gutierrez",
     "telefono": "8259841263",
-    "contacto": "trevor.gutierrez68@gmail.com",
-    "estado": "Maryland",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "13/08/2026"
+    "registro": "13/08/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 131,
     "nombre": "Omar Perez",
     "telefono": "8298348088",
-    "contacto": "omar.perez12@gmail.com",
-    "estado": "Texas",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "09/01/2026"
+    "registro": "09/01/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 132,
     "nombre": "Brandon Hughes",
     "telefono": "5181592277",
-    "contacto": "brandon.hughes87@gmail.com",
-    "estado": "West Virginia",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "27/05/2026"
+    "registro": "27/05/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 133,
     "nombre": "Vanessa Gonzalez",
     "telefono": "2513206988",
-    "contacto": "vanessa.gonzalez91@gmail.com",
-    "estado": "Illinois",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "22/12/2026"
+    "registro": "22/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 134,
     "nombre": "Vanessa Foster",
     "telefono": "5464285982",
-    "contacto": "vanessa.foster66@gmail.com",
+    "conferencia": "Arizona",
     "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "24/03/2026"
+    "registro": "24/03/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 135,
     "nombre": "Ada Torres",
     "telefono": "2784572192",
-    "contacto": "ada.torres35@gmail.com",
-    "estado": "Florida",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "17/09/2026"
+    "registro": "17/09/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 136,
     "nombre": "Sophia Martinez",
     "telefono": "8758809005",
-    "contacto": "sophia.martinez53@gmail.com",
-    "estado": "Delaware",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "03/03/2026"
+    "registro": "03/03/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 137,
     "nombre": "Jordan Gonzalez",
     "telefono": "9503787171",
-    "contacto": "jordan.gonzalez81@gmail.com",
-    "estado": "Mississippi",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "26/07/2026"
+    "registro": "26/07/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 138,
     "nombre": "Terri Sanchez",
     "telefono": "3304560537",
-    "contacto": "terri.sanchez68@gmail.com",
-    "estado": "Mississippi",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "19/07/2026"
+    "registro": "19/07/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 139,
     "nombre": "Trevor Reyes",
     "telefono": "6299224734",
-    "contacto": "trevor.reyes13@gmail.com",
-    "estado": "South Carolina",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "20/04/2026"
+    "registro": "20/04/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 140,
     "nombre": "Paige Phelps",
     "telefono": "8306070814",
-    "contacto": "paige.phelps93@gmail.com",
-    "estado": "Nebraska",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "05/01/2026"
+    "registro": "05/01/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 141,
     "nombre": "Lessie Flores",
     "telefono": "9572442790",
-    "contacto": "lessie.flores24@gmail.com",
-    "estado": "Connecticut",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "18/03/2026"
+    "registro": "18/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 142,
     "nombre": "Jack Ramos",
     "telefono": "7615076397",
-    "contacto": "jack.ramos85@gmail.com",
-    "estado": "West Virginia",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "14/11/2026"
+    "registro": "14/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 143,
     "nombre": "Omar Castillo",
     "telefono": "7939173425",
-    "contacto": "omar.castillo45@gmail.com",
-    "estado": "Arizona",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "07/08/2026"
+    "registro": "07/08/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 144,
     "nombre": "Wyatt Perez",
     "telefono": "8969097897",
-    "contacto": "wyatt.perez22@gmail.com",
-    "estado": "Utah",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "18/11/2026"
+    "registro": "18/11/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 145,
     "nombre": "Henry Johnson",
     "telefono": "7004964045",
-    "contacto": "henry.johnson34@gmail.com",
-    "estado": "Delaware",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "03/11/2026"
+    "registro": "03/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 146,
     "nombre": "Emma Coleman",
     "telefono": "5170814022",
-    "contacto": "emma.coleman16@gmail.com",
-    "estado": "Michigan",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "05/10/2026"
+    "registro": "05/10/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 147,
     "nombre": "Emma Phelps",
     "telefono": "3380304322",
-    "contacto": "emma.phelps85@gmail.com",
-    "estado": "Indiana",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "11/03/2026"
+    "registro": "11/03/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 148,
     "nombre": "Cody Floyd",
     "telefono": "5226368665",
-    "contacto": "cody.floyd26@gmail.com",
-    "estado": "Ohio",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "26/03/2026"
+    "registro": "26/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 149,
     "nombre": "Davion Foster",
     "telefono": "4721365350",
-    "contacto": "davion.foster26@gmail.com",
-    "estado": "Alabama",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "26/04/2026"
+    "registro": "26/04/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 150,
     "nombre": "Riley Rivera",
     "telefono": "1067779246",
-    "contacto": "riley.rivera43@gmail.com",
-    "estado": "Arkansas",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "24/07/2026"
+    "registro": "24/07/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 151,
     "nombre": "Grace Chung",
     "telefono": "4202607993",
-    "contacto": "grace.chung70@gmail.com",
-    "estado": "New Hampshire",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "17/10/2026"
+    "registro": "17/10/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 152,
     "nombre": "Omar Chavez",
     "telefono": "3163970710",
-    "contacto": "omar.chavez88@gmail.com",
-    "estado": "Arizona",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "15/11/2026"
+    "registro": "15/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 153,
     "nombre": "Matt Johnson",
     "telefono": "9583864766",
-    "contacto": "matt.johnson61@gmail.com",
-    "estado": "Nevada",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "16/12/2026"
+    "registro": "16/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 154,
     "nombre": "Wyatt Phelps",
     "telefono": "4862321353",
-    "contacto": "wyatt.phelps51@gmail.com",
-    "estado": "Rhode Island",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "03/03/2026"
+    "registro": "03/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 155,
     "nombre": "Sophia Fernandez",
     "telefono": "6691628146",
-    "contacto": "sophia.fernandez86@gmail.com",
-    "estado": "North Dakota",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "15/09/2026"
+    "registro": "15/09/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 156,
     "nombre": "Cody Gutierrez",
     "telefono": "4014119648",
-    "contacto": "cody.gutierrez93@gmail.com",
-    "estado": "Tennessee",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "14/08/2026"
+    "registro": "14/08/2026",
+    "camiseta": "Pagado",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 157,
     "nombre": "Ethan Ortiz",
     "telefono": "7242730249",
-    "contacto": "ethan.ortiz63@gmail.com",
-    "estado": "Washington",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "11/07/2026"
+    "registro": "11/07/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 158,
     "nombre": "Lucas Foster",
     "telefono": "6389710636",
-    "contacto": "lucas.foster29@gmail.com",
-    "estado": "Utah",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "03/02/2026"
+    "registro": "03/02/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 159,
     "nombre": "Ada Harvey",
     "telefono": "2854895521",
-    "contacto": "ada.harvey57@gmail.com",
-    "estado": "Florida",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "19/09/2026"
+    "registro": "19/09/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 160,
     "nombre": "Chloe Gomez",
     "telefono": "3877685081",
-    "contacto": "chloe.gomez62@gmail.com",
-    "estado": "Minnesota",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "28/12/2026"
+    "registro": "28/12/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 161,
     "nombre": "Elnora Torres",
     "telefono": "7873709012",
-    "contacto": "elnora.torres55@gmail.com",
-    "estado": "Connecticut",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "05/11/2026"
+    "registro": "05/11/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 162,
     "nombre": "Caleb Gonzalez",
     "telefono": "4639017775",
-    "contacto": "caleb.gonzalez54@gmail.com",
-    "estado": "Oklahoma",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "04/05/2026"
+    "registro": "04/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 163,
     "nombre": "Brandon Gonzalez",
     "telefono": "8761956684",
-    "contacto": "brandon.gonzalez81@gmail.com",
-    "estado": "Wyoming",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "20/11/2026"
+    "registro": "20/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 164,
     "nombre": "Derek Ramirez",
     "telefono": "1124352982",
-    "contacto": "derek.ramirez44@gmail.com",
-    "estado": "Vermont",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "11/06/2026"
+    "registro": "11/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 165,
     "nombre": "Terri Rodriguez",
     "telefono": "4736031885",
-    "contacto": "terri.rodriguez82@gmail.com",
-    "estado": "Texas",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "03/03/2026"
+    "registro": "03/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 166,
     "nombre": "Aubrey Bennett",
     "telefono": "5173893550",
-    "contacto": "aubrey.bennett21@gmail.com",
-    "estado": "West Virginia",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "13/07/2026"
+    "registro": "13/07/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 167,
     "nombre": "Abigail Gomez",
     "telefono": "5971034978",
-    "contacto": "abigail.gomez49@gmail.com",
-    "estado": "Washington",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "25/10/2026"
+    "registro": "25/10/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 168,
     "nombre": "Cody Harvey",
     "telefono": "4793925798",
-    "contacto": "cody.harvey29@gmail.com",
-    "estado": "Hawaii",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "22/02/2026"
+    "registro": "22/02/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 169,
     "nombre": "Sophia Chavez",
     "telefono": "8137972345",
-    "contacto": "sophia.chavez72@gmail.com",
-    "estado": "Rhode Island",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "14/05/2026"
+    "registro": "14/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 170,
     "nombre": "Emma Wallace",
     "telefono": "3200510647",
-    "contacto": "emma.wallace54@gmail.com",
-    "estado": "Nevada",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "10/11/2026"
+    "registro": "10/11/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 171,
     "nombre": "Brooke Vasquez",
     "telefono": "8160279830",
-    "contacto": "brooke.vasquez15@gmail.com",
-    "estado": "Iowa",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "20/01/2026"
+    "registro": "20/01/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 172,
     "nombre": "Terri Hernandez",
     "telefono": "6392415228",
-    "contacto": "terri.hernandez51@gmail.com",
-    "estado": "Delaware",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "16/12/2026"
+    "registro": "16/12/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 173,
     "nombre": "Evelyn Rodriguez",
     "telefono": "5849815676",
-    "contacto": "evelyn.rodriguez78@gmail.com",
-    "estado": "Virginia",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "17/09/2026"
+    "registro": "17/09/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 174,
     "nombre": "Marcus Diaz",
     "telefono": "5604529187",
-    "contacto": "marcus.diaz15@gmail.com",
-    "estado": "Nevada",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "15/02/2026"
+    "registro": "15/02/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 175,
     "nombre": "Lucas Ruiz",
     "telefono": "8044354825",
-    "contacto": "lucas.ruiz47@gmail.com",
-    "estado": "Delaware",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Pendiente",
-    "registro": "01/06/2026"
+    "registro": "01/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 176,
     "nombre": "Liam Fernandez",
     "telefono": "2554145481",
-    "contacto": "liam.fernandez65@gmail.com",
-    "estado": "Connecticut",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "14/10/2026"
+    "registro": "14/10/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 177,
     "nombre": "Harper Romero",
     "telefono": "5632753983",
-    "contacto": "harper.romero49@gmail.com",
-    "estado": "West Virginia",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "08/06/2026"
+    "registro": "08/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 178,
     "nombre": "Vanessa Martinez",
     "telefono": "9917981516",
-    "contacto": "vanessa.martinez91@gmail.com",
-    "estado": "Delaware",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "25/06/2026"
+    "registro": "25/06/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 179,
     "nombre": "Henry Simmons",
     "telefono": "1634323009",
-    "contacto": "henry.simmons23@gmail.com",
-    "estado": "Georgia",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "07/03/2026"
+    "registro": "07/03/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 180,
     "nombre": "Cody Garcia",
     "telefono": "3815389788",
-    "contacto": "cody.garcia32@gmail.com",
-    "estado": "Wyoming",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "15/10/2026"
+    "registro": "15/10/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 181,
     "nombre": "Jordan Vasquez",
     "telefono": "7977267911",
-    "contacto": "jordan.vasquez90@gmail.com",
-    "estado": "Massachusetts",
+    "conferencia": "California Sur",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "15/02/2026"
+    "registro": "15/02/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pendiente"
   },
   {
     "id": 182,
     "nombre": "Caleb Chavez",
     "telefono": "8006745733",
-    "contacto": "caleb.chavez45@gmail.com",
-    "estado": "Pennsylvania",
+    "conferencia": "Nevada",
+    "estado": "Nevada",
     "checkin": "Completado",
-    "registro": "12/09/2026"
+    "registro": "12/09/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 183,
     "nombre": "Avianna Flores",
     "telefono": "7278136169",
-    "contacto": "avianna.flores14@gmail.com",
-    "estado": "Arkansas",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "27/05/2026"
+    "registro": "27/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 184,
     "nombre": "Avianna Coleman",
     "telefono": "4673457063",
-    "contacto": "avianna.coleman88@gmail.com",
-    "estado": "Rhode Island",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "15/10/2026"
+    "registro": "15/10/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 185,
     "nombre": "Chloe Tucker",
     "telefono": "4847761430",
-    "contacto": "chloe.tucker67@gmail.com",
-    "estado": "Oregon",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "11/10/2026"
+    "registro": "11/10/2026",
+    "camiseta": "Pendiente",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 186,
     "nombre": "Caleb Jimenez",
     "telefono": "5560712830",
-    "contacto": "caleb.jimenez23@gmail.com",
-    "estado": "Michigan",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "17/11/2026"
+    "registro": "17/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 187,
     "nombre": "Olivia Knapp",
     "telefono": "5976777081",
-    "contacto": "olivia.knapp57@gmail.com",
-    "estado": "Maine",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "14/06/2026"
+    "registro": "14/06/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 188,
     "nombre": "Brooke Castro",
     "telefono": "2437308013",
-    "contacto": "brooke.castro52@gmail.com",
-    "estado": "Connecticut",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Pendiente",
-    "registro": "10/05/2026"
+    "registro": "10/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 189,
     "nombre": "Tristan Foster",
     "telefono": "5940815822",
-    "contacto": "tristan.foster20@gmail.com",
-    "estado": "Pennsylvania",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Completado",
-    "registro": "12/05/2026"
+    "registro": "12/05/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pagado"
   },
   {
     "id": 190,
     "nombre": "Paige Murphy",
     "telefono": "8138816152",
-    "contacto": "paige.murphy26@gmail.com",
-    "estado": "Rhode Island",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "10/09/2026"
+    "registro": "10/09/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 191,
     "nombre": "Jack Coleman",
     "telefono": "8695129534",
-    "contacto": "jack.coleman26@gmail.com",
-    "estado": "Texas",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "21/11/2026"
+    "registro": "21/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 192,
     "nombre": "Evelyn Jimenez",
     "telefono": "2554039848",
-    "contacto": "evelyn.jimenez56@gmail.com",
-    "estado": "Maryland",
+    "conferencia": "California Norte",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "07/06/2026"
+    "registro": "07/06/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 193,
     "nombre": "Vanessa Castillo",
     "telefono": "1824656200",
-    "contacto": "vanessa.castillo27@gmail.com",
-    "estado": "Georgia",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "10/02/2026"
+    "registro": "10/02/2026",
+    "camiseta": "Pendiente",
+    "talla": "MD",
+    "comida": "Pagado"
   },
   {
     "id": 194,
     "nombre": "Nathan Webb",
     "telefono": "3261436148",
-    "contacto": "nathan.webb94@gmail.com",
-    "estado": "Michigan",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Completado",
-    "registro": "20/07/2026"
+    "registro": "20/07/2026",
+    "camiseta": "Pagado",
+    "talla": "SM",
+    "comida": "Pendiente"
   },
   {
     "id": 195,
     "nombre": "Hannah Martinez",
     "telefono": "4876877928",
-    "contacto": "hannah.martinez66@gmail.com",
-    "estado": "Arizona",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "12/11/2026"
+    "registro": "12/11/2026",
+    "camiseta": "Pendiente",
+    "talla": "SM",
+    "comida": "Pagado"
   },
   {
     "id": 196,
     "nombre": "Tristan Perez",
     "telefono": "9459318641",
-    "contacto": "tristan.perez88@gmail.com",
-    "estado": "Maine",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "08/09/2026"
+    "registro": "08/09/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pagado"
   },
   {
     "id": 197,
     "nombre": "Ava Flores",
     "telefono": "8663811838",
-    "contacto": "ava.flores34@gmail.com",
-    "estado": "Mississippi",
+    "conferencia": "Arizona",
+    "estado": "Arizona",
     "checkin": "Pendiente",
-    "registro": "15/05/2026"
+    "registro": "15/05/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pendiente"
   },
   {
     "id": 198,
     "nombre": "Vanessa Morales",
     "telefono": "3597009738",
-    "contacto": "vanessa.morales42@gmail.com",
-    "estado": "Arkansas",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "28/06/2026"
+    "registro": "28/06/2026",
+    "camiseta": "Pagado",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 199,
     "nombre": "Chloe Cantrell",
     "telefono": "5830454240",
-    "contacto": "chloe.cantrell20@gmail.com",
-    "estado": "Wisconsin",
+    "conferencia": "California Centro",
+    "estado": "California",
     "checkin": "Completado",
-    "registro": "09/08/2026"
+    "registro": "09/08/2026",
+    "camiseta": "Pendiente",
+    "talla": "XL",
+    "comida": "Pendiente"
   },
   {
     "id": 200,
     "nombre": "Nathan Garcia",
     "telefono": "8864285771",
-    "contacto": "nathan.garcia21@gmail.com",
-    "estado": "Iowa",
+    "conferencia": "Hawaii",
+    "estado": "Hawaii",
     "checkin": "Pendiente",
-    "registro": "12/01/2026"
+    "registro": "12/01/2026",
+    "camiseta": "Pagado",
+    "talla": "LG",
+    "comida": "Pagado"
   }
 ]
