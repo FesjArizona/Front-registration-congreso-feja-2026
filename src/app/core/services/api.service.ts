@@ -5,6 +5,7 @@ import { ApiResponse } from './../models/api-response.interface';
 import { Conferences, States, Sizes } from '../models/general.interface';
 import { URL_API, CITIES_API } from '../../environment/environment';
 import { EventData } from '../models/event.interface';
+import { UserDataRegister } from '../models/registration-to-save.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +26,6 @@ export class ApiService {
     }
 
     public getCities(state: string): Observable<ApiResponse<string[]>> {
-        console.log(state)
         return this.httpClient.post<ApiResponse<string[]>>(`${CITIES_API}/countries/state/cities`, {
             country: "United States",
             state: state
@@ -34,5 +34,13 @@ export class ApiService {
 
     public getEvent(eventId: number) {
         return this.httpClient.get<ApiResponse<EventData>>(`${URL_API}/events/${eventId}`)
+    }
+
+
+    // public saveRegister(body: UserDataRegister, eventId: string | null): Observable<ApiResponse<any>> {
+    //     return this.httpClient.post<ApiResponse<any>>(`${URL_API}/team`, team)
+    // }
+    public saveRegister(body: UserDataRegister, eventId: string | null): Observable<ApiResponse<number>> {
+        return this.httpClient.post<ApiResponse<number>>(`${URL_API}/events/${eventId}/register`, body)
     }
 }
