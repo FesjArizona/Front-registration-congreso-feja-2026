@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RegistrationFormService } from '../../../../core/services/registration-form.service';
 import { Router } from '@angular/router';
 import { EmergencyData, UserDataRegister } from '../../../../core/models/registration-to-save.interface';
+import { ActivatedRoute } from '@angular/router';
+import { ApiResponse } from '../../../../core/models/api-response.interface';
+import { ApiService } from './../../../../core/services/api.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-step4-confirmacion',
@@ -14,6 +18,15 @@ import { EmergencyData, UserDataRegister } from '../../../../core/models/registr
 export class Step4ConfirmacionComponent {
   private formService = inject(RegistrationFormService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private apiService = inject(ApiService);
+  eventId: string | null = null;
+
+  ngOnInit() {
+    this.route.parent?.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+    });
+  }
 
   get paso1Value() {
     return this.formService.stepperForm.get('paso1')?.value || {};
@@ -152,7 +165,17 @@ export class Step4ConfirmacionComponent {
       }
     }
 
-    console.log(data)
-    // this.router.navigate(['/registro/recibido']);
+    this.apiService.saveRegister(data, this.eventId).subscribe({
+      next: (response: ApiResponse<number>) => {
+        if (response.data != null) {
+          this.router.navigate(['/registro', this.eventId, 'recibido']);
+        }
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error al guardar el registro', error);
+      },
+      complete: () => {
+      },
+    });
   }
 }

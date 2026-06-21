@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+
 import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { RegistrationFormService } from '../../../../core/services/registration-form.service';
 import { ApiResponse } from '../../../../core/models/api-response.interface';
@@ -17,7 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class Step1DatosPersonalesComponent implements OnInit {
   paso1Form!: FormGroup;
-  eventId: string | null = null;
+
   states = signal<States[]>([]);
   conferences = signal<Conferences[]>([]);
   cities = signal<string[]>([]);
@@ -25,14 +25,11 @@ export class Step1DatosPersonalesComponent implements OnInit {
 
   constructor(
     private registrationFormService: RegistrationFormService,
-    private route: ActivatedRoute,
     private apiService: ApiService
   ) { }
 
   ngOnInit() {
-    this.route.parent?.paramMap.subscribe(params => {
-      this.eventId = params.get('id');
-    });
+
     this.paso1Form = this.registrationFormService.stepperForm.get('paso1') as FormGroup;
     this.getStates()
     this.getSizes()

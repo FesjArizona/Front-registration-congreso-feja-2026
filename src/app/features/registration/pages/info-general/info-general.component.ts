@@ -18,7 +18,7 @@ export class InfoGeneralComponent {
   private readonly route = inject(ActivatedRoute)
   email: string = "fesjarizona@gmail.com"
   eventId: string | null = null;
-  eventData = signal<EventData | null>(null);
+  eventData = signal<EventData>({} as EventData);
 
   ngOnInit() {
     this.route.parent?.paramMap.subscribe(params => {

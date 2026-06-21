@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RegistrationFormService } from '../../../../core/services/registration-form.service';
 
 @Component({
@@ -14,11 +15,22 @@ export class Step5RecibidoComponent implements OnInit, OnDestroy {
   private formService = inject(RegistrationFormService);
   private router = inject(Router);
   private redirectTimer: ReturnType<typeof setTimeout> | null = null;
+  private route = inject(ActivatedRoute);
+  eventId: string | null = null;
+
 
   ngOnInit(): void {
+    this.route.parent?.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+      this.iniciarRedireccion();
+    });
+
+
+  }
+  iniciarRedireccion() {
     this.redirectTimer = setTimeout(() => {
       this.formService.stepperForm.reset();
-      this.router.navigate(['/']);
+      this.router.navigate(['/registro', this.eventId]);
     }, 10000);
   }
 
