@@ -1,60 +1,122 @@
-<div class="container d-flex flex-column align-items-start justify-content-center gap-4 p-3">
+<div
+  class="container d-flex flex-column align-items-start justify-content-center gap-4 p-3"
+>
   <form [formGroup]="paso1Form" class="w-100 d-flex flex-column gap-4 bg-white">
-
     <!-- Datos Personales -->
-    <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+    <div
+      class="d-flex flex-column align-items-start justify-content-center gap-2"
+    >
       <p class="m-0 fw-medium fs-5">Detalles Personales</p>
     </div>
     <div class="d-flex flex-column gap-4">
-      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
+      <div
+        class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
+      >
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input type="text" class="form-control" id="name" placeholder="name@example.com" formControlName="name"
-            [class.is-invalid]="paso1Form.get('name')?.invalid && paso1Form.get('name')?.touched">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="name@example.com"
+              formControlName="name"
+              [class.is-invalid]="
+                paso1Form.get('name')?.invalid && paso1Form.get('name')?.touched
+              "
+            />
             <label for="name">Nombre</label>
             <div class="invalid-feedback">El nombre es requerido.</div>
           </div>
         </div>
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input type="text" class="form-control" id="lastname" placeholder="Apellido" formControlName="lastname"
-                  [class.is-invalid]="paso1Form.get('lastname')?.invalid && paso1Form.get('lastname')?.touched">
+            <input
+              type="text"
+              class="form-control"
+              id="lastname"
+              placeholder="Apellido"
+              formControlName="lastname"
+              [class.is-invalid]="
+                paso1Form.get('lastname')?.invalid &&
+                paso1Form.get('lastname')?.touched
+              "
+            />
             <label for="lastname">Apellido</label>
             <div class="invalid-feedback">El apellido es requerido.</div>
           </div>
         </div>
       </div>
-      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
+      <div
+        class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
+      >
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input type="email" class="form-control" id="email" placeholder="Correo Electrónico" formControlName="email"
-                  [class.is-invalid]="paso1Form.get('email')?.invalid && paso1Form.get('email')?.touched">
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Correo Electrónico"
+              formControlName="email"
+              [class.is-invalid]="
+                paso1Form.get('email')?.invalid &&
+                paso1Form.get('email')?.touched
+              "
+            />
             <label for="email">Correo Electrónico</label>
             <div class="invalid-feedback">Ingrese un correo válido.</div>
           </div>
         </div>
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input type="tel" id="phone" class="form-control" formControlName="phone" placeholder="111-222-3333"
-                [class.is-invalid]="paso1Form.get('phone')?.invalid && paso1Form.get('phone')?.touched" minlength="10" maxlength="12">
+            <input
+              type="tel"
+              id="phone"
+              class="form-control"
+              formControlName="phone"
+              placeholder="111-222-3333"
+              [class.is-invalid]="
+                paso1Form.get('phone')?.invalid &&
+                paso1Form.get('phone')?.touched
+              "
+              minlength="10"
+              maxlength="12"
+            />
             <label for="phone">Teléfono</label>
             <div class="invalid-feedback">El teléfono es requerido.</div>
           </div>
         </div>
       </div>
-      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
+      <div
+        class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
+      >
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input type="date" id="age" class="form-control bg-light" formControlName="age"
-                  [class.is-invalid]="paso1Form.get('age')?.invalid && paso1Form.get('age')?.touched">
+            <input
+              type="date"
+              id="age"
+              class="form-control bg-light"
+              formControlName="age"
+              [class.is-invalid]="
+                paso1Form.get('age')?.invalid && paso1Form.get('age')?.touched
+              "
+            />
             <label for="age">Fecha de Nacimiento</label>
-            <div class="invalid-feedback">La fecha de nacimiento es requerida.</div>
+            <div class="invalid-feedback">
+              La fecha de nacimiento es requerida.
+            </div>
           </div>
         </div>
         <div class="col-10 col-md">
           <div class="form-floating">
-            <select class="form-select form-control" id="gender" formControlName="gender"
-              [class.is-invalid]="paso1Form.get('gender')?.invalid && paso1Form.get('gender')?.touched">
+            <select
+              class="form-select form-control"
+              id="gender"
+              formControlName="gender"
+              [class.is-invalid]="
+                paso1Form.get('gender')?.invalid &&
+                paso1Form.get('gender')?.touched
+              "
+            >
               <option selected disabled>Género</option>
               <option value="masc">Masculino</option>
               <option value="fem">Femenino</option>
@@ -66,23 +128,37 @@
       </div>
     </div>
     <!-- Datos de Domicilio -->
-    <div class="d-flex flex-column align-items-start justify-content-center gap-4">
-      <div class="d-flex flex-column align-items-center justify-content-start gap-2">
+    <div
+      class="d-flex flex-column align-items-start justify-content-center gap-4"
+    >
+      <div
+        class="d-flex flex-column align-items-center justify-content-start gap-2"
+      >
         <p class="m-0 fw-medium fs-5">Datos de Domicilio</p>
       </div>
 
       <form [formGroup]="paso1Form" class="w-100 gap-3 bg-white">
         <div class="d-flex flex-column gap-4">
-          <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
+          <div
+            class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
+          >
             <div class="col-10 col-md">
               <div class="form-floating">
-                <select class="form-select form-control" id="state" formControlName="state"
-                  [class.is-invalid]="paso1Form.get('state')?.invalid && paso1Form.get('state')?.touched">
+                <select
+                  class="form-select form-control"
+                  id="state"
+                  formControlName="state"
+                  [class.is-invalid]="
+                    paso1Form.get('state')?.invalid &&
+                    paso1Form.get('state')?.touched
+                  "
+                >
                   <option selected disabled>Estado</option>
-                  <option value="az">Arizona</option>
-                  <option value="hw">Hawaii</option>
-                  <option value="nevada">Nevada-Utah</option>
-                  <option value="calif">California</option>
+                  @for (state of states(); track state.id) {
+                    <option [value]="state.id">{{ state.nombre }}</option>
+                  } @empty {
+                    <option disabled>Cargando estados...</option>
+                  }
                 </select>
                 <label for="state">Estado</label>
                 <div class="invalid-feedback">El estado es requerido.</div>
@@ -90,52 +166,102 @@
             </div>
             <div class="col-10 col-md">
               <div class="form-floating">
-                <select class="form-select form-control" id="conference" formControlName="conference"
-                  [class.is-invalid]="paso1Form.get('conference')?.invalid && paso1Form.get('conference')?.touched">
+                <select
+                  class="form-select form-control"
+                  id="conference"
+                  formControlName="conference"
+                  [class.is-invalid]="
+                    paso1Form.get('conference')?.invalid &&
+                    paso1Form.get('conference')?.touched
+                  "
+                >
                   <option selected disabled>Conferencia</option>
-                  <option value="arizona">Arizona Conference</option>
-                  <option value="hawaii">Hawaii Conference</option>
-                  <option value="nevada-utah">Nevada-Utah Conference</option>
-                  <option value="nortcalif">Northern California Conference</option>
-                  <option value="surescalif">Southeastern California Conference</option>
-                  <option value="surcalif">Southern California Conference</option>
+                  @for (conference of conferences(); track conference.id) {
+                    <option [value]="conference.id">
+                      {{ conference.nombre }}
+                    </option>
+                  } @empty {
+                    <option disabled>Cargando conferencias...</option>
+                  }
                 </select>
                 <label for="conference">Conferencia</label>
                 <div class="invalid-feedback">La conferencia es requerida.</div>
               </div>
             </div>
           </div>
-          <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
+          <div
+            class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
+          >
             <div class="col-10 col-md">
               <div class="form-floating">
-                <input type="text" class="form-control" id="city" placeholder="Ciudad" formControlName="city"
-                      [class.is-invalid]="paso1Form.get('city')?.invalid && paso1Form.get('city')?.touched">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="city"
+                  list="ciudadesList"
+                  placeholder="Ciudad"
+                  formControlName="city"
+                  [class.is-invalid]="
+                    paso1Form.get('city')?.invalid &&
+                    paso1Form.get('city')?.touched
+                  "
+                />
                 <label for="city">Ciudad</label>
+
+                <datalist id="ciudadesList">
+                  @for (city of cities(); track city) {
+                    <option [value]="city"></option>
+                  }
+                </datalist>
+
                 <div class="invalid-feedback">La ciudad es requerida.</div>
               </div>
             </div>
             <div class="col-10 col-md">
               <div class="form-floating">
-                <input type="text" id="church" class="form-control" formControlName="church" placeholder="Iglesia donde asiste"
-                    [class.is-invalid]="paso1Form.get('church')?.invalid && paso1Form.get('church')?.touched">
+                <input
+                  type="text"
+                  id="church"
+                  class="form-control"
+                  formControlName="church"
+                  placeholder="Iglesia donde asiste"
+                  [class.is-invalid]="
+                    paso1Form.get('church')?.invalid &&
+                    paso1Form.get('church')?.touched
+                  "
+                />
                 <label for="church">Iglesia donde asiste</label>
                 <div class="invalid-feedback">La iglesia es requerida.</div>
               </div>
             </div>
           </div>
-          <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5">
+          <div
+            class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5"
+          >
             <div class="col-10 col-md">
               <div class="form-floating">
-                <select class="form-select form-control" id="sizeShirt" formControlName="sizeShirt"
-                  [class.is-invalid]="paso1Form.get('sizeShirt')?.invalid && paso1Form.get('sizeShirt')?.touched">
+                <select
+                  class="form-select form-control"
+                  id="sizeShirt"
+                  formControlName="sizeShirt"
+                  [class.is-invalid]="
+                    paso1Form.get('sizeShirt')?.invalid &&
+                    paso1Form.get('sizeShirt')?.touched
+                  "
+                >
                   <option selected disabled>Talla de camisa</option>
-                  <option value="s">Small</option>
-                  <option value="m">Medium</option>
-                  <option value="l">Large</option>
-                  <option value="xl">Extra Large</option>
+                  @for (size of sizes(); track size.id) {
+                    <option [value]="size.id">
+                      {{ size.talla }}
+                    </option>
+                  } @empty {
+                    <option disabled>Cargando tallas...</option>
+                  }
                 </select>
                 <label for="sizeShirt">Talla de camisa</label>
-                <div class="invalid-feedback">La talla de camisa es requerida.</div>
+                <div class="invalid-feedback">
+                  La talla de camisa es requerida.
+                </div>
               </div>
             </div>
             <div class="col-10 col-md">
@@ -143,60 +269,114 @@
                 <p>¿Deseas incluir el lunchtime del sábado mediodía?*</p>
               </div>
               <div class="d-flex flex-column gap-2">
-                <div class="form-check d-flex flex-row align-items-center gap-3">
-                  <input class="form-check-input" type="radio" name="radiofood" id="yesfood" formControlName="includesLunch"
+                <div
+                  class="form-check d-flex flex-row align-items-center gap-3"
+                >
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="includesLunch"
+                    id="yesfood"
+                    formControlName="includesLunch"
                     [value]="true"
-                    [class.is-invalid]="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched">
-                  <label class="form-check-label m-0" for="yesfood">
-                    Sí
-                  </label>
+                    [class.is-invalid]="
+                      paso1Form.get('includesLunch')?.invalid &&
+                      paso1Form.get('includesLunch')?.touched
+                    "
+                  />
+                  <label class="form-check-label m-0" for="yesfood"> Sí </label>
                 </div>
-                <div class="form-check d-flex flex-row align-items-center gap-3">
-                  <input class="form-check-input" type="radio" name="radiofood" id="nofood" formControlName="includesLunch"
+                <div
+                  class="form-check d-flex flex-row align-items-center gap-3"
+                >
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="includesLunch"
+                    id="nofood"
+                    formControlName="includesLunch"
                     [value]="false"
-                    [class.is-invalid]="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched">
-                  <label class="form-check-label m-0" for="nofood">
-                    No
-                  </label>
+                    [class.is-invalid]="
+                      paso1Form.get('includesLunch')?.invalid &&
+                      paso1Form.get('includesLunch')?.touched
+                    "
+                  />
+                  <label class="form-check-label m-0" for="nofood"> No </label>
                 </div>
-                <div *ngIf="paso1Form.get('includesLunch')?.invalid && paso1Form.get('includesLunch')?.touched"
-                  class="text-danger small mt-1">
+                <div
+                  *ngIf="
+                    paso1Form.get('includesLunch')?.invalid &&
+                    paso1Form.get('includesLunch')?.touched
+                  "
+                  class="text-danger small mt-1"
+                >
                   Por favor, selecciona si deseas incluir el almuerzo.
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5 mt-2 mt-md-3">
+            class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5 mt-2 mt-md-3"
+          >
             <div class="col-10 col-md">
               <div>
-                <p>¿Serías el acompañante adulto (chaperón) de tu grupo de jóvenes?</p>
+                <p>
+                  ¿Serías el acompañante adulto (chaperón) de tu grupo de
+                  jóvenes?
+                </p>
               </div>
               <div class="d-flex flex-column gap-2">
-                <div class="form-check d-flex flex-row align-items-center gap-3">
-                  <input class="form-check-input" type="radio" name="radioChaperone" id="chapyes" formControlName="isChaperone"
+                <div
+                  class="form-check d-flex flex-row align-items-center gap-3"
+                >
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="radioChaperone"
+                    id="chapyes"
+                    formControlName="isChaperone"
                     [value]="true"
-                    [class.is-invalid]="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched">
-                  <label class="form-check-label" for="chapyes">
-                    Sí
-                  </label>
+                    [class.is-invalid]="
+                      paso1Form.get('isChaperone')?.invalid &&
+                      paso1Form.get('isChaperone')?.touched
+                    "
+                  />
+                  <label class="form-check-label" for="chapyes"> Sí </label>
                 </div>
-                <div class="form-check d-flex flex-row align-items-center gap-3">
-                  <input class="form-check-input" type="radio" name="radioChaperone" id="chapno" formControlName="isChaperone"
+                <div
+                  class="form-check d-flex flex-row align-items-center gap-3"
+                >
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="radioChaperone"
+                    id="chapno"
+                    formControlName="isChaperone"
                     [value]="false"
-                    [class.is-invalid]="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched">
-                  <label class="form-check-label" for="chapno">
-                    No
-                  </label>
+                    [class.is-invalid]="
+                      paso1Form.get('isChaperone')?.invalid &&
+                      paso1Form.get('isChaperone')?.touched
+                    "
+                  />
+                  <label class="form-check-label" for="chapno"> No </label>
                 </div>
-                <div *ngIf="paso1Form.get('isChaperone')?.invalid && paso1Form.get('isChaperone')?.touched"
-                  class="text-danger small mt-1">
+                <div
+                  *ngIf="
+                    paso1Form.get('isChaperone')?.invalid &&
+                    paso1Form.get('isChaperone')?.touched
+                  "
+                  class="text-danger small mt-1"
+                >
                   Debes seleccionar una opción.
                 </div>
               </div>
             </div>
           </div>
-          <p class="m-0 fs-6 fw-light">*Al incluir el lunchtime, debe marcar a su conferencia correspondiente para realizar el pago del mismo. Acércate con el director de jóvenes de tu iglesia para más información.</p>
+          <p class="m-0 fs-6 fw-light">
+            *Al incluir el lunchtime, debe marcar a su conferencia
+            correspondiente para realizar el pago del mismo. Acércate con el
+            director de jóvenes de tu iglesia para má información.
+          </p>
         </div>
       </form>
     </div>
