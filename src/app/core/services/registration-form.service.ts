@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationFormService {
   public stepperForm: FormGroup;
+  public selectedStateName = signal<string>('')
 
   constructor(private fb: FormBuilder) {
     this.stepperForm = this.fb.group({
@@ -25,7 +26,7 @@ export class RegistrationFormService {
         isChaperone: ['', Validators.required]
       }),
       paso2: this.fb.group({
-        nameContact: ['',   Validators.required],
+        nameContact: ['', Validators.required],
         phoneContact: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12)]],
         relationship: ['', Validators.required]
       }),
@@ -35,5 +36,17 @@ export class RegistrationFormService {
       paso4: this.fb.group({}),
       paso5: this.fb.group({})
     });
+  }
+
+  setSelectedStateName(name: string) {
+    this.selectedStateName.set(name)
+  }
+
+  setEmptySelectedStateName() {
+    this.selectedStateName.set('')
+  }
+
+  getSelectedStateName() {
+    return this.selectedStateName()
   }
 }

@@ -41,6 +41,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
       if (stateId) {
         const state = this.states().find(s => s.id === parseInt(stateId));
         if (state != undefined) {
+          this.registrationFormService.setSelectedStateName(state.nombre)
           this.apiService.getCities(state.nombre).subscribe({
             next: (response: ApiResponse<string[]>) => {
               this.cities.set(response.data)
