@@ -83,15 +83,7 @@ export class Step4ConfirmacionComponent {
   }
 
   get estado(): string {
-    const st = this.paso1Value.state;
-    if (!st) return 'No especificado';
-    const states: { [key: string]: string } = {
-      'az': 'Arizona',
-      'hw': 'Hawaii',
-      'nevada': 'Nevada-Utah',
-      'calif': 'California'
-    };
-    return states[st.toLowerCase()] || st;
+    return this.formService.getSelectedStateName()
   }
 
   get ciudad(): string {
