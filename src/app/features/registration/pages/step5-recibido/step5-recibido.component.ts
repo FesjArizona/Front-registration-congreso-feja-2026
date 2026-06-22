@@ -30,7 +30,8 @@ export class Step5RecibidoComponent implements OnInit, OnDestroy {
   iniciarRedireccion() {
     this.redirectTimer = setTimeout(() => {
       this.formService.stepperForm.reset();
-      this.router.navigate(['/registro', this.eventId]);
+      /* this.router.navigate(['/registro', this.eventId]); */
+      window.location.href = `/registro/${this.eventId}`;
     }, 10000);
   }
 
