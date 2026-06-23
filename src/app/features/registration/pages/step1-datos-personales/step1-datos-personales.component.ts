@@ -34,34 +34,50 @@ export class Step1DatosPersonalesComponent implements OnInit {
     this.getStates()
     this.getSizes()
     this.addStateEvent()
+    this.addSizeEvent()
   }
 
   addStateEvent() {
     this.paso1Form.get('state')?.valueChanges.subscribe((stateId) => {
-      if (stateId) {
-        const state = this.states().find(s => s.id === parseInt(stateId));
-        if (state != undefined) {
-          this.registrationFormService.setSelectedStateName(state.nombre)
-          this.apiService.getCities(state.nombre).subscribe({
-            next: (response: ApiResponse<string[]>) => {
-              this.cities.set(response.data)
-            },
-            error: (error: HttpErrorResponse) => {
-            },
-            complete: () => {
-            },
-          })
-        }
+      this.paso1Form.get('city')?.setValue('')
+      this.loadConferencesAndCities(stateId);
+    });
+  }
 
-        this.apiService.getConferences(stateId).subscribe({
-          next: (response: ApiResponse<Conferences[]>) => {
-            this.conferences.set(response.data)
-          },
-          error: (error: HttpErrorResponse) => {
-          },
-          complete: () => {
-          },
-        })
+  loadConferencesAndCities(stateId: string | number) {
+    if (!stateId) return;
+
+    const parsedId = typeof stateId === 'string' ? parseInt(stateId) : stateId;
+
+    const state = this.states().find(s => s.id === parsedId);
+
+    if (state != undefined) {
+      this.registrationFormService.setSelectedStateName(state.nombre);
+
+      this.apiService.getCities(state.nombre).subscribe({
+        next: (response: ApiResponse<string[]>) => {
+          this.cities.set(response.data);
+        },
+        error: (error: HttpErrorResponse) => { },
+      });
+    }
+
+    this.apiService.getConferences(parsedId).subscribe({
+      next: (response: ApiResponse<Conferences[]>) => {
+        this.conferences.set(response.data);
+      },
+      error: (error: HttpErrorResponse) => { },
+    });
+  }
+
+
+  addSizeEvent() {
+    this.paso1Form.get('sizeShirt')?.valueChanges.subscribe((sizeId) => {
+      if (sizeId) {
+        const size = this.sizes().find(s => s.id === parseInt(sizeId));
+        if (size != undefined) {
+          this.registrationFormService.setSizeName(size.talla);
+        }
       }
     });
   }
@@ -70,25 +86,33 @@ export class Step1DatosPersonalesComponent implements OnInit {
   getSizes() {
     this.apiService.getSizes().subscribe({
       next: (response: ApiResponse<Sizes[]>) => {
-        this.sizes.set(response.data)
+        this.sizes.set(response.data);
+        this.checkInitialSize();
       },
-      error: (error: HttpErrorResponse) => {
-      },
-      complete: () => {
-      },
-    })
+      error: (error: HttpErrorResponse) => { },
+    });
   }
 
+  checkInitialSize() {
+    const sizeId = this.paso1Form.get('sizeShirt')?.value;
+    if (sizeId) {
+      const size = this.sizes().find(s => s.id === parseInt(sizeId));
+      if (size != undefined) {
+        this.registrationFormService.setSizeName(size.talla);
+      }
+    }
+  }
   getStates() {
     this.apiService.getStates().subscribe({
       next: (response: ApiResponse<States[]>) => {
-        this.states.set(response.data)
+        this.states.set(response.data);
 
+        const currentStateId = this.paso1Form.get('state')?.value;
+        if (currentStateId) {
+          this.loadConferencesAndCities(currentStateId);
+        }
       },
-      error: (error: HttpErrorResponse) => {
-      },
-      complete: () => {
-      },
-    })
+      error: (error: HttpErrorResponse) => { },
+    });
   }
 }

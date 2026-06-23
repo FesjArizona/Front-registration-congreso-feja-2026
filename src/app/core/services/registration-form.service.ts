@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegistrationFormService {
   public stepperForm: FormGroup;
   public selectedStateName = signal<string>('')
+  public selectedSizeName = signal<string>('')
 
   constructor(private fb: FormBuilder) {
     this.stepperForm = this.fb.group({
@@ -42,11 +43,19 @@ export class RegistrationFormService {
     this.selectedStateName.set(name)
   }
 
-  setEmptySelectedStateName() {
-    this.selectedStateName.set('')
+  setSizeName(name: string) {
+    this.selectedSizeName.set(name)
   }
 
-  getSelectedStateName() {
-    return this.selectedStateName()
+  setEmptySelectedNames() {
+    this.selectedStateName.set('')
+    this.selectedSizeName.set('')
+  }
+
+  getSelectednames(): { stateName: string, sizeName: string } {
+    return {
+      "stateName": this.selectedStateName(),
+      "sizeName": this.selectedSizeName()
+    }
   }
 }
