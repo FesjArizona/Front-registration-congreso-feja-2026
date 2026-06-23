@@ -28,7 +28,6 @@ export class FooterBarComponent {
   onNext(): void {
     if (this.isCurrentStepValid) {
       this.next.emit();
-      console.log('En este paso ' + this.isCurrentStepValid + ' se pasan los siguientes datos: ' + this.isCurrentStepValid);
     }
   }
 }
