@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegistrationFormService } from '../../../../core/services/registration-form.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-step3-resumen',
@@ -13,6 +14,14 @@ import { Router } from '@angular/router';
 export class Step3ResumenComponent {
   private formService = inject(RegistrationFormService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  eventId: string | null = null;
+
+  ngOnInit(): void {
+    this.route.parent?.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+    });
+  }
 
   get paso1Value() {
     return this.formService.stepperForm.get('paso1')?.value || {};
@@ -69,16 +78,9 @@ export class Step3ResumenComponent {
   }
 
   get estado(): string {
-    const st = this.paso1Value.state;
-    if (!st) return 'No especificado';
-    const states: { [key: string]: string } = {
-      'az': 'Arizona',
-      'hw': 'Hawaii',
-      'nevada': 'Nevada-Utah',
-      'calif': 'California'
-    };
-    return states[st.toLowerCase()] || st;
+    return this.formService.getSelectednames().stateName
   }
+
 
   get ciudad(): string {
     return this.paso1Value.city || 'No especificado';
@@ -89,15 +91,7 @@ export class Step3ResumenComponent {
   }
 
   get tallaCamiseta(): string {
-    const t = this.paso1Value.sizeShirt;
-    if (!t) return 'No especificado';
-    const sizes: { [key: string]: string } = {
-      's': 'Small',
-      'm': 'Medium',
-      'l': 'Large',
-      'xl': 'Extra Large'
-    };
-    return sizes[t.toLowerCase()] || t;
+    return this.formService.getSelectednames().sizeName
   }
 
   get esChaperon(): string {
@@ -130,6 +124,6 @@ export class Step3ResumenComponent {
   }
 
   editarDatosPersonales(): void {
-    this.router.navigate(['/registro/datos-personales']);
+    this.router.navigate(['/registro', this.eventId, 'datos-personales']);
   }
 }

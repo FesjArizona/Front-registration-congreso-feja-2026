@@ -83,7 +83,7 @@ export class Step4ConfirmacionComponent {
   }
 
   get estado(): string {
-    return this.formService.getSelectedStateName()
+    return this.formService.getSelectednames().stateName
   }
 
   get ciudad(): string {
