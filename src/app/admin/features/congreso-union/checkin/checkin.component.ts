@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,12 @@ import {
   TallaCamiseta,
 } from '../../../core/models/participants.model';
 import { ParticipantesService } from '../../../core/services/participants.service';
+import { RegisteredUsers } from '../../../core/models/events.service';
+import { EventsService } from '../../../core/services/events.service';
+import { ApiResponse } from '../../../../core/models/api-response.interface';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+
 
 // El bundle JS de Bootstrap se carga globalmente (angular.json > scripts),
 // por eso se declara así en lugar de importarlo como módulo de Angular.
@@ -26,9 +32,9 @@ declare var bootstrap: any;
   templateUrl: './checkin.component.html',
   styleUrls: ['./checkin.component.scss']
 })
-export class CheckinComponent implements OnInit, OnDestroy {
+export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  participantes: Participante[] = [];
+  participantes: RegisteredUsers[] = [];
 
   conferenciasDisponibles: Conferencia[] = CONFERENCIAS_DISPONIBLES;
   tallasDisponibles: TallaCamiseta[] = TALLAS_DISPONIBLES;
@@ -53,14 +59,17 @@ export class CheckinComponent implements OnInit, OnDestroy {
   /** Participante completo que se está editando, para no perder campos que este formulario no expone (teléfono) */
   private participanteOriginal: Participante | null = null;
   participanteAEliminar: Participante | null = null;
+  eventId: string | null = null;
 
   private editModal: any;
   private deleteModal: any;
   private suscripcion?: Subscription;
+  private readonly route = inject(ActivatedRoute)
 
   constructor(
     private participantesService: ParticipantesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private eventsService: EventsService
   ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
@@ -73,16 +82,20 @@ export class CheckinComponent implements OnInit, OnDestroy {
     });
   }
 
+
   ngOnInit(): void {
-    this.suscripcion = this.participantesService.getParticipantes().subscribe(data => {
-      this.participantes = data;
-      if (this.paginaActual > this.totalPaginas) {
-        this.paginaActual = this.totalPaginas;
-      }
+    this.route.parent?.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+      this.getRegisteredUsers(this.eventId)
     });
 
+
+  }
+
+  ngAfterViewInit(): void {
     const editEl = document.getElementById('checkinEditModal');
     const deleteEl = document.getElementById('checkinDeleteModal');
+
     if (editEl) this.editModal = new bootstrap.Modal(editEl);
     if (deleteEl) this.deleteModal = new bootstrap.Modal(deleteEl);
   }
@@ -91,23 +104,36 @@ export class CheckinComponent implements OnInit, OnDestroy {
     this.suscripcion?.unsubscribe();
   }
 
+  getRegisteredUsers(eventId: any) {
+    this.eventsService.getRegisteredUsers(eventId).subscribe({
+      next: (response: ApiResponse<RegisteredUsers[]>) => {
+        this.participantes = response.data
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+    })
+  }
+
   // ---------- datos derivados (búsqueda + paginación) ----------
-  get participantesFiltrados(): Participante[] {
-    const termino = this.busqueda.trim().toLowerCase();
-    if (!termino) return this.participantes;
-    return this.participantes.filter(p =>
-      p.nombre.toLowerCase().includes(termino) ||
-      p.conferencia.toLowerCase().includes(termino) ||
-      p.estado.toLowerCase().includes(termino) ||
-      p.talla.toLowerCase().includes(termino)
-    );
+  get participantesFiltrados(): RegisteredUsers[] {
+    return this.participantes
+    // const termino = this.busqueda.trim().toLowerCase();
+    // if (!termino) return this.participantes;
+    // return this.participantes.filter(p =>
+    //   p.nombre.toLowerCase().includes(termino) ||
+    //   p.conferencia_id.toLowerCase().includes(termino) ||
+    //   p.estado.toLowerCase().includes(termino) ||
+    //   p.talla.toLowerCase().includes(termino)
+    // );
   }
 
   get totalPaginas(): number {
     return Math.max(1, Math.ceil(this.participantesFiltrados.length / this.porPagina));
   }
 
-  get participantesPagina(): Participante[] {
+  get participantesPagina(): RegisteredUsers[] {
     const inicio = (this.paginaActual - 1) * this.porPagina;
     return this.participantesFiltrados.slice(inicio, inicio + this.porPagina);
   }
@@ -149,28 +175,37 @@ export class CheckinComponent implements OnInit, OnDestroy {
   }
 
   // ---------- check-in directo desde la tabla ----------
-  toggleCheckin(p: Participante): void {
-    const nuevoEstado: Participante = {
-      ...p,
-      checkin: p.checkin === 'Completado' ? 'Pendiente' : 'Completado',
-    };
-    this.participantesService.actualizarParticipante(nuevoEstado);
+  toggleCheckin(p: RegisteredUsers): void {
+    this.eventsService.checkInUser(p.id).subscribe({
+      next: (response: ApiResponse<any>) => {
+        this.getRegisteredUsers(this.eventId)
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+    })
+    // const nuevoEstado: RegisteredUsers = {
+    //   ...p,
+    //   checkin: p.checkin === 'Completado' ? 'Pendiente' : 'Completado',
+    // };
+    // this.participantesService.actualizarParticipante(nuevoEstado);
   }
 
   // ---------- modal editar ----------
-  abrirModalEditar(p: Participante): void {
-    this.editandoId = p.id;
-    this.participanteOriginal = p;
-    this.form.setValue({
-      nombre: p.nombre,
-      registro: this.ddmmyyyyAIso(p.registro),
-      conferencia: p.conferencia,
-      camiseta: p.camiseta,
-      talla: p.talla,
-      comida: p.comida,
-      checkin: p.checkin === 'Completado',
-    });
-    this.editModal?.show();
+  abrirModalEditar(p: RegisteredUsers): void {
+    // this.editandoId = p.id;
+    // this.participanteOriginal = p;
+    // this.form.setValue({
+    //   nombre: p.nombre,
+    //   registro: this.ddmmyyyyAIso(p.registro),
+    //   conferencia: p.conferencia,
+    //   camiseta: p.camiseta,
+    //   talla: p.talla,
+    //   comida: p.comida,
+    //   checkin: p.checkin === 'Completado',
+    // });
+    // this.editModal?.show();
   }
 
   /** Estado derivado en vivo, según la conferencia seleccionada en el formulario (solo lectura en el modal) */
@@ -190,25 +225,25 @@ export class CheckinComponent implements OnInit, OnDestroy {
     const conferencia: Conferencia = valores.conferencia;
     const estado = ESTADO_POR_CONFERENCIA[conferencia];
 
-    this.participantesService.actualizarParticipante({
-      ...this.participanteOriginal,
-      nombre: valores.nombre,
-      registro,
-      conferencia,
-      estado,
-      camiseta: valores.camiseta,
-      talla: valores.talla,
-      comida: valores.comida,
-      checkin: valores.checkin ? 'Completado' : 'Pendiente',
-    });
+    // this.participantesService.actualizarParticipante({
+    //   ...this.participanteOriginal,
+    //   nombre: valores.nombre,
+    //   registro,
+    //   conferencia,
+    //   estado,
+    //   camiseta: valores.camiseta,
+    //   talla: valores.talla,
+    //   comida: valores.comida,
+    //   checkin: valores.checkin ? 'Completado' : 'Pendiente',
+    // });
 
     this.editModal?.hide();
   }
 
   // ---------- modal eliminar ----------
-  abrirModalEliminar(p: Participante): void {
-    this.participanteAEliminar = p;
-    this.deleteModal?.show();
+  abrirModalEliminar(p: RegisteredUsers): void {
+    // this.participanteAEliminar = p;
+    // this.deleteModal?.show();
   }
 
   confirmarEliminar(): void {
@@ -225,9 +260,33 @@ export class CheckinComponent implements OnInit, OnDestroy {
     return `${y}-${m}-${d}`;
   }
 
-  private isoADdmmyyyy(fecha: string): string {
-    const [y, m, d] = fecha.split('-');
-    return `${d}/${m}/${y}`;
+  public isoADdmmyyyy(fecha: string | null): string {
+    if (!fecha) return '';
+
+    const dateObj = new Date(fecha);
+
+    if (isNaN(dateObj.getTime())) return fecha;
+
+    const d = String(dateObj.getDate()).padStart(2, '0');
+    const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const y = dateObj.getFullYear();
+
+    let resultado = `${d}/${m}/${y}`;
+
+    if (fecha.includes('T')) {
+      let horas = dateObj.getHours();
+      const minutos = String(dateObj.getMinutes()).padStart(2, '0');
+      const ampm = horas >= 12 ? 'PM' : 'AM';
+
+      horas = horas % 12;
+      horas = horas ? horas : 12;
+
+      const horasStr = String(horas).padStart(2, '0');
+
+      resultado += ` ${horasStr}:${minutos} ${ampm}`;
+    }
+
+    return resultado;
   }
 
 }

@@ -36,10 +36,6 @@ export class ApiService {
         return this.httpClient.get<ApiResponse<EventData>>(`${URL_API}/events/${eventId}`)
     }
 
-
-    // public saveRegister(body: UserDataRegister, eventId: string | null): Observable<ApiResponse<any>> {
-    //     return this.httpClient.post<ApiResponse<any>>(`${URL_API}/team`, team)
-    // }
     public saveRegister(body: UserDataRegister, eventId: string | null): Observable<ApiResponse<number>> {
         return this.httpClient.post<ApiResponse<number>>(`${URL_API}/events/${eventId}/register`, body)
     }

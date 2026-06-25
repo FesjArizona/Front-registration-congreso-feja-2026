@@ -1,9 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Conferencia, CONFERENCIAS_DISPONIBLES, Estado, ESTADO_POR_CONFERENCIA, ESTADOS_DISPONIBLES, Participante } from '../../../core/models/participants.model';
 import { ParticipantesService } from '../../../core/services/participants.service';
+import { RegisteredUsers } from '../../../core/models/events.service';
+import { EventsService } from './../../../../admin/core/services/events.service';
+import { ActivatedRoute } from '@angular/router';
+import { ApiResponse } from '../../../../core/models/api-response.interface';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 declare var bootstrap: any;
@@ -17,7 +22,7 @@ declare var bootstrap: any;
 })
 export class RegistradosComponent implements OnInit, OnDestroy {
 
-  participantes: Participante[] = [];
+  participantes: RegisteredUsers[] = [];
 
   conferenciasDisponibles: Conferencia[] = CONFERENCIAS_DISPONIBLES;
   estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
@@ -42,16 +47,18 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   form: FormGroup;
   editandoId: number | null = null;
   /** Participante completo que se está editando, para no perder campos que este formulario no expone (camiseta, talla, comida) */
-  private participanteOriginal: Participante | null = null;
-  participanteAEliminar: Participante | null = null;
+  private participanteOriginal: RegisteredUsers | null = null;
+  participanteAEliminar: RegisteredUsers | null = null;
+  eventId: string | null = null;
 
   private participantModal: any;
   private deleteModal: any;
   private suscripcion?: Subscription;
-
+  private readonly route = inject(ActivatedRoute)
   constructor(
     private participantesService: ParticipantesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private eventsService: EventsService
   ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
@@ -63,11 +70,9 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.suscripcion = this.participantesService.getParticipantes().subscribe(data => {
-      this.participantes = data;
-      if (this.paginaActual > this.totalPaginas) {
-        this.paginaActual = this.totalPaginas;
-      }
+    this.route.parent?.paramMap.subscribe(params => {
+      this.eventId = params.get('id');
+      this.getRegisteredUsers(this.eventId)
     });
 
     const modalEl = document.getElementById('participantModal');
@@ -76,30 +81,42 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     if (deleteEl) this.deleteModal = new bootstrap.Modal(deleteEl);
   }
 
+  getRegisteredUsers(eventId: any) {
+    this.eventsService.getRegisteredUsers(eventId).subscribe({
+      next: (response: ApiResponse<RegisteredUsers[]>) => {
+        this.participantes = response.data
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+    })
+  }
+
   ngOnDestroy(): void {
     this.suscripcion?.unsubscribe();
   }
 
   // ---------- datos derivados (filtros + paginación) ----------
-  get participantesFiltrados(): Participante[] {
-    const termino = this.busqueda.trim().toLowerCase();
-    return this.participantes.filter(p => {
-      const coincideBusqueda = !termino ||
-        p.nombre.toLowerCase().includes(termino) ||
-        p.telefono.includes(termino) ||
-        p.conferencia.toLowerCase().includes(termino);
-      const coincideEstado = !this.filtroEstado || p.estado === this.filtroEstado;
-      const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
-      const coincideCheckin = !this.filtroCheckin || p.checkin === this.filtroCheckin;
-      return coincideBusqueda && coincideEstado && coincideConferencia && coincideCheckin;
-    });
+  get participantesFiltrados(): RegisteredUsers[] {
+    return this.participantes
+    // const termino = this.busqueda.trim().toLowerCase();
+    // return this.participantes.filter(p => {
+    //   const coincideBusqueda = !termino ||
+    //     p.nombre.toLowerCase().includes(termino) ||
+    //     p.telefono.includes(termino);
+    //   const coincideEstado = !this.filtroEstado || p.estado === this.filtroEstado;
+    //   const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
+    //   const coincideCheckin = !this.filtroCheckin || p.checkin === this.filtroCheckin;
+    //   return coincideBusqueda && coincideEstado && coincideConferencia && coincideCheckin;
+    // });
   }
 
   get totalPaginas(): number {
     return Math.max(1, Math.ceil(this.participantesFiltrados.length / this.porPagina));
   }
 
-  get participantesPagina(): Participante[] {
+  get participantesPagina(): RegisteredUsers[] {
     const inicio = (this.paginaActual - 1) * this.porPagina;
     return this.participantesFiltrados.slice(inicio, inicio + this.porPagina);
   }
@@ -155,15 +172,15 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     this.participantModal?.show();
   }
 
-  abrirModalEditar(p: Participante): void {
+  abrirModalEditar(p: RegisteredUsers): void {
     this.editandoId = p.id;
     this.participanteOriginal = p;
     this.form.setValue({
       nombre: p.nombre,
       telefono: p.telefono,
       conferencia: p.conferencia,
-      checkin: p.checkin,
-      registro: this.ddmmyyyyAIso(p.registro),
+      checkin: p.checkin_at,
+      registro: this.ddmmyyyyAIso(p.checkin_at as string),
     });
     this.participantModal?.show();
   }
@@ -186,17 +203,17 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     const estado = ESTADO_POR_CONFERENCIA[conferencia];
 
     if (this.editandoId !== null && this.participanteOriginal) {
-      // Se parte del registro original para no perder camiseta/talla/comida,
-      // que este formulario no edita.
-      this.participantesService.actualizarParticipante({
-        ...this.participanteOriginal,
-        nombre: valores.nombre,
-        telefono: valores.telefono,
-        conferencia,
-        estado,
-        checkin: valores.checkin,
-        registro,
-      });
+      // // Se parte del registro original para no perder camiseta/talla/comida,
+      // // que este formulario no edita.
+      // this.participantesService.actualizarParticipante({
+      //   ...this.participanteOriginal,
+      //   nombre: valores.nombre,
+      //   telefono: valores.telefono,
+      //   conferencia_id,
+      //   estado_id,
+      //   checkin_at: valores.checkin,
+      //   checkin_at,
+      // });
     } else {
       this.participantesService.agregarParticipante({
         nombre: valores.nombre,
@@ -216,7 +233,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   }
 
   // ---------- modal eliminar ----------
-  abrirModalEliminar(p: Participante): void {
+  abrirModalEliminar(p: RegisteredUsers): void {
     this.participanteAEliminar = p;
     this.deleteModal?.show();
   }
@@ -239,9 +256,34 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     return `${y}-${m}-${d}`;
   }
 
-  private isoADdmmyyyy(fecha: string): string {
-    const [y, m, d] = fecha.split('-');
-    return `${d}/${m}/${y}`;
+  public isoADdmmyyyy(fecha: string | null): string {
+    if (!fecha) return '';
+
+    const dateObj = new Date(fecha);
+
+    if (isNaN(dateObj.getTime())) return fecha;
+
+    const d = String(dateObj.getDate()).padStart(2, '0');
+    const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const y = dateObj.getFullYear();
+
+    let resultado = `${d}/${m}/${y}`;
+
+    if (fecha.includes('T')) {
+      let horas = dateObj.getHours();
+      const minutos = String(dateObj.getMinutes()).padStart(2, '0');
+      const ampm = horas >= 12 ? 'PM' : 'AM';
+
+      horas = horas % 12;
+      horas = horas ? horas : 12;
+
+      const horasStr = String(horas).padStart(2, '0');
+
+      resultado += ` ${horasStr}:${minutos} ${ampm}`;
+    }
+
+    return resultado;
   }
+
 
 }

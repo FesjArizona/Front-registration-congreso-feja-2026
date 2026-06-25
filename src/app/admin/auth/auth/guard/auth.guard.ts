@@ -27,7 +27,7 @@ export const eventGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
 
   // 2. Lógica de autorización básica:
   // Si es 'admin' general, tiene acceso completo al congreso
-  if (user && user.role === 'admin') {
+  if (user && user.role === 'superadmin') {
     return true;
   }
 

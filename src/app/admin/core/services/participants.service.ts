@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { NuevoParticipante, Participante } from './../models/participants.model';
+import { RegisteredUsers } from '../models/events.service';
 
 @Injectable({ providedIn: 'root' })
 export class ParticipantesService {
@@ -10,22 +11,22 @@ export class ParticipantesService {
   private readonly jsonUrl = 'assets/data/registered.json';
 
   /** Cache en memoria de los participantes ya cargados */
-  private readonly participantesSubject = new BehaviorSubject<Participante[]>([]);
+  private readonly participantesSubject = new BehaviorSubject<RegisteredUsers[]>([]);
 
   /** Evita volver a pedir el archivo si ya fue cargado */
   private cargado = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Devuelve un observable con la lista de participantes.
    * La primera vez dispara la petición HTTP al JSON de assets;
    * las siguientes veces reutiliza la copia ya cargada en memoria.
    */
-  getParticipantes(): Observable<Participante[]> {
+  getParticipantes(): Observable<RegisteredUsers[]> {
     if (!this.cargado) {
       this.cargado = true;
-      this.http.get<Participante[]>(this.jsonUrl).pipe(
+      this.http.get<RegisteredUsers[]>(this.jsonUrl).pipe(
         tap(data => this.participantesSubject.next(data))
       ).subscribe({
         error: () => {
@@ -39,14 +40,14 @@ export class ParticipantesService {
 
   /** Agrega un participante nuevo al frente de la lista (solo en memoria) */
   agregarParticipante(participante: NuevoParticipante): void {
-    const actuales = this.participantesSubject.value;
-    const nuevoId = actuales.length ? Math.max(...actuales.map(p => p.id)) + 1 : 1;
-    const nuevo: Participante = { id: nuevoId, ...participante };
-    this.participantesSubject.next([nuevo, ...actuales]);
+    // const actuales = this.participantesSubject.value;
+    // const nuevoId = actuales.length ? Math.max(...actuales.map(p => p.id)) + 1 : 1;
+    // const nuevo: RegisteredUsers = { id: nuevoId, ...participante };
+    // this.participantesSubject.next([nuevo, ...actuales]);
   }
 
   /** Actualiza un participante existente (solo en memoria) */
-  actualizarParticipante(participante: Participante): void {
+  actualizarParticipante(participante: RegisteredUsers): void {
     const actualizados = this.participantesSubject.value.map(p =>
       p.id === participante.id ? { ...participante } : p
     );
