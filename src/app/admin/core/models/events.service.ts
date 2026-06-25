@@ -1,0 +1,22 @@
+export interface RegisteredUsers {
+    id: number,
+    evento_id: number,
+    conferencia: number,
+    talla: number,
+    nombre: string,
+    apellidos: string,
+    correo: string,
+    telefono: string,
+    fecha_nacimiento: string,
+    genero: string,
+    estado: number,
+    ciudad: string,
+    iglesia: string,
+    incluir_lunchtime: number,
+    es_chaperon: number,
+    pago_camiseta: string,
+    pago_lunchtime: string,
+    checkin_at: string | null,
+    created_at: string,
+    updated_at: string
+}

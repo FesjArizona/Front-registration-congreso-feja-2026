@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, tap, throwError } from 'rxjs';
+import { ApiResponse } from '../../../../core/models/api-response.interface';
+import { URL_API } from '../../../../environment/environment';
 
 export interface AuthUser {
-    id: number;
-    name: string;
-    email: string;
-    role: 'admin' | 'admin_sport' | 'referee' | 'viewer';
-    sport: 'soccer' | 'volleyball' | 'basketball' | null;
+  id: number;
+  name: string;
+  email: string;
+  role: 'superadmin' | 'staff' ;
 }
 
 interface LoginResponse {
-    token: string;
-    user: AuthUser;
+  token: string;
+  user: AuthUser;
 }
 
 const TOKEN_KEY = 'auth_token';
@@ -27,43 +28,53 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) {}
+  ) { }
 
   // ── Login Mock Temporal ───────────────────────────────────────────────────
-  login(email: string, password: string): Observable<LoginResponse> {
-    // Definimos las credenciales simuladas obligatorias
-    const VALID_EMAIL = 'admin@congreso.com';
-    const VALID_PASSWORD = 'admin123';
+  // login(email: string, password: string): Observable<LoginResponse> {
+  //   // Definimos las credenciales simuladas obligatorias
+  //   const VALID_EMAIL = 'admin@congreso.com';
+  //   const VALID_PASSWORD = 'admin123';
 
-    if (email === VALID_EMAIL && password === VALID_PASSWORD) {
-      const mockResponse: LoginResponse = {
-        token: 'jwt_mock_token_12345',
-        user: {
-          id: 1,
-          name: 'Webmaster Admin',
-          email: email,
-          role: 'admin',
-          sport: null,
-        },
-      };
+  //   if (email === VALID_EMAIL && password === VALID_PASSWORD) {
+  //     const mockResponse: LoginResponse = {
+  //       token: 'jwt_mock_token_12345',
+  //       user: {
+  //         id: 1,
+  //         name: 'Webmaster Admin',
+  //         email: email,
+  //         role: 'admin',
+  //         sport: null,
+  //       },
+  //     };
 
-      return of(mockResponse).pipe(
-        tap((response) => {
-          localStorage.setItem(TOKEN_KEY, response.token);
-          localStorage.setItem(USER_KEY, JSON.stringify(response.user));
-          this.userSubject.next(response.user);
-        }),
-      );
-    } else {
-      // Si no coinciden, simulamos un error del servidor (status 401)
-      return throwError(() => ({
-        status: 401,
-        error: {
-          error:
-            'Credenciales incorrectas. Intenta con admin@congreso.com y admin123',
-        },
-      }));
-    }
+  //     return of(mockResponse).pipe(
+  //       tap((response) => {
+  //         localStorage.setItem(TOKEN_KEY, response.token);
+  //         localStorage.setItem(USER_KEY, JSON.stringify(response.user));
+  //         this.userSubject.next(response.user);
+  //       }),
+  //     );
+  //   } else {
+  //     // Si no coinciden, simulamos un error del servidor (status 401)
+  //     return throwError(() => ({
+  //       status: 401,
+  //       error: {
+  //         error:
+  //           'Credenciales incorrectas. Intenta con admin@congreso.com y admin123',
+  //       },
+  //     }));
+  //   }
+  // }
+
+  login(email: string, password: string): Observable<ApiResponse<LoginResponse>> {
+    return this.http.post<ApiResponse<LoginResponse>>(`${URL_API}/auth/login`, { email, password }).pipe(
+      tap(response => {
+        localStorage.setItem(TOKEN_KEY, response.data.token);
+        localStorage.setItem(USER_KEY, JSON.stringify(response.data.user));
+        this.userSubject.next(response.data.user);
+      })
+    );
   }
 
   // ── Logout ────────────────────────────────────────────────────────────────
@@ -89,14 +100,6 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  // Verifica si el usuario tiene acceso a un deporte específico
-  // Admin general (sport = null) tiene acceso a todo
-  canAccessSport(sport: 'soccer' | 'volleyball' | 'basketball'): boolean {
-    const user = this.getUser();
-    if (!user) return false;
-    if (user.role === 'admin') return true;
-    return user.sport === sport;
-  }
 
   // ── Helpers privados ──────────────────────────────────────────────────────
 
