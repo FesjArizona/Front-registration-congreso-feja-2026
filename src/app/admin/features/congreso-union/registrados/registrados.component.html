@@ -40,12 +40,12 @@
       <div class="col-6 col-md-3">
         <select
           class="form-select"
-          [(ngModel)]="filtroEstado"
+          [(ngModel)]="filtroConferencia"
           (ngModelChange)="onFiltroChange()"
         >
-          <option value="">Todos los estados</option>
-          <option *ngFor="let estado of estadosDisponibles" [value]="estado">
-            {{ estado }}
+          <option value="">Todas las Conferencias</option>
+          <option *ngFor="let conferencia of conferenciasDisponibles" [value]="conferencia">
+            Conf - {{ conferencia }}
           </option>
         </select>
       </div>

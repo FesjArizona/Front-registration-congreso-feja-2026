@@ -269,7 +269,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
     let resultado = `${d}/${m}/${y}`;
 
-    if (fecha.includes('T')) {
+    /* if (fecha.includes('T')) {
       let horas = dateObj.getHours();
       const minutos = String(dateObj.getMinutes()).padStart(2, '0');
       const ampm = horas >= 12 ? 'PM' : 'AM';
@@ -280,7 +280,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       const horasStr = String(horas).padStart(2, '0');
 
       resultado += ` ${horasStr}:${minutos} ${ampm}`;
-    }
+    } */
 
     return resultado;
   }
