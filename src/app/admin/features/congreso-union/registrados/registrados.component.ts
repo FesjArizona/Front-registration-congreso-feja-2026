@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Subscription } from 'rxjs';
 import { Conferencia, CONFERENCIAS_DISPONIBLES, Estado, ESTADO_POR_CONFERENCIA, ESTADOS_DISPONIBLES, Participante } from '../../../core/models/participants.model';
 import { ParticipantesService } from '../../../core/services/participants.service';
-import { RegisteredUsers } from '../../../core/models/events.service';
+import { RegisteredUsers } from '../../../core/models/events.model';
 import { EventsService } from './../../../../admin/core/services/events.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiResponse } from '../../../../core/models/api-response.interface';
@@ -99,17 +99,21 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   // ---------- datos derivados (filtros + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
-    return this.participantes
-    // const termino = this.busqueda.trim().toLowerCase();
-    // return this.participantes.filter(p => {
-    //   const coincideBusqueda = !termino ||
-    //     p.nombre.toLowerCase().includes(termino) ||
-    //     p.telefono.includes(termino);
-    //   const coincideEstado = !this.filtroEstado || p.estado === this.filtroEstado;
-    //   const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
-    //   const coincideCheckin = !this.filtroCheckin || p.checkin === this.filtroCheckin;
-    //   return coincideBusqueda && coincideEstado && coincideConferencia && coincideCheckin;
-    // });
+    const termino = this.busqueda.trim().toLowerCase();
+    return this.participantes.filter(p => {
+      const coincideBusqueda = !termino ||
+        p.nombre.toLowerCase().includes(termino) ||
+        p.telefono.includes(termino);
+      const coincideEstado = !this.filtroEstado || p.estado === this.filtroEstado;
+      const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
+      let coincideCheckin = true;
+      if (this.filtroCheckin === "Pendiente") {
+        coincideCheckin = !p.checkin_at;
+      } else if (this.filtroCheckin === "Completado") {
+        coincideCheckin = !!p.checkin_at;
+      }
+      return coincideBusqueda && coincideEstado && coincideConferencia && coincideCheckin;
+    });
   }
 
   get totalPaginas(): number {
@@ -240,7 +244,15 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   confirmarEliminar(): void {
     if (this.participanteAEliminar) {
-      this.participantesService.eliminarParticipante(this.participanteAEliminar.id);
+      this.eventsService.removeRegister(this.participanteAEliminar.id).subscribe({
+        next: (response: ApiResponse<RegisteredUsers[]>) => {
+          this.getRegisteredUsers(this.eventId)
+        },
+        error: (error: HttpErrorResponse) => {
+        },
+        complete: () => {
+        },
+      })
       this.participanteAEliminar = null;
     }
     this.deleteModal?.hide();

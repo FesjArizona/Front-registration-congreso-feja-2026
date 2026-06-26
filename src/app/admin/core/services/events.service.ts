@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiResponse } from '../../../core/models/api-response.interface';
-import { RegisteredUsers } from '../../core/models/events.service';
+import { RegisteredUsers } from '../models/events.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../../../environment/environment';
@@ -18,6 +18,10 @@ export class EventsService {
 
   public checkInUser(userId: number): Observable<ApiResponse<any>> {
     return this.httpClient.get<ApiResponse<any>>(`${URL_API}/events/register/${userId}/checkin`)
+  }
+
+  public removeRegister(registerId: number): Observable<ApiResponse<any>> {
+    return this.httpClient.delete<ApiResponse<any>>(`${URL_API}/events/register/${registerId}/delete`)
   }
 
 }

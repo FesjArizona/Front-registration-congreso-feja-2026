@@ -14,7 +14,7 @@ import {
   TallaCamiseta,
 } from '../../../core/models/participants.model';
 import { ParticipantesService } from '../../../core/services/participants.service';
-import { RegisteredUsers } from '../../../core/models/events.service';
+import { RegisteredUsers } from '../../../core/models/events.model';
 import { EventsService } from '../../../core/services/events.service';
 import { ApiResponse } from '../../../../core/models/api-response.interface';
 import { HttpErrorResponse } from '@angular/common/http';

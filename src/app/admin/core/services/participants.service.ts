@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { NuevoParticipante, Participante } from './../models/participants.model';
-import { RegisteredUsers } from '../models/events.service';
+import { RegisteredUsers } from '../models/events.model';
 
 @Injectable({ providedIn: 'root' })
 export class ParticipantesService {
