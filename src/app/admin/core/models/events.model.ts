@@ -1,15 +1,18 @@
 export interface RegisteredUsers {
     id: number,
     evento_id: number,
-    conferencia: number,
+    conferencia: string,
+    conferencia_id: number
     talla: number,
+    talla_camiseta_id: number
     nombre: string,
     apellidos: string,
     correo: string,
     telefono: string,
     fecha_nacimiento: string,
     genero: string,
-    estado: number,
+    estado: string,
+    estado_id: number
     ciudad: string,
     iglesia: string,
     incluir_lunchtime: number,

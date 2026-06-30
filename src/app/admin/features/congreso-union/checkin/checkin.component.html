@@ -212,13 +212,13 @@
         <button
           type="button"
           class="btn-close"
-          data-bs-dismiss="modal"
+          (click)="cerrarModalEditar()"
         ></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="form" novalidate>
           <div class="mb-3">
-            <label class="form-label">Nombre completo</label>
+            <label class="form-label">Nombre</label>
             <input
               type="text"
               class="form-control"
@@ -227,7 +227,17 @@
                 form.get('nombre')?.invalid && form.get('nombre')?.touched
               "
             />
+            <label class="form-label">Apellidos</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="apellido"
+              [class.is-invalid]="
+                form.get('apellido')?.invalid && form.get('apellido')?.touched
+              "
+            />
           </div>
+
           <div class="row">
             <div class="col-md-6 mb-3">
               <label class="form-label">Fecha de registro</label>
@@ -240,7 +250,7 @@
                 "
               />
             </div>
-            <div class="col-md-6 mb-3">
+            <!-- <div class="col-md-6 mb-3">
               <label class="form-label">Conferencia</label>
               <select
                 class="form-select"
@@ -258,8 +268,55 @@
                   {{ conf }}
                 </option>
               </select>
+            </div> -->
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Estado</label>
+              <select class="form-select" formControlName="estado">
+                @for (state of states(); track state.id) {
+                  <option [value]="state.id">{{ state.nombre }}</option>
+                } @empty {
+                  <option disabled>Cargando estados...</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Conferencia</label>
+              <select class="form-select" formControlName="conferencia">
+                <option selected disabled>Conferencia</option>
+                @for (conference of conferences(); track conference.id) {
+                  <option [value]="conference.id">
+                    {{ conference.nombre }}
+                  </option>
+                } @empty {
+                  <option disabled>Cargando conferencias...</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">ciudad</label>
+              <input
+                type="text"
+                class="form-control"
+                id="ciudad"
+                list="ciudadesList"
+                placeholder="ciudad"
+                formControlName="ciudad"
+                [class.is-invalid]="
+                  form.get('ciudad')?.invalid && form.get('ciudad')?.touched
+                "
+              />
+
+              <datalist id="ciudadesList">
+                @for (city of cities(); track city) {
+                  <option [value]="city"></option>
+                }
+              </datalist>
             </div>
           </div>
+
           <div class="mb-3">
             <label class="form-label">Estado</label>
             <input
@@ -319,7 +376,13 @@
         </form>
       </div>
       <div class="modal-footer border-0">
-        <button class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+        <button
+          type="button"
+          class="btn btn-light"
+          (click)="cerrarModalEditar()"
+        >
+          Cancelar
+        </button>
         <button class="btn btn-brand" (click)="guardar()">
           Guardar cambios
         </button>
@@ -345,7 +408,11 @@
           <strong>{{ participanteAEliminar?.nombre }}</strong> de la lista.
         </p>
         <div class="d-flex justify-content-center gap-2">
-          <button class="btn btn-light px-4" data-bs-dismiss="modal">
+          <button
+            type="button"
+            class="btn btn-light"
+            (click)="cerrarModalEditar()"
+          >
             Cancelar
           </button>
           <button class="btn btn-danger px-4" (click)="confirmarEliminar()">
