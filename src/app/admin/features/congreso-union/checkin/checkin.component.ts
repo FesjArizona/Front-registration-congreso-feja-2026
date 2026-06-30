@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -19,6 +19,8 @@ import { EventsService } from '../../../core/services/events.service';
 import { ApiResponse } from '../../../../core/models/api-response.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../../../core/services/api.service';
+import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
 
 
 // El bundle JS de Bootstrap se carga globalmente (angular.json > scripts),
@@ -47,7 +49,10 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // ---------- búsqueda ----------
   busqueda = '';
-
+  states = signal<States[]>([]);
+  conferences = signal<Conferences[]>([]);
+  cities = signal<string[]>([]);
+  sizes = signal<Sizes[]>([]);
   // ---------- paginación ----------
   paginaActual = 1;
   porPagina = 5;
@@ -57,14 +62,15 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   form: FormGroup;
   editandoId: number | null = null;
   /** Participante completo que se está editando, para no perder campos que este formulario no expone (teléfono) */
-  private participanteOriginal: Participante | null = null;
-  participanteAEliminar: Participante | null = null;
+  private participanteOriginal: RegisteredUsers | null = null;
+  participanteAEliminar: RegisteredUsers | null = null;
   eventId: string | null = null;
 
   private editModal: any;
   private deleteModal: any;
   private suscripcion?: Subscription;
   private readonly route = inject(ActivatedRoute)
+  private readonly apiService = inject(ApiService)
 
   constructor(
     private participantesService: ParticipantesService,
@@ -73,8 +79,11 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
       registro: ['', Validators.required],
+      estado: ['', Validators.required],
       conferencia: ['', Validators.required],
+      ciudad: ['', Validators.required],
       camiseta: ['Pendiente', Validators.required],
       talla: ['MD', Validators.required],
       comida: ['Pendiente', Validators.required],
@@ -92,6 +101,45 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
+  getStates() {
+    this.apiService.getStates().subscribe({
+      next: (response: ApiResponse<States[]>) => {
+        this.states.set(response.data);
+        const currentStateId = this.form.get('estado')?.value;
+        if (currentStateId) {
+          this.loadConferencesAndCities(currentStateId);
+        }
+      },
+      error: (error: HttpErrorResponse) => { },
+    });
+  }
+
+  loadConferencesAndCities(stateId: string | number) {
+    if (!stateId) return;
+
+    const parsedId = typeof stateId === 'string' ? parseInt(stateId) : stateId;
+
+    const state = this.states().find(s => s.id === parsedId);
+    console.log(stateId)
+    if (state != undefined) {
+
+      this.apiService.getCities(state.nombre).subscribe({
+        next: (response: ApiResponse<string[]>) => {
+          this.cities.set(response.data);
+        },
+        error: (error: HttpErrorResponse) => { },
+      });
+    }
+
+    this.apiService.getConferences(parsedId).subscribe({
+      next: (response: ApiResponse<Conferences[]>) => {
+        this.conferences.set(response.data);
+      },
+      error: (error: HttpErrorResponse) => { },
+    });
+  }
+
+
   ngAfterViewInit(): void {
     const editEl = document.getElementById('checkinEditModal');
     const deleteEl = document.getElementById('checkinDeleteModal');
@@ -102,6 +150,8 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.suscripcion?.unsubscribe();
+    this.editModal?.dispose();
+    this.deleteModal?.dispose();
   }
 
   getRegisteredUsers(eventId: any) {
@@ -115,7 +165,14 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
       },
     })
   }
+  cerrarModalEditar(): void {
+    this.editModal?.hide();
+  }
 
+  cerrarModalEliminar(): void {
+    this.deleteModal?.hide();
+    this.participanteAEliminar = null; // Buena práctica limpiar el estado
+  }
   // ---------- datos derivados (búsqueda + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
     return this.participantes
@@ -194,18 +251,25 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // ---------- modal editar ----------
   abrirModalEditar(p: RegisteredUsers): void {
-    // this.editandoId = p.id;
-    // this.participanteOriginal = p;
-    // this.form.setValue({
-    //   nombre: p.nombre,
-    //   registro: this.ddmmyyyyAIso(p.registro),
-    //   conferencia: p.conferencia,
-    //   camiseta: p.camiseta,
-    //   talla: p.talla,
-    //   comida: p.comida,
-    //   checkin: p.checkin === 'Completado',
-    // });
-    // this.editModal?.show();
+    this.editandoId = p.id;
+    this.participanteOriginal = p;
+    console.log(p.conferencia)
+    console.log(p.estado_id)
+    console.log(p.ciudad)
+    this.form.setValue({
+      nombre: p.nombre,
+      apellido: p.apellidos,
+      registro: this.ddmmyyyyAIso(p.created_at),
+      estado: p.estado_id,
+      conferencia: p.conferencia_id,
+      ciudad: p.ciudad,
+      camiseta: p.pago_camiseta,
+      talla: p.talla_camiseta_id,
+      comida: p.pago_lunchtime,
+      checkin: p.checkin_at != null,
+    });
+    this.editModal?.show();
+    this.getStates()
   }
 
   /** Estado derivado en vivo, según la conferencia seleccionada en el formulario (solo lectura en el modal) */
@@ -254,9 +318,20 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
     this.deleteModal?.hide();
   }
 
-  // ---------- utilidades de fecha (dd/mm/yyyy <-> yyyy-mm-dd) ----------
   private ddmmyyyyAIso(fecha: string): string {
-    const [d, m, y] = fecha.split('/');
+    if (!fecha) return '';
+
+    if (fecha.includes('T')) {
+      return fecha.split('T')[0];
+    }
+
+    const dateObj = new Date(fecha);
+    if (isNaN(dateObj.getTime())) return '';
+
+    const y = dateObj.getFullYear();
+    const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const d = String(dateObj.getDate()).padStart(2, '0');
+
     return `${y}-${m}-${d}`;
   }
 

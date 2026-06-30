@@ -2,7 +2,9 @@ export interface RegisteredUsers {
     id: number,
     evento_id: number,
     conferencia: string,
+    conferencia_id: number
     talla: number,
+    talla_camiseta_id: number
     nombre: string,
     apellidos: string,
     correo: string,
@@ -10,6 +12,7 @@ export interface RegisteredUsers {
     fecha_nacimiento: string,
     genero: string,
     estado: string,
+    estado_id: number
     ciudad: string,
     iglesia: string,
     incluir_lunchtime: number,
