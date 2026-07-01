@@ -65,16 +65,16 @@
                 <span
                   class="avatar-circle"
                   [style.background]="colorAvatar(p.nombre)"
-                  >{{ inicial(p.nombre) }}</span
+                  >{{ inicial(p.nombre) }} </span
                 >
-                <span class="fw-medium">{{ p.nombre }}</span>
+                <span class="fw-medium">{{ p.nombre }} {{p.apellidos}}</span>
               </div>
             </td>
             <td>
               <span
                 class="d-inline-flex align-items-center gap-1 text-secondary"
               >
-                <i class="bi bi-calendar3"></i>{{ isoADdmmyyyy(p.checkin_at) }}
+                <i class="bi bi-calendar3"></i>{{ isoADdmmyyyy(p.created_at) }}
               </span>
             </td>
             <td>{{ p.conferencia }}</td>
@@ -231,50 +231,17 @@
             <input
               type="text"
               class="form-control"
-              formControlName="apellido"
+              formControlName="apellidos"
               [class.is-invalid]="
-                form.get('apellido')?.invalid && form.get('apellido')?.touched
+                form.get('apellidos')?.invalid && form.get('apellidos')?.touched
               "
             />
           </div>
 
           <div class="row">
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Fecha de registro</label>
-              <input
-                type="date"
-                class="form-control"
-                formControlName="registro"
-                [class.is-invalid]="
-                  form.get('registro')?.invalid && form.get('registro')?.touched
-                "
-              />
-            </div>
-            <!-- <div class="col-md-6 mb-3">
-              <label class="form-label">Conferencia</label>
-              <select
-                class="form-select"
-                formControlName="conferencia"
-                [class.is-invalid]="
-                  form.get('conferencia')?.invalid &&
-                  form.get('conferencia')?.touched
-                "
-              >
-                <option value="" disabled>Selecciona una conferencia</option>
-                <option
-                  *ngFor="let conf of conferenciasDisponibles"
-                  [value]="conf"
-                >
-                  {{ conf }}
-                </option>
-              </select>
-            </div> -->
-          </div>
-
-          <div class="row">
             <div class="col-md-4 mb-3">
               <label class="form-label">Estado</label>
-              <select class="form-select" formControlName="estado">
+              <select class="form-select" formControlName="estado_id">
                 @for (state of states(); track state.id) {
                   <option [value]="state.id">{{ state.nombre }}</option>
                 } @empty {
@@ -284,7 +251,7 @@
             </div>
             <div class="col-md-4 mb-3">
               <label class="form-label">Conferencia</label>
-              <select class="form-select" formControlName="conferencia">
+              <select class="form-select" formControlName="conferencia_id">
                 <option selected disabled>Conferencia</option>
                 @for (conference of conferences(); track conference.id) {
                   <option [value]="conference.id">
@@ -316,62 +283,34 @@
               </datalist>
             </div>
           </div>
-
-          <div class="mb-3">
-            <label class="form-label">Estado</label>
-            <input
-              type="text"
-              class="form-control"
-              [value]="estadoCalculado"
-              disabled
-              placeholder="Se calcula según la conferencia"
-            />
-            <div class="form-text">
-              Se asigna automáticamente según la conferencia elegida.
-            </div>
-          </div>
           <div class="row">
             <div class="col-md-4 mb-3">
               <label class="form-label">Camiseta</label>
-              <select class="form-select" formControlName="camiseta">
-                <option
-                  *ngFor="let estado of estadosPagoDisponibles"
-                  [value]="estado"
-                >
-                  {{ estado }}
-                </option>
+              <select class="form-select" formControlName="pago_camiseta">
+                <option value="pagado">Pagado</option>
+                <option value="pendiente">pendiente</option>
               </select>
             </div>
             <div class="col-md-4 mb-3">
               <label class="form-label">Talla</label>
-              <select class="form-select" formControlName="talla">
-                <option *ngFor="let talla of tallasDisponibles" [value]="talla">
-                  {{ talla }}
-                </option>
+              <select class="form-select" formControlName="talla_camiseta_id">
+                @for (size of sizes(); track size.id) {
+                  <option [value]="size.id">
+                    {{ size.talla }}
+                  </option>
+                } @empty {
+                  <option disabled>Cargando tallas...</option>
+                }
               </select>
             </div>
             <div class="col-md-4 mb-3">
               <label class="form-label">Comida</label>
-              <select class="form-select" formControlName="comida">
-                <option
-                  *ngFor="let estado of estadosPagoDisponibles"
-                  [value]="estado"
-                >
-                  {{ estado }}
-                </option>
+              <select class="form-select" formControlName="pago_lunchtime">
+                <option value="pagado">Pagado</option>
+                <option value="pendiente">pendiente</option>
+                <option value="no_aplica">no aplica</option>
               </select>
             </div>
-          </div>
-          <div class="form-check mt-1">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="checkinFormCheckbox"
-              formControlName="checkin"
-            />
-            <label class="form-check-label" for="checkinFormCheckbox">
-              Confirmar llegada (check-in)
-            </label>
           </div>
         </form>
       </div>
