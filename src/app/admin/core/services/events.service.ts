@@ -24,4 +24,10 @@ export class EventsService {
     return this.httpClient.delete<ApiResponse<any>>(`${URL_API}/events/register/${registerId}/delete`)
   }
 
+  public updateRegister(data: any, registerId: number): Observable<ApiResponse<any>> {
+    return this.httpClient.put<ApiResponse<any>>(`${URL_API}/events/register/${registerId}/update`, data)
+  }
+
+
+
 }

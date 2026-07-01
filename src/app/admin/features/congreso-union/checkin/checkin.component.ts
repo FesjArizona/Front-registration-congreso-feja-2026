@@ -79,15 +79,15 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
+      apellidos: ['', Validators.required],
       registro: ['', Validators.required],
-      estado: ['', Validators.required],
-      conferencia: ['', Validators.required],
+      estado_id: ['', Validators.required],
+      conferencia_id: ['', Validators.required],
       ciudad: ['', Validators.required],
-      camiseta: ['Pendiente', Validators.required],
-      talla: ['MD', Validators.required],
-      comida: ['Pendiente', Validators.required],
-      checkin: [false],
+      pago_camiseta: ['Pendiente', Validators.required],
+      talla_camiseta_id: ['MD', Validators.required],
+      pago_lunchtime: ['Pendiente', Validators.required],
+      checkin_at: [false],
     });
   }
 
@@ -97,18 +97,34 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
       this.eventId = params.get('id');
       this.getRegisteredUsers(this.eventId)
     });
+    this.addStateEvent()
 
+  }
 
+  addStateEvent() {
+    this.form.get('estado_id')?.valueChanges.subscribe((stateId) => {
+      this.form.get('ciudad')?.setValue('')
+      this.loadConferencesAndCities(stateId);
+    });
   }
 
   getStates() {
     this.apiService.getStates().subscribe({
       next: (response: ApiResponse<States[]>) => {
         this.states.set(response.data);
-        const currentStateId = this.form.get('estado')?.value;
+        const currentStateId = this.form.get('estado_id')?.value;
         if (currentStateId) {
           this.loadConferencesAndCities(currentStateId);
         }
+      },
+      error: (error: HttpErrorResponse) => { },
+    });
+  }
+
+  getSizes() {
+    this.apiService.getSizes().subscribe({
+      next: (response: ApiResponse<Sizes[]>) => {
+        this.sizes.set(response.data);
       },
       error: (error: HttpErrorResponse) => { },
     });
@@ -175,15 +191,14 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   // ---------- datos derivados (búsqueda + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
-    return this.participantes
-    // const termino = this.busqueda.trim().toLowerCase();
-    // if (!termino) return this.participantes;
-    // return this.participantes.filter(p =>
-    //   p.nombre.toLowerCase().includes(termino) ||
-    //   p.conferencia_id.toLowerCase().includes(termino) ||
-    //   p.estado.toLowerCase().includes(termino) ||
-    //   p.talla.toLowerCase().includes(termino)
-    // );
+    const termino = this.busqueda.trim().toLowerCase();
+    return this.participantes.filter(p => {
+      const coincideBusqueda = !termino ||
+        p.nombre.toLowerCase().includes(termino) ||
+        p.apellidos.toLowerCase().includes(termino) ||
+        p.telefono.includes(termino);
+      return coincideBusqueda
+    });
   }
 
   get totalPaginas(): number {
@@ -253,23 +268,22 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   abrirModalEditar(p: RegisteredUsers): void {
     this.editandoId = p.id;
     this.participanteOriginal = p;
-    console.log(p.conferencia)
-    console.log(p.estado_id)
-    console.log(p.ciudad)
+    console.log(p)
     this.form.setValue({
       nombre: p.nombre,
-      apellido: p.apellidos,
+      apellidos: p.apellidos,
       registro: this.ddmmyyyyAIso(p.created_at),
-      estado: p.estado_id,
-      conferencia: p.conferencia_id,
+      estado_id: p.estado_id,
+      conferencia_id: p.conferencia_id,
       ciudad: p.ciudad,
-      camiseta: p.pago_camiseta,
-      talla: p.talla_camiseta_id,
-      comida: p.pago_lunchtime,
-      checkin: p.checkin_at != null,
+      pago_camiseta: p.pago_camiseta,
+      talla_camiseta_id: p.talla_camiseta_id,
+      pago_lunchtime: p.pago_lunchtime,
+      checkin_at: p.checkin_at != null,
     });
     this.editModal?.show();
     this.getStates()
+    this.getSizes()
   }
 
   /** Estado derivado en vivo, según la conferencia seleccionada en el formulario (solo lectura en el modal) */
@@ -283,23 +297,29 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
       this.form.markAllAsTouched();
       return;
     }
+    const payloadActualizado: any = {};
+    Object.keys(this.form.controls).forEach(key => {
+      const control = this.form.get(key);
 
-    const valores = this.form.value;
-    const registro = this.isoADdmmyyyy(valores.registro);
-    const conferencia: Conferencia = valores.conferencia;
-    const estado = ESTADO_POR_CONFERENCIA[conferencia];
+      if (control && control.dirty) {
+        payloadActualizado[key] = control.value;
+      }
+    });
 
-    // this.participantesService.actualizarParticipante({
-    //   ...this.participanteOriginal,
-    //   nombre: valores.nombre,
-    //   registro,
-    //   conferencia,
-    //   estado,
-    //   camiseta: valores.camiseta,
-    //   talla: valores.talla,
-    //   comida: valores.comida,
-    //   checkin: valores.checkin ? 'Completado' : 'Pendiente',
-    // });
+    if (Object.keys(payloadActualizado).length === 0) {
+      console.log('No se detectaron cambios, cerrando modal...');
+      this.editModal?.hide();
+      return;
+    }
+    this.eventsService.updateRegister(payloadActualizado, this.participanteOriginal.id).subscribe({
+      next: (response: ApiResponse<any>) => {
+        this.getRegisteredUsers(this.eventId)
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+    })
 
     this.editModal?.hide();
   }
