@@ -58,6 +58,7 @@
                 [checked]="p.checkin_at"
                 (change)="toggleCheckin(p)"
                 [attr.aria-label]="'Confirmar check-in de ' + p.nombre"
+                [disabled]="p.checkin_at"
               />
             </td>
             <td>
@@ -65,9 +66,9 @@
                 <span
                   class="avatar-circle"
                   [style.background]="colorAvatar(p.nombre)"
-                  >{{ inicial(p.nombre) }} </span
-                >
-                <span class="fw-medium">{{ p.nombre }} {{p.apellidos}}</span>
+                  >{{ inicial(p.nombre) }}
+                </span>
+                <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
               </div>
             </td>
             <td>
@@ -82,7 +83,7 @@
               <span
                 class="badge rounded-pill px-3 py-2"
                 [ngClass]="
-                  p.pago_camiseta === 'Pagado'
+                  p.pago_camiseta === 'pagado'
                     ? 'badge-soft-success'
                     : 'badge-soft-danger'
                 "
@@ -90,12 +91,12 @@
                 <i
                   class="bi"
                   [ngClass]="
-                    p.pago_camiseta === 'Pagado'
+                    p.pago_camiseta === 'pagado'
                       ? 'bi-check-circle-fill'
                       : 'bi-x-circle-fill'
                   "
                 ></i>
-                {{ p.pago_camiseta }}
+                {{ p.pago_camiseta?.replace("_", " ") }}
               </span>
             </td>
             <td>{{ p.talla }}</td>
@@ -116,7 +117,7 @@
                       : 'bi-x-circle-fill'
                   "
                 ></i>
-                {{ p.pago_lunchtime }}
+                {{ p.pago_lunchtime?.replace("_", " ") }}
               </span>
             </td>
             <td>
@@ -288,7 +289,8 @@
               <label class="form-label">Camiseta</label>
               <select class="form-select" formControlName="pago_camiseta">
                 <option value="pagado">Pagado</option>
-                <option value="pendiente">pendiente</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="no_aplica">No aplica</option>
               </select>
             </div>
             <div class="col-md-4 mb-3">
@@ -307,8 +309,8 @@
               <label class="form-label">Comida</label>
               <select class="form-select" formControlName="pago_lunchtime">
                 <option value="pagado">Pagado</option>
-                <option value="pendiente">pendiente</option>
-                <option value="no_aplica">no aplica</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="no_aplica">No aplica</option>
               </select>
             </div>
           </div>

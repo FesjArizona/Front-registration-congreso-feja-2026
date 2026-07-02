@@ -1,14 +1,16 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Conferencia, CONFERENCIAS_DISPONIBLES, Estado, ESTADO_POR_CONFERENCIA, ESTADOS_DISPONIBLES, Participante } from '../../../core/models/participants.model';
+import { Conferencia, Estado, ESTADOS_DISPONIBLES, Participante } from '../../../core/models/participants.model';
 import { ParticipantesService } from '../../../core/services/participants.service';
 import { RegisteredUsers } from '../../../core/models/events.model';
 import { EventsService } from './../../../../admin/core/services/events.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiResponse } from '../../../../core/models/api-response.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
+import { ApiService } from '../../../../core/services/api.service';
 
 
 declare var bootstrap: any;
@@ -24,7 +26,13 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   participantes: RegisteredUsers[] = [];
 
-  conferenciasDisponibles: Conferencia[] = CONFERENCIAS_DISPONIBLES;
+  conferenciasDisponibles: Conferencia[] = ['Arizona Conference',
+    'Central California Conference',
+    'Hawaii Conference',
+    'Nevada-Utah Conference',
+    'Northern California Conference',
+    'Southeastern California Conference',
+    'Southern California Conference'];
   estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
 
   private readonly avatarPalette: string[] = [
@@ -37,6 +45,12 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   filtroEstado = '';
   filtroConferencia = '';
   filtroCheckin = '';
+
+
+  states = signal<States[]>([]);
+  conferences = signal<Conferences[]>([]);
+  cities = signal<string[]>([]);
+  sizes = signal<Sizes[]>([]);
 
   // ---------- paginación ----------
   paginaActual = 1;
@@ -55,6 +69,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   private deleteModal: any;
   private suscripcion?: Subscription;
   private readonly route = inject(ActivatedRoute)
+  private readonly apiService = inject(ApiService)
   constructor(
     private participantesService: ParticipantesService,
     private fb: FormBuilder,
@@ -62,10 +77,15 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
-      telefono: ['', Validators.required],
-      conferencia: ['', Validators.required],
-      checkin: ['Pendiente', Validators.required],
+      apellidos: ['', Validators.required],
       registro: ['', Validators.required],
+      estado_id: ['', Validators.required],
+      conferencia_id: ['', Validators.required],
+      ciudad: ['', Validators.required],
+      pago_camiseta: ['Pendiente', Validators.required],
+      talla_camiseta_id: ['MD', Validators.required],
+      pago_lunchtime: ['Pendiente', Validators.required],
+      checkin_at: [false],
     });
   }
 
@@ -79,6 +99,15 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     const deleteEl = document.getElementById('deleteModal');
     if (modalEl) this.participantModal = new bootstrap.Modal(modalEl);
     if (deleteEl) this.deleteModal = new bootstrap.Modal(deleteEl);
+
+    this.addStateEvent()
+  }
+
+  addStateEvent() {
+    this.form.get('estado_id')?.valueChanges.subscribe((stateId) => {
+      this.form.get('ciudad')?.setValue('')
+      this.loadConferencesAndCities(stateId);
+    });
   }
 
   getRegisteredUsers(eventId: any) {
@@ -103,8 +132,8 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     return this.participantes.filter(p => {
       const coincideBusqueda = !termino ||
         p.nombre.toLowerCase().includes(termino) ||
-        p.telefono.includes(termino);
-      const coincideEstado = !this.filtroEstado || p.estado === this.filtroEstado;
+        p.telefono.includes(termino)||
+        p.correo.includes(termino);
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
       let coincideCheckin = true;
       if (this.filtroCheckin === "Pendiente") {
@@ -112,7 +141,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       } else if (this.filtroCheckin === "Completado") {
         coincideCheckin = !!p.checkin_at;
       }
-      return coincideBusqueda && coincideEstado && coincideConferencia && coincideCheckin;
+      return coincideBusqueda && coincideConferencia && coincideCheckin;
     });
   }
 
@@ -162,6 +191,52 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     return nombre.charAt(0).toUpperCase();
   }
 
+  getStates() {
+    this.apiService.getStates().subscribe({
+      next: (response: ApiResponse<States[]>) => {
+        this.states.set(response.data);
+        const currentStateId = this.form.get('estado_id')?.value;
+        if (currentStateId) {
+          this.loadConferencesAndCities(currentStateId);
+        }
+      },
+      error: (error: HttpErrorResponse) => { },
+    });
+  }
+  getSizes() {
+    this.apiService.getSizes().subscribe({
+      next: (response: ApiResponse<Sizes[]>) => {
+        this.sizes.set(response.data);
+      },
+      error: (error: HttpErrorResponse) => { },
+    });
+  }
+
+
+  loadConferencesAndCities(stateId: string | number) {
+    if (!stateId) return;
+
+    const parsedId = typeof stateId === 'string' ? parseInt(stateId) : stateId;
+
+    const state = this.states().find(s => s.id === parsedId);
+    if (state != undefined) {
+
+      this.apiService.getCities(state.nombre).subscribe({
+        next: (response: ApiResponse<string[]>) => {
+          this.cities.set(response.data);
+        },
+        error: (error: HttpErrorResponse) => { },
+      });
+    }
+
+    this.apiService.getConferences(parsedId).subscribe({
+      next: (response: ApiResponse<Conferences[]>) => {
+        this.conferences.set(response.data);
+      },
+      error: (error: HttpErrorResponse) => { },
+    });
+  }
+
   // ---------- modal crear / editar ----------
   abrirModalNuevo(): void {
     this.editandoId = null;
@@ -181,57 +256,50 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     this.participanteOriginal = p;
     this.form.setValue({
       nombre: p.nombre,
-      telefono: p.telefono,
-      conferencia: p.conferencia,
-      checkin: p.checkin_at,
-      registro: this.ddmmyyyyAIso(p.checkin_at as string),
+      apellidos: p.apellidos,
+      registro: this.ddmmyyyyAIso(p.created_at),
+      estado_id: p.estado_id,
+      conferencia_id: p.conferencia_id,
+      ciudad: p.ciudad,
+      pago_camiseta: p.pago_camiseta,
+      talla_camiseta_id: p.talla_camiseta_id,
+      pago_lunchtime: p.pago_lunchtime,
+      checkin_at: p.checkin_at != null,
     });
     this.participantModal?.show();
+    this.getStates()
+    this.getSizes()
   }
 
-  /** Estado derivado en vivo, según la conferencia seleccionada en el formulario (solo lectura en el modal) */
-  get estadoCalculado(): Estado | '' {
-    const conferencia = this.form.get('conferencia')?.value as Conferencia | '';
-    return conferencia ? ESTADO_POR_CONFERENCIA[conferencia] : '';
-  }
+
 
   guardar(): void {
-    if (this.form.invalid) {
+    if (this.form.invalid || !this.participanteOriginal) {
       this.form.markAllAsTouched();
       return;
     }
+    const payloadActualizado: any = {};
+    Object.keys(this.form.controls).forEach(key => {
+      const control = this.form.get(key);
 
-    const valores = this.form.value;
-    const registro = this.isoADdmmyyyy(valores.registro);
-    const conferencia: Conferencia = valores.conferencia;
-    const estado = ESTADO_POR_CONFERENCIA[conferencia];
+      if (control && control.dirty) {
+        payloadActualizado[key] = control.value;
+      }
+    });
 
-    if (this.editandoId !== null && this.participanteOriginal) {
-      // // Se parte del registro original para no perder camiseta/talla/comida,
-      // // que este formulario no edita.
-      // this.participantesService.actualizarParticipante({
-      //   ...this.participanteOriginal,
-      //   nombre: valores.nombre,
-      //   telefono: valores.telefono,
-      //   conferencia_id,
-      //   estado_id,
-      //   checkin_at: valores.checkin,
-      //   checkin_at,
-      // });
-    } else {
-      this.participantesService.agregarParticipante({
-        nombre: valores.nombre,
-        telefono: valores.telefono,
-        conferencia,
-        estado,
-        checkin: valores.checkin,
-        registro,
-        camiseta: 'Pendiente',
-        talla: 'MD',
-        comida: 'Pendiente',
-      });
-      this.paginaActual = 1;
+    if (Object.keys(payloadActualizado).length === 0) {
+      this.participantModal?.hide();
+      return;
     }
+    this.eventsService.updateRegister(payloadActualizado, this.participanteOriginal.id).subscribe({
+      next: (response: ApiResponse<any>) => {
+        this.getRegisteredUsers(this.eventId)
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+    })
 
     this.participantModal?.hide();
   }

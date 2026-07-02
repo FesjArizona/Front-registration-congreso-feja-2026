@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
-  CONFERENCIAS_DISPONIBLES,
   Conferencia,
   ESTADOS_PAGO_DISPONIBLES,
-  ESTADO_POR_CONFERENCIA,
   EstadoPago,
   Estado,
   Participante,
@@ -38,7 +36,6 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
 
   participantes: RegisteredUsers[] = [];
 
-  conferenciasDisponibles: Conferencia[] = CONFERENCIAS_DISPONIBLES;
   tallasDisponibles: TallaCamiseta[] = TALLAS_DISPONIBLES;
   estadosPagoDisponibles: EstadoPago[] = ESTADOS_PAGO_DISPONIBLES;
 
@@ -136,7 +133,6 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
     const parsedId = typeof stateId === 'string' ? parseInt(stateId) : stateId;
 
     const state = this.states().find(s => s.id === parsedId);
-    console.log(stateId)
     if (state != undefined) {
 
       this.apiService.getCities(state.nombre).subscribe({
@@ -268,7 +264,6 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   abrirModalEditar(p: RegisteredUsers): void {
     this.editandoId = p.id;
     this.participanteOriginal = p;
-    console.log(p)
     this.form.setValue({
       nombre: p.nombre,
       apellidos: p.apellidos,
@@ -286,11 +281,6 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
     this.getSizes()
   }
 
-  /** Estado derivado en vivo, según la conferencia seleccionada en el formulario (solo lectura en el modal) */
-  get estadoCalculado(): Estado | '' {
-    const conferencia = this.form.get('conferencia')?.value as Conferencia | '';
-    return conferencia ? ESTADO_POR_CONFERENCIA[conferencia] : '';
-  }
 
   guardar(): void {
     if (this.form.invalid || !this.participanteOriginal) {
@@ -307,7 +297,6 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     if (Object.keys(payloadActualizado).length === 0) {
-      console.log('No se detectaron cambios, cerrando modal...');
       this.editModal?.hide();
       return;
     }
@@ -326,13 +315,21 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // ---------- modal eliminar ----------
   abrirModalEliminar(p: RegisteredUsers): void {
-    // this.participanteAEliminar = p;
-    // this.deleteModal?.show();
+    this.participanteAEliminar = p;
+    this.deleteModal?.show();
   }
 
   confirmarEliminar(): void {
     if (this.participanteAEliminar) {
-      this.participantesService.eliminarParticipante(this.participanteAEliminar.id);
+      this.eventsService.removeRegister(this.participanteAEliminar.id).subscribe({
+        next: (response: ApiResponse<RegisteredUsers[]>) => {
+          this.getRegisteredUsers(this.eventId)
+        },
+        error: (error: HttpErrorResponse) => {
+        },
+        complete: () => {
+        },
+      })
       this.participanteAEliminar = null;
     }
     this.deleteModal?.hide();

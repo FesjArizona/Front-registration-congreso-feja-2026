@@ -8,12 +8,13 @@ export type TallaCamiseta = 'SM' | 'MD' | 'LG' | 'XL';
 
 /** Las 6 conferencias válidas, agrupadas por región */
 export type Conferencia =
-  | 'Arizona'
-  | 'Nevada'
-  | 'California Sur'
-  | 'California Norte'
-  | 'California Centro'
-  | 'Hawaii';
+  | 'Arizona Conference'
+  | 'Central California Conference'
+  | 'Hawaii Conference'
+  | 'Nevada-Utah Conference'
+  | 'Northern California Conference'
+  | 'Southeastern California Conference'
+  | 'Southern California Conference';
 
 /** Los 4 estados válidos. Se derivan siempre de la conferencia, nunca se eligen sueltos. */
 export type Estado = 'Arizona' | 'Nevada' | 'California' | 'Hawaii';
@@ -43,18 +44,8 @@ export type NuevoParticipante = Omit<Participante, 'id'>;
  * - Arizona pertenece a Arizona.
  * - Nevada pertenece a Nevada.
  */
-export const ESTADO_POR_CONFERENCIA: Record<Conferencia, Estado> = {
-  'Hawaii': 'Hawaii',
-  'California Sur': 'California',
-  'California Norte': 'California',
-  'California Centro': 'California',
-  'Arizona': 'Arizona',
-  'Nevada': 'Nevada',
-};
 
-export const CONFERENCIAS_DISPONIBLES: Conferencia[] = [
-  'Arizona', 'Nevada', 'California Sur', 'Hawaii', 'California Norte', 'California Centro',
-];
+
 
 export const ESTADOS_DISPONIBLES: Estado[] = ['Arizona', 'Nevada', 'California', 'Hawaii'];
 
