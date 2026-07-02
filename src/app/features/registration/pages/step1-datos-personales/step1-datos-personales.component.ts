@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { RegistrationFormService } from '../../../../core/services/registration-form.service';
 import { ApiResponse } from '../../../../core/models/api-response.interface';
 import { ApiService } from './../../../../core/services/api.service';
@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './step1-datos-personales.component.html',
-  styleUrl: './step1-datos-personales.component.scss'
+  styleUrl: './step1-datos-personales.component.scss',
 })
 export class Step1DatosPersonalesComponent implements OnInit {
   paso1Form!: FormGroup;
@@ -25,21 +25,74 @@ export class Step1DatosPersonalesComponent implements OnInit {
 
   constructor(
     private registrationFormService: RegistrationFormService,
-    private apiService: ApiService
-  ) { }
+    private apiService: ApiService,
+  ) {}
 
   ngOnInit() {
+    this.paso1Form = this.registrationFormService.stepperForm.get(
+      'paso1',
+    ) as FormGroup;
+    this.getStates();
+    this.getSizes();
+    this.addStateEvent();
+    this.addSizeEvent();
 
-    this.paso1Form = this.registrationFormService.stepperForm.get('paso1') as FormGroup;
-    this.getStates()
-    this.getSizes()
-    this.addStateEvent()
-    this.addSizeEvent()
+    this.paso1Form.get('includesTshirt')?.valueChanges.subscribe((value) => {
+      this.updateSizeShirtValidation(value);
+    });
+    this.updateSizeShirtValidation(this.paso1Form.get('includesTshirt')?.value);
+
+    this.paso1Form.get('includesLunch')?.valueChanges.subscribe((value) => {
+      this.updateFoodPreferenceValidation(value);
+    });
+    this.updateFoodPreferenceValidation(
+      this.paso1Form.get('includesLunch')?.value,
+    );
+
+    this.paso1Form.get('foodPreference')?.valueChanges.subscribe((value) => {
+      this.updateFoodPreferenceDetailsValidation(value);
+    });
+    this.updateFoodPreferenceDetailsValidation(
+      this.paso1Form.get('foodPreference')?.value,
+    );
+  }
+
+  private updateSizeShirtValidation(value: boolean | null) {
+    const sizeControl = this.paso1Form.get('sizeShirt');
+    if (value === true) {
+      sizeControl?.setValidators([Validators.required]);
+    } else {
+      sizeControl?.clearValidators();
+      sizeControl?.setValue(null);
+    }
+    sizeControl?.updateValueAndValidity();
+  }
+
+  private updateFoodPreferenceValidation(value: boolean | null) {
+    const foodPrefControl = this.paso1Form.get('foodPreference');
+    if (value === true) {
+      foodPrefControl?.setValidators([Validators.required]);
+    } else {
+      foodPrefControl?.clearValidators();
+      foodPrefControl?.setValue(null);
+    }
+    foodPrefControl?.updateValueAndValidity();
+  }
+
+  private updateFoodPreferenceDetailsValidation(value: string | null) {
+    const detailsControl = this.paso1Form.get('foodPreferenceDetails');
+    if (value === 'otra') {
+      detailsControl?.setValidators([Validators.required]);
+    } else {
+      detailsControl?.clearValidators();
+      detailsControl?.setValue(null);
+    }
+    detailsControl?.updateValueAndValidity();
   }
 
   addStateEvent() {
     this.paso1Form.get('state')?.valueChanges.subscribe((stateId) => {
-      this.paso1Form.get('city')?.setValue('')
+      this.paso1Form.get('city')?.setValue('');
       this.loadConferencesAndCities(stateId);
     });
   }
@@ -49,7 +102,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
 
     const parsedId = typeof stateId === 'string' ? parseInt(stateId) : stateId;
 
-    const state = this.states().find(s => s.id === parsedId);
+    const state = this.states().find((s) => s.id === parsedId);
 
     if (state != undefined) {
       this.registrationFormService.setSelectedStateName(state.nombre);
@@ -58,7 +111,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
         next: (response: ApiResponse<string[]>) => {
           this.cities.set(response.data);
         },
-        error: (error: HttpErrorResponse) => { },
+        error: (error: HttpErrorResponse) => {},
       });
     }
 
@@ -66,15 +119,14 @@ export class Step1DatosPersonalesComponent implements OnInit {
       next: (response: ApiResponse<Conferences[]>) => {
         this.conferences.set(response.data);
       },
-      error: (error: HttpErrorResponse) => { },
+      error: (error: HttpErrorResponse) => {},
     });
   }
-
 
   addSizeEvent() {
     this.paso1Form.get('sizeShirt')?.valueChanges.subscribe((sizeId) => {
       if (sizeId) {
-        const size = this.sizes().find(s => s.id === parseInt(sizeId));
+        const size = this.sizes().find((s) => s.id === parseInt(sizeId));
         if (size != undefined) {
           this.registrationFormService.setSizeName(size.talla);
         }
@@ -82,21 +134,20 @@ export class Step1DatosPersonalesComponent implements OnInit {
     });
   }
 
-
   getSizes() {
     this.apiService.getSizes().subscribe({
       next: (response: ApiResponse<Sizes[]>) => {
         this.sizes.set(response.data);
         this.checkInitialSize();
       },
-      error: (error: HttpErrorResponse) => { },
+      error: (error: HttpErrorResponse) => {},
     });
   }
 
   checkInitialSize() {
     const sizeId = this.paso1Form.get('sizeShirt')?.value;
     if (sizeId) {
-      const size = this.sizes().find(s => s.id === parseInt(sizeId));
+      const size = this.sizes().find((s) => s.id === parseInt(sizeId));
       if (size != undefined) {
         this.registrationFormService.setSizeName(size.talla);
       }
@@ -112,7 +163,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
           this.loadConferencesAndCities(currentStateId);
         }
       },
-      error: (error: HttpErrorResponse) => { },
+      error: (error: HttpErrorResponse) => {},
     });
   }
 }

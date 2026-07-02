@@ -24,6 +24,9 @@ export class RegistrationFormService {
         church: ['', Validators.required],
         sizeShirt: ['', Validators.required],
         includesLunch: ['', Validators.required],
+        foodPreference: [null],
+        foodPreferenceDetails: [null],
+        includesTshirt: ['', Validators.required],
         isChaperone: ['', Validators.required]
       }),
       paso2: this.fb.group({
