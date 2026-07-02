@@ -8,7 +8,6 @@
         Registrar, actualizar y borrar participantes
       </p>
     </div>
-   
   </div>
 
   <div class="card border-0 shadow-sm rounded-4 p-3 p-md-4">
@@ -38,9 +37,9 @@
           [(ngModel)]="filtroConferencia"
           (ngModelChange)="onFiltroChange()"
         >
-          <option value="">Todas las Conferencias</option>
+          <option value="">Todas las conferencias</option>
           <option *ngFor="let conferencia of conferenciasDisponibles" [value]="conferencia">
-            Conf - {{ conferencia }}
+            {{ conferencia }}
           </option>
         </select>
       </div>
@@ -87,7 +86,7 @@
                   [style.background]="colorAvatar(p.nombre)"
                   >{{ inicial(p.nombre) }}</span
                 >
-                <span class="fw-medium">{{ p.nombre }}</span>
+                <span class="fw-medium">{{ p.nombre }} {{ p.apellidos}}</span>
               </div>
             </td>
             <td>{{ p.telefono }}</td>
@@ -115,7 +114,7 @@
                 {{ p.checkin_at ? "Completado" : "Pendiente" }}
               </span>
             </td>
-            <td>{{ isoADdmmyyyy(p.checkin_at) }}</td>
+            <td>{{ isoADdmmyyyy(p.created_at) }}</td>
             <td>
               <button
                 class="icon-action edit-btn"
@@ -221,7 +220,7 @@
       <div class="modal-body">
         <form [formGroup]="form" novalidate>
           <div class="mb-3">
-            <label class="form-label">Nombre completo</label>
+            <label class="form-label">Nombre</label>
             <input
               type="text"
               class="form-control"
@@ -230,68 +229,91 @@
                 form.get('nombre')?.invalid && form.get('nombre')?.touched
               "
             />
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Teléfono</label>
-              <input
-                type="tel"
-                class="form-control"
-                formControlName="telefono"
-                [class.is-invalid]="
-                  form.get('telefono')?.invalid && form.get('telefono')?.touched
-                "
-              />
-            </div>
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Correo de contacto</label>
-              <input
-                type="email"
-                class="form-control"
-                formControlName="contacto"
-                [class.is-invalid]="
-                  form.get('contacto')?.invalid && form.get('contacto')?.touched
-                "
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Estado</label>
-              <select
-                class="form-select"
-                formControlName="estado"
-                [class.is-invalid]="
-                  form.get('estado')?.invalid && form.get('estado')?.touched
-                "
-              >
-                <option value="" disabled>Selecciona un estado</option>
-                <option
-                  *ngFor="let estado of estadosDisponibles"
-                  [value]="estado"
-                >
-                  {{ estado }}
-                </option>
-              </select>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label class="form-label">Check-in</label>
-              <select class="form-select" formControlName="checkin">
-                <option value="Completado">Completado</option>
-                <option value="Pendiente">Pendiente</option>
-              </select>
-            </div>
-          </div>
-          <div class="mb-1">
-            <label class="form-label">Fecha de registro</label>
+            <label class="form-label">Apellidos</label>
             <input
-              type="date"
+              type="text"
               class="form-control"
-              formControlName="registro"
+              formControlName="apellidos"
               [class.is-invalid]="
-                form.get('registro')?.invalid && form.get('registro')?.touched
+                form.get('apellidos')?.invalid && form.get('apellidos')?.touched
               "
             />
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Estado</label>
+              <select class="form-select" formControlName="estado_id">
+                @for (state of states(); track state.id) {
+                  <option [value]="state.id">{{ state.nombre }}</option>
+                } @empty {
+                  <option disabled>Cargando estados...</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Conferencia</label>
+              <select class="form-select" formControlName="conferencia_id">
+                <option selected disabled>Conferencia</option>
+                @for (conference of conferences(); track conference.id) {
+                  <option [value]="conference.id">
+                    {{ conference.nombre }}
+                  </option>
+                } @empty {
+                  <option disabled>Cargando conferencias...</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">ciudad</label>
+              <input
+                type="text"
+                class="form-control"
+                id="ciudad"
+                list="ciudadesList"
+                placeholder="ciudad"
+                formControlName="ciudad"
+                [class.is-invalid]="
+                  form.get('ciudad')?.invalid && form.get('ciudad')?.touched
+                "
+              />
+
+              <datalist id="ciudadesList">
+                @for (city of cities(); track city) {
+                  <option [value]="city"></option>
+                }
+              </datalist>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Camiseta</label>
+              <select class="form-select" formControlName="pago_camiseta">
+                <option value="pagado">Pagado</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="no_aplica">No aplica</option>
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Talla</label>
+              <select class="form-select" formControlName="talla_camiseta_id">
+                @for (size of sizes(); track size.id) {
+                  <option [value]="size.id">
+                    {{ size.talla }}
+                  </option>
+                } @empty {
+                  <option disabled>Cargando tallas...</option>
+                }
+              </select>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Comida</label>
+              <select class="form-select" formControlName="pago_lunchtime">
+                <option value="pagado">Pagado</option>
+                <option value="pendiente">Pendiente</option>
+                <option value="no_aplica">No aplica</option>
+              </select>
+            </div>
           </div>
         </form>
       </div>
