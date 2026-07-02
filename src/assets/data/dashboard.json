@@ -1,9 +1,9 @@
 {
   "stats": [
-    { "icon": "registered.svg", "label": "Ventas Totales", "value": 650 },
-    { "icon": "check-ed.svg", "label": "Nuevos Clientes", "value": 20 },
-    { "icon": "shirts.svg", "label": "Nuevos Clientes", "value": 16 },
-    { "icon": "lunch.svg", "label": "Nuevos Clientes", "value": 582 }
+    { "icon": "registered.svg", "label": "Total Registrados", "value": 650 },
+    { "icon": "check-ed.svg", "label": "Check-in Realizados", "value": 20 },
+    { "icon": "shirts.svg", "label": "Camisetas Pagadas", "value": 16 },
+    { "icon": "lunch.svg", "label": "Comidas pagadas", "value": 582 }
   ],
   "activities": [
     {
