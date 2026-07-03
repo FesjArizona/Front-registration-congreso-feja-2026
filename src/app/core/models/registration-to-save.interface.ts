@@ -12,6 +12,9 @@ export interface UserDataRegister {
     iglesia: string
     incluir_lunchtime: boolean,
     es_chaperon: boolean,
+    incluir_camisa: boolean,
+    alimento_especial_nota: string,
+    tipo_alimento: string
     contacto_emergencia: EmergencyData
 }
 

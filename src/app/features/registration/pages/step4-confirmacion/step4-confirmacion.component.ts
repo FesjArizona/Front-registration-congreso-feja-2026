@@ -150,12 +150,16 @@ export class Step4ConfirmacionComponent {
       iglesia: this.paso1Value.church,
       incluir_lunchtime: this.paso1Value.includesLunch,
       es_chaperon: this.paso1Value.isChaperone,
+      incluir_camisa: this.paso1Value.includesTshirt,
+      tipo_alimento: this.paso1Value.foodPreference,
+      alimento_especial_nota: this.paso1Value.foodPreferenceDetails,
       contacto_emergencia: {
         nombre_contacto: this.paso2Value.nameContact,
         telefono_contacto: this.paso2Value.phoneContact,
         relacion: this.paso2Value.relationship
       }
     }
+
 
     this.apiService.saveRegister(data, this.eventId).subscribe({
       next: (response: ApiResponse<number>) => {
