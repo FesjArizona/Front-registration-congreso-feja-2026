@@ -36,11 +36,12 @@
           <tr class="text-uppercase">
             <th>Check In</th>
             <th>Nombre</th>
-            <th>Registro</th>
             <th>Conferencia</th>
             <th>Camiseta</th>
             <th>Talla</th>
             <th>Comida</th>
+            <th>Tipo de alimento</th>
+            <th>Nota alimento</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -70,13 +71,6 @@
                 </span>
                 <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
               </div>
-            </td>
-            <td>
-              <span
-                class="d-inline-flex align-items-center gap-1 text-secondary"
-              >
-                <i class="bi bi-calendar3"></i>{{ isoADdmmyyyy(p.created_at) }}
-              </span>
             </td>
             <td>{{ p.conferencia }}</td>
             <td>
@@ -119,6 +113,12 @@
                 ></i>
                 {{ p.pago_lunchtime?.replace("_", " ") }}
               </span>
+            </td>
+            <td>
+              {{p.tipo_alimento}}
+            </td>
+            <td>
+              {{p.alimento_especial_nota}}
             </td>
             <td>
               <button

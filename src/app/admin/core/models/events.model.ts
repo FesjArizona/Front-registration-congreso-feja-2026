@@ -19,6 +19,8 @@ export interface RegisteredUsers {
     es_chaperon: number,
     pago_camiseta: string,
     pago_lunchtime: string,
+    tipo_alimento: string
+    alimento_especial_nota: string
     checkin_at: string | null,
     created_at: string,
     updated_at: string
