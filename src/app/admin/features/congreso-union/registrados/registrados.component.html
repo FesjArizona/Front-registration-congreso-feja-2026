@@ -38,7 +38,10 @@
           (ngModelChange)="onFiltroChange()"
         >
           <option value="">Todas las conferencias</option>
-          <option *ngFor="let conferencia of conferenciasDisponibles" [value]="conferencia">
+          <option
+            *ngFor="let conferencia of conferenciasDisponibles"
+            [value]="conferencia"
+          >
             {{ conferencia }}
           </option>
         </select>
@@ -86,7 +89,7 @@
                   [style.background]="colorAvatar(p.nombre)"
                   >{{ inicial(p.nombre) }}</span
                 >
-                <span class="fw-medium">{{ p.nombre }} {{ p.apellidos}}</span>
+                <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
               </div>
             </td>
             <td>{{ p.telefono }}</td>
@@ -238,6 +241,14 @@
                 form.get('apellidos')?.invalid && form.get('apellidos')?.touched
               "
             />
+
+            <label class="form-label">Preferencia alimento</label>
+            <select class="form-select" formControlName="tipo_alimento">
+              <option value="normal">No aplica</option>
+              <option value="vegetariano">vegetariano</option>
+              <option value="vegano">vegano</option>
+              <option value="otra">otra</option>
+            </select>
           </div>
 
           <div class="row">

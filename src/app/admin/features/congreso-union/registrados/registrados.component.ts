@@ -83,6 +83,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       conferencia_id: ['', Validators.required],
       ciudad: ['', Validators.required],
       pago_camiseta: ['Pendiente', Validators.required],
+      tipo_alimento: ['', Validators.required],
       talla_camiseta_id: ['MD', Validators.required],
       pago_lunchtime: ['Pendiente', Validators.required],
       checkin_at: [false],
@@ -132,7 +133,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     return this.participantes.filter(p => {
       const coincideBusqueda = !termino ||
         p.nombre.toLowerCase().includes(termino) ||
-        p.telefono.includes(termino)||
+        p.telefono.includes(termino) ||
         p.correo.includes(termino);
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
       let coincideCheckin = true;
@@ -262,6 +263,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       conferencia_id: p.conferencia_id,
       ciudad: p.ciudad,
       pago_camiseta: p.pago_camiseta,
+      tipo_alimento: p.tipo_alimento,
       talla_camiseta_id: p.talla_camiseta_id,
       pago_lunchtime: p.pago_lunchtime,
       checkin_at: p.checkin_at != null,

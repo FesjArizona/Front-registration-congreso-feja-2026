@@ -41,7 +41,6 @@
             <th>Talla</th>
             <th>Comida</th>
             <th>Tipo de alimento</th>
-            <th>Nota alimento</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -115,10 +114,7 @@
               </span>
             </td>
             <td>
-              {{p.tipo_alimento}}
-            </td>
-            <td>
-              {{p.alimento_especial_nota}}
+              {{ p.tipo_alimento == "normal" ? "No aplica" : p.tipo_alimento }}
             </td>
             <td>
               <button
@@ -237,6 +233,14 @@
                 form.get('apellidos')?.invalid && form.get('apellidos')?.touched
               "
             />
+
+            <label class="form-label">Preferencia alimento</label>
+            <select class="form-select" formControlName="tipo_alimento">
+              <option value="normal">No aplica</option>
+              <option value="vegetariano">vegetariano</option>
+              <option value="vegano">vegano</option>
+              <option value="otra">otra</option>
+            </select>
           </div>
 
           <div class="row">
@@ -312,6 +316,14 @@
                 <option value="pendiente">Pendiente</option>
                 <option value="no_aplica">No aplica</option>
               </select>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center">
+              <label class="form-label">Check-in</label>
+              <input
+                type="checkbox"
+                class="form-check-input checkin-checkbox"
+                formControlName="checkin_at"
+              />
             </div>
           </div>
         </form>
