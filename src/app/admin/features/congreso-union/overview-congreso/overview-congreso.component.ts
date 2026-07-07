@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { StatCard, RecentActivity, StaffMember } from '../../../core/models/dashboard.model';
+import { EventsService } from '../../../core/services/events.service';
 
 @Component({
   standalone: true,
@@ -15,6 +16,7 @@ export class OverviewCongresoComponent {
   baseUrlIcon: string = '../../../../../assets/icons/admin/';
 
   private dashboardService = inject(DashboardService);
+  private eventsService = inject(EventsService);
 
   // Variables fuertemente tipadas gracias al modelo
   public statsList: StatCard[] = [];
@@ -27,8 +29,10 @@ export class OverviewCongresoComponent {
 
   private loadDashboardData(): void {
     // Ejemplo consumiendo los endpoints por separado:
-    this.dashboardService.getStats().subscribe({
-      next: (data) => this.statsList = data,
+    this.eventsService.getResumen(2).subscribe({
+      next: (result) => {
+        this.statsList = result.data
+      },
       error: (err) => console.error('Error al cargar stats', err)
     });
 
