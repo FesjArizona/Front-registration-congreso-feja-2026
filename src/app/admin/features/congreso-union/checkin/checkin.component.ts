@@ -81,6 +81,7 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
       estado_id: ['', Validators.required],
       conferencia_id: ['', Validators.required],
       ciudad: ['', Validators.required],
+      tipo_alimento: ['', Validators.required],
       pago_camiseta: ['Pendiente', Validators.required],
       talla_camiseta_id: ['MD', Validators.required],
       pago_lunchtime: ['Pendiente', Validators.required],
@@ -253,11 +254,7 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
       complete: () => {
       },
     })
-    // const nuevoEstado: RegisteredUsers = {
-    //   ...p,
-    //   checkin: p.checkin === 'Completado' ? 'Pendiente' : 'Completado',
-    // };
-    // this.participantesService.actualizarParticipante(nuevoEstado);
+    
   }
 
   // ---------- modal editar ----------
@@ -271,6 +268,7 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
       estado_id: p.estado_id,
       conferencia_id: p.conferencia_id,
       ciudad: p.ciudad,
+      tipo_alimento: p.tipo_alimento,
       pago_camiseta: p.pago_camiseta,
       talla_camiseta_id: p.talla_camiseta_id,
       pago_lunchtime: p.pago_lunchtime,
