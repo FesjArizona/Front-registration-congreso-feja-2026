@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterLinkActive } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AuthService } from '../../auth/auth/service/auth.service';
 
 interface NavChild {
   label: string;
@@ -16,6 +17,13 @@ interface NavItem {
   expanded?: boolean;
 }
 
+interface AuthUser {
+  id: number;
+  name: string;
+  email: string;
+  role: 'superadmin' | 'finanzas' | 'staff';
+}
+
 @Component({
   standalone: true,
   selector: 'app-sidebar',
@@ -24,28 +32,60 @@ interface NavItem {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  navItems: NavItem[] = []
+  private readonly authService = inject(AuthService)
+  constructor(private sanitizer: DomSanitizer) {
 
-  constructor(private sanitizer: DomSanitizer) { }
+  }
+  ngOnInit(): void {
+    this.authUser = this.authService.getUser() as AuthUser;
+    const menuMaestro = [
+      {
+        label: 'Feja 2026 - Union',
+        icon: 'soccer',
+        route: '/soccer',
+        expanded: true,
+        children: [
+          {
+            label: 'Resumen',
+            route: 'congreso/overview',
+            roles: ['superadmin', 'staff', 'finanzas']
+          },
+          {
+            label: 'Check-in',
+            route: 'congreso/checkin',
+            roles: ['superadmin', 'staff']
+          },
+          {
+            label: 'Registrados',
+            route: 'congreso/registered',
+            roles: ['superadmin', 'finanzas']
+          }
+        ],
+      }
+    ];
+    const rolUsuario = this.authUser.role;
 
+    this.navItems = menuMaestro.map(item => {
+      const itemFiltrado = { ...item };
+
+      if (itemFiltrado.children) {
+        itemFiltrado.children = itemFiltrado.children.filter(child => {
+          return rolUsuario === 'superadmin' || (child.roles && child.roles.includes(rolUsuario));
+        });
+      }
+
+      return itemFiltrado;
+    });
+
+  }
   isCollapsed = false;
-
+  authUser: AuthUser = {} as AuthUser
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  navItems: NavItem[] = [
-    {
-      label: 'Feja 2026 - Union',
-      icon: 'soccer',
-      route: '/soccer',
-      expanded: true,
-      children: [
-        { label: 'Resumen', route: 'congreso/overview' },
-        { label: 'Registrados', route: 'congreso/registered' },
-        { label: 'Check-in', route: 'congreso/checkin' },
-      ],
-    }
-  ];
+
 
   /* ngOnInit(): void {} */
 
