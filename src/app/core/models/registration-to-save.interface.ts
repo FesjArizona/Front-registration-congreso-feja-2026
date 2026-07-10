@@ -1,5 +1,6 @@
 export interface UserDataRegister {
     conferencia_id: number,
+    nombre_conferencia: string,
     talla_camiseta_id: number,
     nombre: string,
     apellidos: string,
@@ -8,6 +9,7 @@ export interface UserDataRegister {
     fecha_nacimiento: string,
     genero: string,
     estado_id: number,
+    nombre_estado: string,
     ciudad: string,
     iglesia: string
     incluir_lunchtime: boolean,

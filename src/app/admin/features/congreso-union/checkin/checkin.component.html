@@ -128,17 +128,19 @@
                   style="width: 16px"
                 />
               </button>
-              <button
-                class="icon-action delete"
-                title="Eliminar"
-                (click)="abrirModalEliminar(p)"
-              >
-                <img
-                  src="../../../../../assets/icons/registered/delete.svg"
-                  alt="Delete Icon"
-                  style="width: 16px"
-                />
-              </button>
+              @if (authUser.role !== "finanzas") {
+                <button
+                  class="icon-action delete"
+                  title="Eliminar"
+                  (click)="abrirModalEliminar(p)"
+                >
+                  <img
+                    src="../../../../../assets/icons/registered/delete.svg"
+                    alt="Delete Icon"
+                    style="width: 16px"
+                  />
+                </button>
+              }
             </td>
           </tr>
         </tbody>

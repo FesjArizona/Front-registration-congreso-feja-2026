@@ -20,7 +20,7 @@ export class AuthComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit() {
     // Si ya está logueado, redirigir directo al admin
@@ -60,19 +60,17 @@ export class AuthComponent implements OnInit {
     const user = this.authService.getUser();
     if (!user) return;
 
-      // if (user.role === 'admin') {
-      //   // Admin general → overview de soccer por defecto
-      //   this.router.navigate(['/admin/congreso/overview']);
-      // } else if (user.sport) {
-      //   // Admin de deporte → su propio deporte
-      //   this.router.navigate([`/admin/${user.sport}/overview`]);
-      // } else {
-      //   this.router.navigate(['/admin']);
-      // }
+    // if (user.role === 'admin') {
+    //   // Admin general → overview de soccer por defecto
+    //   this.router.navigate(['/admin/congreso/overview']);
+    // } else if (user.sport) {
+    //   // Admin de deporte → su propio deporte
+    //   this.router.navigate([`/admin/${user.sport}/overview`]);
+    // } else {
+    //   this.router.navigate(['/admin']);
+    // }
 
-      if (user.role === 'superadmin') {
-        // Admin general → overview de soccer por defecto
-        this.router.navigate(['/admin/congreso/overview']);
-      } 
+    // Admin general → overview de soccer por defecto
+    this.router.navigate(['/admin/congreso/overview']);
   }
 }
