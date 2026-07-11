@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-topbar-mobile',
@@ -12,6 +14,10 @@ export class TopbarMobileComponent {
   // Puedes cambiar estos valores manualmente o pasarlos como @Input()
   @Input() currentStep: number = 0;
   @Input() totalSteps: number = 5;
+
+  constructor(
+    public languageService: LanguageService,
+  ) { }
 
   readonly stepTitles = [
     'Información General',

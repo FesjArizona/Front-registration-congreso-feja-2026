@@ -1,272 +1,195 @@
-<div
-  class="container d-flex flex-column align-items-start justify-content-center gap-4 p-3"
->
+<div class="container d-flex flex-column align-items-start justify-content-center gap-4 p-3">
   <form [formGroup]="paso1Form" class="w-100 d-flex flex-column gap-4 bg-white">
     <!-- Datos Personales -->
-    <div
-      class="d-flex flex-column align-items-start justify-content-center gap-2"
-    >
-      <p class="m-0 fw-medium fs-5">Detalles Personales</p>
+    <div class="d-flex flex-column align-items-start justify-content-center gap-2">
+      <p class="m-0 fw-medium fs-5">{{ 'STEP1.TITLE1' | translate}}</p>
     </div>
     <div class="d-flex flex-column gap-4">
-      <div
-        class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
-      >
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              placeholder="name@example.com"
-              formControlName="name"
+            <input type="text" class="form-control" id="name" placeholder="name@example.com" formControlName="name"
               [class.is-invalid]="
                 paso1Form.get('name')?.invalid && paso1Form.get('name')?.touched
-              "
-            />
-            <label for="name">Nombre</label>
-            <div class="invalid-feedback">El nombre es requerido.</div>
+              " />
+            <label for="name">{{ 'STEP1.FORM-INPUTS.InputName' | translate}}</label>
+            <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationName' | translate}}</div>
           </div>
         </div>
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input
-              type="text"
-              class="form-control"
-              id="lastname"
-              placeholder="Apellido"
-              formControlName="lastname"
+            <input type="text" class="form-control" id="lastname" placeholder="Apellido" formControlName="lastname"
               [class.is-invalid]="
                 paso1Form.get('lastname')?.invalid &&
                 paso1Form.get('lastname')?.touched
-              "
-            />
-            <label for="lastname">Apellido</label>
-            <div class="invalid-feedback">El apellido es requerido.</div>
+              " />
+            <label for="lastname">{{ 'STEP1.FORM-INPUTS.InputLastName' | translate}}</label>
+            <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationLastName' | translate}}</div>
           </div>
         </div>
       </div>
-      <div
-        class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
-      >
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="Correo Electrónico"
-              formControlName="email"
+            <input type="email" class="form-control" id="email" placeholder="Correo Electrónico" formControlName="email"
               [class.is-invalid]="
                 paso1Form.get('email')?.invalid &&
                 paso1Form.get('email')?.touched
-              "
-            />
-            <label for="email">Correo Electrónico</label>
-            <div class="invalid-feedback">Ingrese un correo válido.</div>
+              " />
+            <label for="email">{{ 'STEP1.FORM-INPUTS.InputEmail' | translate}}</label>
+            <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationEmail' | translate}}</div>
           </div>
         </div>
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input
-              type="tel"
-              id="phone"
-              class="form-control"
-              formControlName="phone"
-              placeholder="111-222-3333"
+            <input type="tel" id="phone" class="form-control" formControlName="phone" placeholder="111-222-3333"
               [class.is-invalid]="
                 paso1Form.get('phone')?.invalid &&
                 paso1Form.get('phone')?.touched
-              "
-              minlength="10"
-              maxlength="12"
-            />
-            <label for="phone">Teléfono</label>
-            <div class="invalid-feedback">El teléfono es requerido.</div>
+              " minlength="10" maxlength="12" />
+            <label for="phone">{{ 'STEP1.FORM-INPUTS.InputPhone' | translate}}</label>
+            <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationPhone' | translate}}</div>
           </div>
         </div>
       </div>
-      <div
-        class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
-      >
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
         <div class="col-10 col-md">
           <div class="form-floating">
-            <input
-              type="date"
-              id="age"
-              class="form-control bg-light"
-              formControlName="age"
-              [class.is-invalid]="
+            <input type="date" id="age" class="form-control bg-light" formControlName="age" [class.is-invalid]="
                 paso1Form.get('age')?.invalid && paso1Form.get('age')?.touched
-              "
-            />
-            <label for="age">Fecha de Nacimiento</label>
+              " />
+            <label for="age">{{ 'STEP1.FORM-INPUTS.InputBirthDate' | translate}}</label>
             <div class="invalid-feedback">
-              La fecha de nacimiento es requerida.
+              {{ 'STEP1.FORM-INPUTS.ValidationBirthDate' | translate}}
             </div>
           </div>
         </div>
         <div class="col-10 col-md">
           <div class="form-floating">
-            <select
-              class="form-select form-control"
-              id="gender"
-              formControlName="gender"
-              [class.is-invalid]="
+            <select class="form-select form-control" id="gender" formControlName="gender" [class.is-invalid]="
                 paso1Form.get('gender')?.invalid &&
                 paso1Form.get('gender')?.touched
-              "
-            >
-              <option selected disabled>Género</option>
-              <option value="Masculino">Masculino</option>
-              <option value="Femenino">Femenino</option>
+              ">
+              <option selected disabled>{{ 'STEP1.FORM-INPUTS.InputGender' | translate}}</option>
+              <option value="Masculino">{{ 'STEP1.FORM-INPUTS.OptionMasc' | translate}}</option>
+              <option value="Femenino">{{ 'STEP1.FORM-INPUTS.OptionFem' | translate}}</option>
             </select>
-            <label for="gender">Género</label>
-            <div class="invalid-feedback">El género es requerido.</div>
+            <label for="gender">{{ 'STEP1.FORM-INPUTS.InputGender' | translate}}</label>
+            <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationGender' | translate}}</div>
           </div>
         </div>
       </div>
     </div>
     <!-- Datos de Domicilio -->
-    <div
-      class="d-flex flex-column align-items-start justify-content-center gap-4"
-    >
-      <div
-        class="d-flex flex-column align-items-center justify-content-start gap-2"
-      >
-        <p class="m-0 fw-medium fs-5">Datos de Domicilio</p>
+    <div class="d-flex flex-column align-items-start justify-content-center gap-4">
+      <div class="d-flex flex-column align-items-center justify-content-start gap-2">
+        <p class="m-0 fw-medium fs-5">{{ 'STEP1.TITLE2' | translate}}</p>
       </div>
 
       <form [formGroup]="paso1Form" class="w-100 gap-3 bg-white">
         <div class="d-flex flex-column gap-4">
-          <div
-            class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
-          >
+          <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
             <div class="col-10 col-md">
               <div class="form-floating">
-                <select
-                  class="form-select form-control"
-                  id="state"
-                  formControlName="state"
-                  [class.is-invalid]="
+                <select class="form-select form-control" id="state" formControlName="state" [class.is-invalid]="
                     paso1Form.get('state')?.invalid &&
                     paso1Form.get('state')?.touched
-                  "
-                >
+                  ">
                   <option selected disabled>Estado</option>
                   @for (state of states(); track state.id) {
-                    <option [value]="state.id">{{ state.nombre }}</option>
+                  <option [value]="state.id">{{ state.nombre }}</option>
                   } @empty {
-                    <option disabled>Cargando estados...</option>
+                  <option disabled>Cargando estados...</option>
                   }
                 </select>
-                <label for="state">Estado</label>
-                <div class="invalid-feedback">El estado es requerido.</div>
+                <label for="state">{{ 'STEP1.FORM-INPUTS.InputState' | translate}}</label>
+                <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationState' | translate}}</div>
               </div>
             </div>
             <div class="col-10 col-md">
               <div class="form-floating">
-                <select
-                  class="form-select form-control"
-                  id="conference"
-                  formControlName="conference"
+                <select class="form-select form-control" id="conference" formControlName="conference"
                   [class.is-invalid]="
                     paso1Form.get('conference')?.invalid &&
                     paso1Form.get('conference')?.touched
-                  "
-                >
-                  <option selected disabled>Conferencia</option>
+                  ">
+                  <option selected disabled>{{ 'STEP1.FORM-INPUTS.InputConf' | translate}}</option>
                   @for (conference of conferences(); track conference.id) {
-                    <option [value]="conference.id">
-                      {{ conference.nombre }}
-                    </option>
+                  <option [value]="conference.id">
+                    {{ conference.nombre }}
+                  </option>
                   } @empty {
-                    <option disabled>Cargando conferencias...</option>
+                  <option disabled>Cargando conferencias...</option>
                   }
                 </select>
-                <label for="conference">Conferencia</label>
-                <div class="invalid-feedback">La conferencia es requerida.</div>
+                <label for="conference">{{ 'STEP1.FORM-INPUTS.InputConf' | translate}}</label>
+                <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationConf' | translate}}</div>
               </div>
             </div>
           </div>
-          <div
-            class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5"
-          >
+          <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 gap-md-5">
             <div class="col-10 col-md">
               <div class="form-floating">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="city"
-                  list="ciudadesList"
-                  placeholder="Ciudad"
-                  formControlName="city"
-                  [class.is-invalid]="
+                <input type="text" class="form-control" id="city" list="ciudadesList" placeholder="Ciudad"
+                  formControlName="city" [class.is-invalid]="
                     paso1Form.get('city')?.invalid &&
                     paso1Form.get('city')?.touched
-                  "
-                />
-                <label for="city">Ciudad</label>
+                  " />
+                <label for="city">{{ 'STEP1.FORM-INPUTS.InputCity' | translate}}</label>
 
                 <datalist id="ciudadesList">
                   @for (city of cities(); track city) {
-                    <option [value]="city"></option>
+                  <option [value]="city"></option>
                   }
                 </datalist>
 
-                <div class="invalid-feedback">La ciudad es requerida.</div>
+                <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationCity' | translate}}</div>
               </div>
             </div>
             <div class="col-10 col-md">
               <div class="form-floating">
-                <input
-                  type="text"
-                  id="church"
-                  class="form-control"
-                  formControlName="church"
-                  placeholder="Iglesia donde asiste"
-                  [class.is-invalid]="
+                <input type="text" id="church" class="form-control" formControlName="church"
+                  placeholder="Iglesia donde asiste" [class.is-invalid]="
                     paso1Form.get('church')?.invalid &&
                     paso1Form.get('church')?.touched
-                  "
-                />
-                <label for="church">Iglesia donde asiste</label>
-                <div class="invalid-feedback">La iglesia es requerida.</div>
+                  " />
+                <label for="church">{{ 'STEP1.FORM-INPUTS.InputChurch' | translate}}</label>
+                <div class="invalid-feedback">{{ 'STEP1.FORM-INPUTS.ValidationChurch' | translate}}</div>
               </div>
             </div>
           </div>
 
           <!-- Datos de Domicilio -->
           <div class="d-flex flex-column align-items-start justify-content-center gap-2">
-            <p class="m-0 fw-medium fs-5">Detalles de Registro</p>
+            <p class="m-0 fw-medium fs-5">{{ 'STEP1.TITLE3' | translate}}</p>
           </div>
 
           <div
             class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5">
             <div class="col-10 col-md my-4">
               <div>
-                <p>¿Deseas incluir el almuerzo?*</p>
+                <p>{{ 'STEP1.FORM-CHECKS.Q1.Question1' | translate }}</p>
               </div>
               <div class="d-flex flex-row gap-3 justify-content-center">
 
                 <label class="custom-radio" for="nofood">
-                  <input class="custom-radio-input" type="radio" name="includesLunch" id="nofood" formControlName="includesLunch"
-                    [value]="false" [class.is-invalid]="
+                  <input class="custom-radio-input" type="radio" name="includesLunch" id="nofood"
+                    formControlName="includesLunch" [value]="false" [class.is-invalid]="
                       paso1Form.get('includesLunch')?.invalid &&
                       paso1Form.get('includesLunch')?.touched
                     " />
                   <span class="custom-radio-check"></span>
-                  <span class="custom-radio-label">No</span>
+                  <span class="custom-radio-label">{{ 'STEP1.FORM-CHECKS.OPTIONS.OptionNo' | translate }}</span>
                 </label>
 
                 <label class="custom-radio" for="yesfood">
-                  <input class="custom-radio-input" type="radio" name="includesLunch" id="yesfood" formControlName="includesLunch"
-                    [value]="true" [class.is-invalid]="
+                  <input class="custom-radio-input" type="radio" name="includesLunch" id="yesfood"
+                    formControlName="includesLunch" [value]="true" [class.is-invalid]="
                       paso1Form.get('includesLunch')?.invalid &&
                       paso1Form.get('includesLunch')?.touched
                     " />
                   <span class="custom-radio-check"></span>
-                  <span class="custom-radio-label">Sí</span>
+                  <span class="custom-radio-label">{{ 'STEP1.FORM-CHECKS.OPTIONS.OptionYes' | translate }}</span>
                 </label>
 
                 <div *ngIf="
@@ -279,7 +202,7 @@
 
               <!-- Preferencia alimentaria: solo si includesLunch === true -->
               <div *ngIf="paso1Form.get('includesLunch')?.value === true" class="mt-3">
-                <p>¿Tiene alguna preferencia alimentaria?</p>
+                <p>{{ 'STEP1.FORM-CHECKS.Q1.Question1b' | translate }}</p>
 
                 <div
                   class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5">
@@ -290,15 +213,15 @@
                                   paso1Form.get('foodPreference')?.invalid &&
                                   paso1Form.get('foodPreference')?.touched
                                 ">
-                        <option selected disabled [value]="null">Selecciona una opción</option>
-                        <option value="normal">Sin Preferencia</option>
-                        <option value="vegetariano">Vegetariano</option>
-                        <option value="vegano">Vegano</option>
-                        <option value="otra">Otra</option>
+                        <option selected disabled [value]="null">{{ 'STEP1.FORM-CHECKS.Q1.Options.OptionSelected' | translate }}</option>
+                        <option value="normal">{{ 'STEP1.FORM-CHECKS.Q1.Options.Option1' | translate }}</option>
+                        <option value="vegetariano">{{ 'STEP1.FORM-CHECKS.Q1.Options.Option2' | translate }}</option>
+                        <option value="vegano">{{ 'STEP1.FORM-CHECKS.Q1.Options.Option3' | translate }}</option>
+                        <option value="otra">{{ 'STEP1.FORM-CHECKS.Q1.Options.Option4' | translate }}</option>
                       </select>
-                      <label for="foodPreference">Preferencia alimentaria</label>
+                      <label for="foodPreference">{{ 'STEP1.FORM-CHECKS.Q1.PreFood' | translate }}</label>
                       <div class="invalid-feedback">
-                        Por favor, selecciona una preferencia alimentaria.
+                        {{ 'STEP1.FORM-CHECKS.Q1.Options.ValidationFood' | translate }}
                       </div>
                     </div>
                   </div>
@@ -314,9 +237,9 @@
                                   paso1Form.get('foodPreferenceDetails')?.invalid &&
                                   paso1Form.get('foodPreferenceDetails')?.touched
                                 "></textarea>
-                      <label for="foodPreferenceDetails">Especifica tu alergia, restricción, preferencia o intolerancia</label>
+                      <label for="foodPreferenceDetails">{{ 'STEP1.FORM-CHECKS.Q1.Options.Description' | translate }}</label>
                       <div class="invalid-feedback">
-                        Por favor, describe cualquier alergia, alimento que no consumes o indicación especial.
+                        {{ 'STEP1.FORM-CHECKS.Q1.Options.DescriptionValidation' | translate }}
                       </div>
                     </div>
                   </div>
@@ -329,7 +252,7 @@
             class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5">
             <div class="col-10 col-md mt-4 mb-3">
               <div>
-                <p>¿Quieres incluir la playera oficial del evento?*</p>
+                <p>{{ 'STEP1.FORM-CHECKS.Q2.Question2' | translate }}</p>
               </div>
               <div class="d-flex flex-row gap-3 justify-content-center">
 
@@ -340,7 +263,7 @@
                                 paso1Form.get('includesTshirt')?.touched
                               " />
                   <span class="custom-radio-check"></span>
-                  <span class="custom-radio-label">No</span>
+                  <span class="custom-radio-label">{{ 'STEP1.FORM-CHECKS.OPTIONS.OptionNo' | translate }}</span>
                 </label>
 
                 <label class="custom-radio" for="yestshirt">
@@ -350,28 +273,28 @@
                                 paso1Form.get('includesTshirt')?.touched
                               " />
                   <span class="custom-radio-check"></span>
-                  <span class="custom-radio-label">Sí</span>
+                  <span class="custom-radio-label">{{ 'STEP1.FORM-CHECKS.OPTIONS.OptionYes' | translate }}</span>
                 </label>
 
                 <div *ngIf="
                                 paso1Form.get('includesTshirt')?.invalid &&
                                 paso1Form.get('includesTshirt')?.touched
                               " class="text-danger small mt-1">
-                  Por favor, selecciona si deseas incluir la playera oficial.
+                  {{ 'STEP1.FORM-CHECKS.Q2.OptionValidation' | translate }}
                 </div>
               </div>
 
               <!-- Solo se muestra si includesTshirt es true -->
-              <div
-                *ngIf="paso1Form.get('includesTshirt')?.value === true"
+              <div *ngIf="paso1Form.get('includesTshirt')?.value === true"
                 class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5 mt-3">
                 <div class="col-10 col-md-3">
                   <div class="form-floating">
-                    <select class="form-select form-control" id="sizeShirt" formControlName="sizeShirt" [class.is-invalid]="
+                    <select class="form-select form-control" id="sizeShirt" formControlName="sizeShirt"
+                      [class.is-invalid]="
                                                     paso1Form.get('sizeShirt')?.invalid &&
                                                     paso1Form.get('sizeShirt')?.touched
                                                   ">
-                      <option selected disabled>Talla de playera</option>
+                      <option selected disabled>{{ 'STEP1.FORM-CHECKS.Q2.OptionLabel' | translate }}</option>
                       @for (size of sizes(); track size.id) {
                       <option [value]="size.id">
                         {{ size.talla }}
@@ -380,9 +303,9 @@
                       <option disabled>Cargando tallas...</option>
                       }
                     </select>
-                    <label for="sizeShirt">Talla de playera</label>
+                    <label for="sizeShirt">{{ 'STEP1.FORM-CHECKS.Q2.OptionLabel' | translate }}</label>
                     <div class="invalid-feedback">
-                      La talla de playera es requerida.
+                      {{ 'STEP1.FORM-CHECKS.Q2.OptionValidation' | translate }}
                     </div>
                   </div>
                 </div>
@@ -390,32 +313,31 @@
             </div>
           </div>
           <div
-            class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5 mt-2 mt-md-3"
-          >
+            class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-center gap-3 gap-md-5 mt-2 mt-md-3">
             <div class="col-10 col-md">
               <div>
                 <p>
-                  ¿Serás chaperón de tu grupo de jóvenes?
+                  {{ 'STEP1.FORM-CHECKS.Q3' | translate }}
                 </p>
               </div>
               <div class="d-flex flex-row gap-3 justify-content-center">
                 <label class="custom-radio" for="chapno">
-                  <input class="custom-radio-input" type="radio" name="radioChaperone" id="chapno" formControlName="isChaperone"
-                    [value]="false" [class.is-invalid]="
+                  <input class="custom-radio-input" type="radio" name="radioChaperone" id="chapno"
+                    formControlName="isChaperone" [value]="false" [class.is-invalid]="
                                     paso1Form.get('isChaperone')?.invalid &&
                                     paso1Form.get('isChaperone')?.touched
                                   " />
                   <span class="custom-radio-check"></span>
-                  <span class="custom-radio-label" for="chapno"> No </span>
+                  <span class="custom-radio-label" for="chapno">{{ 'STEP1.FORM-CHECKS.OPTIONS.OptionNo' | translate }}</span>
                 </label>
                 <label class="custom-radio" for="chapyes">
-                  <input class="custom-radio-input" type="radio" name="radioChaperone" id="chapyes" formControlName="isChaperone"
-                    [value]="true" [class.is-invalid]="
+                  <input class="custom-radio-input" type="radio" name="radioChaperone" id="chapyes"
+                    formControlName="isChaperone" [value]="true" [class.is-invalid]="
                                     paso1Form.get('isChaperone')?.invalid &&
                                     paso1Form.get('isChaperone')?.touched
                                   " />
                   <span class="custom-radio-check"></span>
-                  <span class="custom-radio-label" for="chapyes">Sí</span>
+                  <span class="custom-radio-label" for="chapyes">{{ 'STEP1.FORM-CHECKS.OPTIONS.OptionYes' | translate }}</span>
                 </label>
                 <div *ngIf="
                                   paso1Form.get('isChaperone')?.invalid &&
@@ -427,9 +349,7 @@
             </div>
           </div>
           <p class="m-0 fs-6 fw-light">
-            *Al incluir el almuerzo y/o playera oficial, debes llamar a tu conferencia
-            correspondiente para realizar el pago. O bien, acércate con el
-            director de jóvenes de tu iglesia para más información.
+            {{ 'STEP1.Warning' | translate }}
           </p>
         </div>
       </form>

@@ -1,7 +1,7 @@
-<aside class="stepper-sidebar d-flex flex-column align-items-center gap-5 py-5">
+<aside class="stepper-sidebar d-flex flex-column align-items-center gap-5 pb-5 pt-1">
   <div class="d-flex flex-column align-items-center justify-content-center gap-2">
     <img src="../../../../assets/images/logo_fesjaz.webp" alt="Stepper Logo Image" class="logo-image">
-    <h4 class="stepper-title m-0">Registro al Congreso</h4>
+    <h4 class="stepper-title m-0 text-center">{{ 'TITLE' | translate }}</h4>
   </div>
   <ul class="stepper-list nav flex-column gap-5">
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 1" [class.solved]="isStepSolved(1)">
@@ -15,7 +15,7 @@
           1
         }
       </span>
-      <p class="step-label m-0" [class.active]="currentStep === 1" [class.solved]="isStepSolved(1)">Datos Personales</p>
+      <p class="step-label m-0" [class.active]="currentStep === 1" [class.solved]="isStepSolved(1)">{{ 'SIDEBAR.STEP1' | translate }}</p>
     </li>
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 2" [class.solved]="isStepSolved(2)">
       <span class="step-number" [class.active]="currentStep === 2" [class.solved]="isStepSolved(2)">
@@ -28,7 +28,7 @@
           2
         }
       </span>
-      <p class="step-label m-0" [class.active]="currentStep === 2" [class.solved]="isStepSolved(2)">Contacto de Emergencia</p>
+      <p class="step-label m-0" [class.active]="currentStep === 2" [class.solved]="isStepSolved(2)">{{ 'SIDEBAR.STEP2' | translate }}</p>
     </li>
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 3" [class.solved]="isStepSolved(3)">
       <span class="step-number" [class.active]="currentStep === 3" [class.solved]="isStepSolved(3)">
@@ -41,7 +41,7 @@
           3
         }
       </span>
-      <p class="step-label m-0" [class.active]="currentStep === 3" [class.solved]="isStepSolved(3)">Resumen</p>
+      <p class="step-label m-0" [class.active]="currentStep === 3" [class.solved]="isStepSolved(3)">{{ 'SIDEBAR.STEP3' | translate }}</p>
     </li>
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 4" [class.solved]="isStepSolved(4)">
       <span class="step-number" [class.active]="currentStep === 4" [class.solved]="isStepSolved(4)">
@@ -54,7 +54,7 @@
           4
         }
       </span>
-      <p class="step-label m-0" [class.active]="currentStep === 4" [class.solved]="isStepSolved(4)">Confirmación</p>
+      <p class="step-label m-0" [class.active]="currentStep === 4" [class.solved]="isStepSolved(4)">{{ 'SIDEBAR.STEP4' | translate }}</p>
     </li>
     <li class="stepper-item nav-item d-flex align-items-center gap-3 justify-content-start" [class.active]="currentStep === 5" [class.solved]="isStepSolved(5)">
       <span class="step-number" [class.active]="currentStep === 5" [class.solved]="isStepSolved(5)">
@@ -67,7 +67,7 @@
           5
         }
       </span>
-      <p class="step-label m-0" [class.active]="currentStep === 5" [class.solved]="isStepSolved(5)">Recibido</p>
+      <p class="step-label m-0" [class.active]="currentStep === 5" [class.solved]="isStepSolved(5)">{{ 'SIDEBAR.STEP5' | translate }}</p>
     </li>
   </ul>
 </aside>

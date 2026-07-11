@@ -254,7 +254,7 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
       complete: () => {
       },
     })
-    
+
   }
 
   // ---------- modal editar ----------
