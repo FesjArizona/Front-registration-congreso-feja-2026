@@ -5,11 +5,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ApiService } from './../../../../core/services/api.service';
 import { EventData } from '../../../../core/models/event.interface';
 import { ApiResponse } from '../../../../core/models/api-response.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-info-general',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './info-general.component.html',
   styleUrl: './info-general.component.scss'
 })

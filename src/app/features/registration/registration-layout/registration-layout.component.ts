@@ -8,10 +8,12 @@ import { FormGroup } from '@angular/forms';
 import { RegistrationFormService } from '../../../core/services/registration-form.service';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   standalone: true,
-  imports: [StepperSidebarComponent, CommonModule, RouterOutlet, TopbarMobileComponent, FooterBarComponent],
+  imports: [StepperSidebarComponent, CommonModule, RouterOutlet, TopbarMobileComponent, FooterBarComponent, TranslateModule],
   selector: 'app-registration-layout',
   templateUrl: './registration-layout.component.html',
   styleUrls: ['./registration-layout.component.scss']
@@ -36,6 +38,7 @@ export class RegistrationLayoutComponent implements OnInit, OnDestroy {
   private redirectTimeout: any;
 
   constructor(
+    public languageService: LanguageService,
     private registrationFormService: RegistrationFormService,
     private router: Router,
     private route: ActivatedRoute

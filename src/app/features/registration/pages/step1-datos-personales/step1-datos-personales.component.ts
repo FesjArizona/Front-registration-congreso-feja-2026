@@ -7,11 +7,12 @@ import { ApiResponse } from '../../../../core/models/api-response.interface';
 import { ApiService } from './../../../../core/services/api.service';
 import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-step1-datos-personales',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './step1-datos-personales.component.html',
   styleUrl: './step1-datos-personales.component.scss',
 })

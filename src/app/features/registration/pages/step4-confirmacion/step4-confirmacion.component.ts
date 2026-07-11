@@ -7,11 +7,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiResponse } from '../../../../core/models/api-response.interface';
 import { ApiService } from './../../../../core/services/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-step4-confirmacion',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './step4-confirmacion.component.html',
   styleUrl: './step4-confirmacion.component.scss'
 })
@@ -20,6 +21,7 @@ export class Step4ConfirmacionComponent {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private apiService = inject(ApiService);
+  private translate = inject(TranslateService);
   eventId: string | null = null;
 
   ngOnInit() {
@@ -40,20 +42,20 @@ export class Step4ConfirmacionComponent {
     const val = this.paso1Value;
     const name = val.name || '';
     const lastname = val.lastname || '';
-    return `${name} ${lastname}`.trim() || 'No especificado';
+    return `${name} ${lastname}`.trim() || this.translate.instant('STEP3.NotSpecified');
   }
 
   get correoElectronico(): string {
-    return this.paso1Value.email || 'No especificado';
+    return this.paso1Value.email || this.translate.instant('STEP3.NotSpecified');
   }
 
   get telefono(): string {
-    return this.paso1Value.phone || 'No especificado';
+    return this.paso1Value.phone || this.translate.instant('STEP3.NotSpecified');
   }
 
   get fechaNacimiento(): string {
     const birth = this.paso1Value.age;
-    if (!birth) return 'No especificado';
+    if (!birth) return this.translate.instant('STEP3.NotSpecified');
     const parts = birth.split('-');
     if (parts.length === 3) {
       return `${parts[2]}/${parts[1]}/${parts[0]}`;
@@ -63,7 +65,7 @@ export class Step4ConfirmacionComponent {
 
   get edad(): string {
     const birth = this.paso1Value.age;
-    if (!birth) return 'No especificado';
+    if (!birth) return this.translate.instant('STEP3.NotSpecified');
     const birthDate = new Date(birth);
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -71,14 +73,14 @@ export class Step4ConfirmacionComponent {
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
-    return `${age} Años`;
+    return `${age} ${this.translate.instant('STEP3.YearsLabel')}`;
   }
 
   get genero(): string {
     const g = this.paso1Value.gender;
-    if (!g) return 'No especificado';
-    if (g.toLowerCase() === 'masc') return 'Masculino';
-    if (g.toLowerCase() === 'fem') return 'Femenino';
+    if (!g) return this.translate.instant('STEP3.NotSpecified');
+    if (g.toLowerCase() === 'masc') return this.translate.instant('STEP3.Male');
+    if (g.toLowerCase() === 'fem') return this.translate.instant('STEP3.Female');
     return g;
   }
 
@@ -87,46 +89,48 @@ export class Step4ConfirmacionComponent {
   }
 
   get ciudad(): string {
-    return this.paso1Value.city || 'No especificado';
+    return this.paso1Value.city || this.translate.instant('STEP3.NotSpecified');
   }
 
   get iglesia(): string {
-    return this.paso1Value.church || 'No especificado';
+    return this.paso1Value.church || this.translate.instant('STEP3.NotSpecified');
   }
 
   get tallaCamiseta(): string {
     const t = this.paso1Value.sizeShirt;
-    if (!t) return 'No especificado';
+    if (!t) return this.translate.instant('STEP3.NotSpecified');
     const sizes: { [key: string]: string } = {
-      's': 'Small',
-      'm': 'Medium',
-      'l': 'Large',
-      'xl': 'Extra Large'
+      's': this.translate.instant('STEP3.SizeSmall'),
+      'm': this.translate.instant('STEP3.SizeMedium'),
+      'l': this.translate.instant('STEP3.SizeLarge'),
+      'xl': this.translate.instant('STEP3.SizeExtraLarge')
     };
     return sizes[t.toLowerCase()] || t;
   }
 
   get esChaperon(): string {
     const chap = this.paso1Value.isChaperone;
-    if (chap === undefined || chap === null || chap === '') return 'No especificado';
-    return chap === true || chap === 'true' ? 'Sí' : 'No';
+    if (chap === undefined || chap === null || chap === '') return this.translate.instant('STEP3.NotSpecified');
+    return chap === true || chap === 'true'
+      ? this.translate.instant('STEP1.FORM-CHECKS.OPTIONS.OptionYes')
+      : this.translate.instant('STEP1.FORM-CHECKS.OPTIONS.OptionNo');
   }
 
   get nombreContacto(): string {
-    return this.paso2Value.nameContact || 'No especificado';
+    return this.paso2Value.nameContact || this.translate.instant('STEP3.NotSpecified');
   }
 
   get telefonoContacto(): string {
-    return this.paso2Value.phoneContact || 'No especificado';
+    return this.paso2Value.phoneContact || this.translate.instant('STEP3.NotSpecified');
   }
 
   get relacionContacto(): string {
     const rel = this.paso2Value.relationship;
-    if (!rel) return 'No especificado';
+    if (!rel) return this.translate.instant('STEP3.NotSpecified');
     const relationships: { [key: string]: string } = {
-      'familia': 'Familiar',
-      'amigo': 'Amigo',
-      'otro': 'Otro'
+      'familia': this.translate.instant('STEP2.FORM-CHECKS.Options.Option4'),
+      'amigo': this.translate.instant('STEP2.FORM-CHECKS.Options.Option5'),
+      'otro': this.translate.instant('STEP2.FORM-CHECKS.Options.Option6')
     };
     return relationships[rel.toLowerCase()] || rel;
   }

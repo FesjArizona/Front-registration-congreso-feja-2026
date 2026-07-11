@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'registro',
+    redirectTo: 'registro/2',
     pathMatch: 'full'
   },
   // Ruta de Login limpia (apunta a tu AuthComponent dentro de la carpeta admin/auth)
@@ -26,6 +26,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'registro'
+    redirectTo: 'registro/2'
   }
 ];
