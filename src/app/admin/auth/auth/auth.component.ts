@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from './service/auth.service';
@@ -15,6 +15,12 @@ export class AuthComponent implements OnInit {
   authForm!: FormGroup;
   loading = false;
   error = '';
+
+  showPassword = signal(false);
+
+  togglePasswordVisibility(): void {
+    this.showPassword.update(value => !value);
+  }
 
   constructor(
     private formBuilder: FormBuilder,

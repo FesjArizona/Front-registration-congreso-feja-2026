@@ -98,3 +98,23 @@
   animation-delay: 0.4s;
 }
 /* ----- ANIMATIONS ----- */
+
+.btn-icon-eye {
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  color: #6c757d;
+  z-index: 5;
+
+  &:hover {
+    color: #495057;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+input#password {
+  font-size: 1.1rem;
+}
