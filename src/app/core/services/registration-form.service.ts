@@ -8,6 +8,7 @@ export class RegistrationFormService {
   public stepperForm: FormGroup;
   public selectedStateName = signal<string>('')
   public selectedSizeName = signal<string>('')
+  public selectedConferenceName = signal<string>('')
 
   constructor(private fb: FormBuilder) {
     this.stepperForm = this.fb.group({
@@ -46,6 +47,10 @@ export class RegistrationFormService {
     this.selectedStateName.set(name)
   }
 
+  setSelectedConferenceName(name: string) {
+    this.selectedConferenceName.set(name)
+  }
+
   setSizeName(name: string) {
     this.selectedSizeName.set(name)
   }
@@ -55,10 +60,11 @@ export class RegistrationFormService {
     this.selectedSizeName.set('')
   }
 
-  getSelectednames(): { stateName: string, sizeName: string } {
+  getSelectednames(): { stateName: string, sizeName: string, conferenceName: string } {
     return {
       "stateName": this.selectedStateName(),
-      "sizeName": this.selectedSizeName()
+      "sizeName": this.selectedSizeName(),
+      "conferenceName": this.selectedConferenceName()
     }
   }
 }

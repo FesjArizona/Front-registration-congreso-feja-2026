@@ -27,7 +27,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
   constructor(
     private registrationFormService: RegistrationFormService,
     private apiService: ApiService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.paso1Form = this.registrationFormService.stepperForm.get(
@@ -37,6 +37,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
     this.getSizes();
     this.addStateEvent();
     this.addSizeEvent();
+    this.addConferenceEvent()
 
     this.paso1Form.get('includesTshirt')?.valueChanges.subscribe((value) => {
       this.updateSizeShirtValidation(value);
@@ -98,6 +99,13 @@ export class Step1DatosPersonalesComponent implements OnInit {
     });
   }
 
+  addConferenceEvent() {
+    this.paso1Form.get('conference')?.valueChanges.subscribe((conferenceId) => {
+      const selectedConference = this.conferences().find((conference: Conferences) => conference.id = conferenceId)
+      if (selectedConference) this.registrationFormService.setSelectedConferenceName(selectedConference.nombre)
+    });
+  }
+
   loadConferencesAndCities(stateId: string | number) {
     if (!stateId) return;
 
@@ -112,7 +120,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
         next: (response: ApiResponse<string[]>) => {
           this.cities.set(response.data);
         },
-        error: (error: HttpErrorResponse) => {},
+        error: (error: HttpErrorResponse) => { },
       });
     }
 
@@ -120,7 +128,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
       next: (response: ApiResponse<Conferences[]>) => {
         this.conferences.set(response.data);
       },
-      error: (error: HttpErrorResponse) => {},
+      error: (error: HttpErrorResponse) => { },
     });
   }
 
@@ -141,7 +149,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
         this.sizes.set(response.data);
         this.checkInitialSize();
       },
-      error: (error: HttpErrorResponse) => {},
+      error: (error: HttpErrorResponse) => { },
     });
   }
 
@@ -164,7 +172,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
           this.loadConferencesAndCities(currentStateId);
         }
       },
-      error: (error: HttpErrorResponse) => {},
+      error: (error: HttpErrorResponse) => { },
     });
   }
 }

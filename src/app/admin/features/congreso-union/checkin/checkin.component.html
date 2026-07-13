@@ -104,37 +104,81 @@
                             "></i>
                   {{ p.pago_camiseta?.replace("_", " ") }}
                 </span>
-              </td>
-              <td>{{ p.talla }}</td>
-              <td>
-                <span class="badge rounded-pill px-3 py-2" [ngClass]="
-                            p.pago_lunchtime === 'pagado'
-                              ? 'badge-soft-success'
-                              : 'badge-soft-danger'
-                          ">
-                  <i class="bi" [ngClass]="
-                              p.pago_lunchtime === 'pagado'
-                                ? 'bi-check-circle-fill'
-                                : 'bi-x-circle-fill'
-                            "></i>
-                  {{ p.pago_lunchtime?.replace("_", " ") }}
-                </span>
-              </td>
-              <td>
-                {{ p.tipo_alimento == "normal" ? "No aplica" : p.tipo_alimento }}
-              </td>
-              <td>
-                <button class="icon-action edit-btn" title="Editar" (click)="abrirModalEditar(p)">
-                  <img src="../../../../../assets/icons/registered/edit.svg" alt="Edit Icon" style="width: 16px" />
+                <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
+              </div>
+            </td>
+            <td>{{ p.conferencia }}</td>
+            <td>
+              <span
+                class="badge rounded-pill px-3 py-2"
+                [ngClass]="
+                  p.pago_camiseta === 'pagado'
+                    ? 'badge-soft-success'
+                    : 'badge-soft-danger'
+                "
+              >
+                <i
+                  class="bi"
+                  [ngClass]="
+                    p.pago_camiseta === 'pagado'
+                      ? 'bi-check-circle-fill'
+                      : 'bi-x-circle-fill'
+                  "
+                ></i>
+                {{ p.pago_camiseta?.replace("_", " ") }}
+              </span>
+            </td>
+            <td>{{ p.talla }}</td>
+            <td>
+              <span
+                class="badge rounded-pill px-3 py-2"
+                [ngClass]="
+                  p.pago_lunchtime === 'pagado'
+                    ? 'badge-soft-success'
+                    : 'badge-soft-danger'
+                "
+              >
+                <i
+                  class="bi"
+                  [ngClass]="
+                    p.pago_lunchtime === 'pagado'
+                      ? 'bi-check-circle-fill'
+                      : 'bi-x-circle-fill'
+                  "
+                ></i>
+                {{ p.pago_lunchtime?.replace("_", " ") }}
+              </span>
+            </td>
+            <td>
+              {{ p.tipo_alimento == "normal" ? "No aplica" : p.tipo_alimento }}
+            </td>
+            <td>
+              <button
+                class="icon-action edit-btn"
+                title="Editar"
+                (click)="abrirModalEditar(p)"
+              >
+                <img
+                  src="../../../../../assets/icons/registered/edit.svg"
+                  alt="Edit Icon"
+                  style="width: 16px"
+                />
+              </button>
+              @if (authUser.role !== "finanzas") {
+                <button
+                  class="icon-action delete"
+                  title="Eliminar"
+                  (click)="abrirModalEliminar(p)"
+                >
+                  <img
+                    src="../../../../../assets/icons/registered/delete.svg"
+                    alt="Delete Icon"
+                    style="width: 16px"
+                  />
                 </button>
-                <button class="icon-action delete" title="Eliminar" (click)="abrirModalEliminar(p)">
-                  <img src="../../../../../assets/icons/registered/delete.svg" alt="Delete Icon" style="width: 16px" />
-                </button>
-              </td>
-            </tr>
-          </ng-template>
-
-
+              }
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -11,10 +11,16 @@ import { ApiResponse } from '../../../../core/models/api-response.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
 import { ApiService } from '../../../../core/services/api.service';
+import { AuthService } from '../../../auth/auth/service/auth.service';
 
 
 declare var bootstrap: any;
-
+interface AuthUser {
+  id: number;
+  name: string;
+  email: string;
+  role: 'superadmin' | 'finanzas' | 'staff';
+}
 @Component({
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
@@ -68,12 +74,13 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   private participanteOriginal: RegisteredUsers | null = null;
   participanteAEliminar: RegisteredUsers | null = null;
   eventId: string | null = null;
-
+  authUser: AuthUser = {} as AuthUser
   private participantModal: any;
   private deleteModal: any;
   private suscripcion?: Subscription;
   private readonly route = inject(ActivatedRoute)
   private readonly apiService = inject(ApiService)
+  private readonly authService = inject(AuthService)
   constructor(
     private participantesService: ParticipantesService,
     private fb: FormBuilder,
@@ -99,7 +106,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       this.eventId = params.get('id');
       this.getRegisteredUsers(this.eventId)
     });
-
+    this.authUser = this.authService.getUser() as AuthUser;
     const modalEl = document.getElementById('participantModal');
     const deleteEl = document.getElementById('deleteModal');
     if (modalEl) this.participantModal = new bootstrap.Modal(modalEl);
@@ -279,6 +286,15 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       pago_lunchtime: p.pago_lunchtime,
       checkin_at: p.checkin_at != null,
     });
+    if (this.authUser.role === "finanzas") {
+      this.form.get("nombre")?.disable()
+      this.form.get("apellidos")?.disable()
+      this.form.get("registro")?.disable()
+      this.form.get("estado_id")?.disable()
+      this.form.get("conferencia_id")?.disable()
+      this.form.get("ciudad")?.disable()
+      this.form.get("checkin_at")?.disable()
+    }
     this.participantModal?.show();
     this.getStates()
     this.getSizes()

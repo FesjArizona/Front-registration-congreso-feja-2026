@@ -9,7 +9,7 @@ export interface AuthUser {
   id: number;
   name: string;
   email: string;
-  role: 'superadmin' | 'staff' ;
+  role: 'superadmin' | 'finanzas' | 'staff' ;
 }
 
 interface LoginResponse {
