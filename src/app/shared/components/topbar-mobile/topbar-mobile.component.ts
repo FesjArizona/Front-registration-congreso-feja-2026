@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-topbar-mobile',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './topbar-mobile.component.html',
   styleUrls: ['./topbar-mobile.component.scss']
 })
@@ -17,24 +17,31 @@ export class TopbarMobileComponent {
 
   constructor(
     public languageService: LanguageService,
+    private translate: TranslateService,
   ) { }
 
-  readonly stepTitles = [
-    'Información General',
-    'Datos Personales',
-    'Contacto de Emergencia',
-    'Resumen',
-    'Confirmación',
-    'Recibido'
+  // Keys de traducción en vez de texto hardcodeado.
+  // Índice 0 = pantalla de información general, índices 1-5 = SIDEBAR.STEP1..STEP5
+  readonly stepTitleKeys = [
+    'INFO.TITLE',
+    'SIDEBAR.STEP1',
+    'SIDEBAR.STEP2',
+    'SIDEBAR.STEP3',
+    'SIDEBAR.STEP4',
+    'SIDEBAR.STEP5'
   ];
 
   get currentTitle(): string {
-    return this.stepTitles[this.currentStep] || '';
+    const key = this.stepTitleKeys[this.currentStep];
+    return key ? this.translate.instant(key) : '';
   }
 
   get nextTitle(): string {
     if (this.currentStep < this.totalSteps) {
-      return `Siguiente - ${this.stepTitles[this.currentStep + 1]}`;
+      const key = this.stepTitleKeys[this.currentStep + 1];
+      const nextStepTitle = key ? this.translate.instant(key) : '';
+      const nextLabel = this.translate.instant('FOOTER.NEXT');
+      return `${nextLabel} - ${nextStepTitle}`;
     }
     return '';
   }

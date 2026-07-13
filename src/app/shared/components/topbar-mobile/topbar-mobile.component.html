@@ -13,7 +13,7 @@
       @if (currentStep < totalSteps) {
         <p class="stepper-description m-0">{{ nextTitle }}</p>
       } @else {
-        <p class="stepper-description m-0">¡Registro completado!</p>
+        <p class="stepper-description m-0">{{ 'TOPBAR.Completed' | translate }}</p>
       }
     </div>
   </div>
@@ -26,7 +26,7 @@
       </svg>
 
       <div class="progress-text">
-        {{ currentStep }} de {{ totalSteps }}
+        {{ currentStep }} {{ 'TOPBAR.Of' | translate }} {{ totalSteps }}
       </div>
     </div>
   </div>

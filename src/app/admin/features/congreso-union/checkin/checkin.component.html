@@ -21,7 +21,7 @@
           <input
             type="text"
             class="form-control border-start-0 ps-0"
-            placeholder="Buscar..."
+            placeholder="Buscar por nombre"
             [(ngModel)]="busqueda"
             (ngModelChange)="onBusquedaChange()"
           />
@@ -45,28 +45,64 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngIf="participantesPagina.length === 0" class="empty-state">
-            <td colspan="8">
-              No se encontraron participantes con esa búsqueda.
-            </td>
-          </tr>
-          <tr *ngFor="let p of participantesPagina">
-            <td>
-              <input
-                type="checkbox"
-                class="form-check-input checkin-checkbox"
-                [checked]="p.checkin_at"
-                (change)="toggleCheckin(p)"
-                [attr.aria-label]="'Confirmar check-in de ' + p.nombre"
-                [disabled]="p.checkin_at"
-              />
-            </td>
-            <td>
-              <div class="d-flex align-items-center gap-2">
-                <span
-                  class="avatar-circle"
-                  [style.background]="colorAvatar(p.nombre)"
-                  >{{ inicial(p.nombre) }}
+          <!-- Skeleton mientras carga -->
+          <ng-container *ngIf="cargando; else contenidoReal">
+            <tr *ngFor="let i of skeletonRows" class="placeholder-glow">
+              <td class="col">
+                <span class="placeholder col-3" style="height: 18px;"></span>
+              </td>
+              <td class="col-3">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="placeholder rounded-circle skeleton-avatar"></span>
+                  <span class="placeholder col-10" style="height: 12px;"></span>
+                </div>
+              </td>
+              <td class="col-3"><span class="placeholder col-10" style="height: 12px;"></span></td>
+              <td class="col"><span class="placeholder rounded-pill col-12 skeleton-badge"></span></td>
+              <td class="col"><span class="placeholder col-7" style="height: 12px;"></span></td>
+              <td class="col"><span class="placeholder rounded-pill col-10 skeleton-badge"></span></td>
+              <td class="col"><span class="placeholder col-10" style="height: 12px;"></span></td>
+              <td class="col">
+                <div class="d-flex gap-2 justify-content-center">
+                  <span class="placeholder skeleton-icon"></span>
+                  <span class="placeholder skeleton-icon"></span>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+
+          <!-- Contenido real -->
+          <ng-template #contenidoReal>
+            <tr *ngIf="participantesPagina.length === 0" class="empty-state">
+              <td colspan="8">
+                No se encontraron participantes con esa búsqueda.
+              </td>
+            </tr>
+            <tr *ngFor="let p of participantesPagina">
+              <td>
+                <input type="checkbox" class="form-check-input checkin-checkbox" [checked]="p.checkin_at"
+                  (change)="toggleCheckin(p)" [attr.aria-label]="'Confirmar check-in de ' + p.nombre" [disabled]="p.checkin_at" />
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="avatar-circle" [style.background]="colorAvatar(p.nombre)">{{ inicial(p.nombre) }}
+                  </span>
+                  <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
+                </div>
+              </td>
+              <td>{{ p.conferencia }}</td>
+              <td>
+                <span class="badge rounded-pill px-3 py-2" [ngClass]="
+                            p.pago_camiseta === 'pagado'
+                              ? 'badge-soft-success'
+                              : 'badge-soft-danger'
+                          ">
+                  <i class="bi" [ngClass]="
+                              p.pago_camiseta === 'pagado'
+                                ? 'bi-check-circle-fill'
+                                : 'bi-x-circle-fill'
+                            "></i>
+                  {{ p.pago_camiseta?.replace("_", " ") }}
                 </span>
                 <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
               </div>

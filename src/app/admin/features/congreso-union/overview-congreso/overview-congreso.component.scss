@@ -251,3 +251,30 @@ $registered-fg: #b91c1c;
   background: $registered-bg;
   color: $registered-fg;
 }
+
+// Placeholder base - gris medio, ni muy suave ni muy oscuro
+.placeholder {
+  background-color: #ced4da !important; // Bootstrap gray-400
+}
+
+.skeleton-stat-icon {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 100px;
+  background-color: #adb5bd !important;
+}
+
+.skeleton-badge {
+  height: 26px;
+  display: inline-block;
+  background-color: #ced4da !important;
+}
+
+.skeleton-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-right: 8px;
+  background-color: #ced4da !important;
+}

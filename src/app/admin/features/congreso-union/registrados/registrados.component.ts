@@ -46,6 +46,10 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     '#27AE60', '#5B6FE0', '#EE6C9B', '#56C2C0', '#BB6BD9'
   ];
 
+  // ---------- estado de carga ----------
+  cargando = true;
+  skeletonRows = Array.from({ length: 5 });
+
   // ---------- filtros ----------
   busqueda = '';
   filtroEstado = '';
@@ -119,13 +123,16 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   }
 
   getRegisteredUsers(eventId: any) {
+    this.cargando = true;
     this.eventsService.getRegisteredUsers(eventId).subscribe({
       next: (response: ApiResponse<RegisteredUsers[]>) => {
         this.participantes = response.data
       },
       error: (error: HttpErrorResponse) => {
+        this.cargando = false;
       },
       complete: () => {
+        this.cargando = false;
       },
     })
   }
@@ -179,7 +186,11 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   onBusquedaChange(): void { this.paginaActual = 1; }
   onFiltroChange(): void { this.paginaActual = 1; }
-  onPorPaginaChange(): void { this.paginaActual = 1; }
+
+  onPorPaginaChange(): void {
+    this.paginaActual = 1;
+    this.skeletonRows = Array.from({ length: this.porPagina });
+  }
 
   irAPagina(pagina: number | string): void {
     if (pagina === '...') return;
