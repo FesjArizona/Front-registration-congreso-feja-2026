@@ -52,15 +52,15 @@ export class SidebarComponent {
             roles: ['superadmin', 'staff', 'finanzas']
           },
           {
+            label: 'Registros',
+            route: 'congreso/registered',
+            roles: ['superadmin', 'finanzas']
+          },
+          {
             label: 'Check-in',
             route: 'congreso/checkin',
             roles: ['superadmin', 'staff']
           },
-          {
-            label: 'Registrados',
-            route: 'congreso/registered',
-            roles: ['superadmin', 'finanzas']
-          }
         ],
       }
     ];
@@ -84,8 +84,6 @@ export class SidebarComponent {
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
-
-
 
   /* ngOnInit(): void {} */
 
