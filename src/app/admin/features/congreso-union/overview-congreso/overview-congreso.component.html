@@ -8,15 +8,37 @@
 
   <!-- Stat Cards -->
   <div class="row g-3 mb-4">
-    <div class="col-6 col-lg-3" *ngFor="let card of statsList">
-      <div class="stat-card h-100">
-        <div class="stat-icon mb-2">
-          <img src="{{ baseUrlIcon + card.icon }}" style="width: 25px; filter: hue-rotate(144deg);">
+
+    <!-- ===== SKELETON mientras carga ===== -->
+    <ng-container *ngIf="cargandoStats; else statsReal">
+      <div class="col-6 col-lg-3" *ngFor="let i of skeletonCards">
+        <div class="stat-card h-100 placeholder-glow">
+          <div class="stat-icon mb-2">
+            <span class="placeholder skeleton-stat-icon"></span>
+          </div>
+          <p class="stat-label mb-1">
+            <span class="placeholder col-7" style="height: 12px;"></span>
+          </p>
+          <h3 class="stat-value mb-0">
+            <span class="placeholder col-5" style="height: 20px;"></span>
+          </h3>
         </div>
-        <p class="stat-label mb-1">{{ card.label }}</p>
-        <h3 class="stat-value mb-0">{{ card.value }}</h3>
       </div>
-    </div>
+    </ng-container>
+
+    <!-- ===== CONTENIDO REAL ===== -->
+    <ng-template #statsReal>
+      <div class="col-6 col-lg-3" *ngFor="let card of statsList">
+        <div class="stat-card h-100">
+          <div class="stat-icon mb-2">
+            <img src="{{ baseUrlIcon + card.icon }}" style="width: 25px; filter: hue-rotate(144deg);">
+          </div>
+          <p class="stat-label mb-1">{{ card.label }}</p>
+          <h3 class="stat-value mb-0">{{ card.value }}</h3>
+        </div>
+      </div>
+    </ng-template>
+
   </div>
 
   <!-- Bottom Section -->

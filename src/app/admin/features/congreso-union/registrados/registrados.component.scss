@@ -24,8 +24,8 @@
 
 ::ng-deep .form-control:focus,
 ::ng-deep .form-select:focus {
-  border-color: var(--brand);
-  box-shadow: 0 0 0 .2rem var(--brand-soft);
+  border-color: #dee2e6 !important;
+  box-shadow: none !important;
 }
 
 table {
@@ -143,4 +143,30 @@ table {
   justify-content: center;
   font-size: 1.4rem;
   margin: 0 auto;
+}
+
+// Placeholder base - gris medio, ni muy suave ni muy oscuro
+.placeholder {
+  background-color: #ced4da !important; // Bootstrap gray-400
+}
+
+.skeleton-avatar {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background-color: #adb5bd !important; // un poco más marcado para el avatar
+}
+
+.skeleton-badge {
+  height: 26px;
+  display: inline-block;
+  background-color: #ced4da !important;
+}
+
+.skeleton-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-right: 8px;
+  background-color: #ced4da !important;
 }

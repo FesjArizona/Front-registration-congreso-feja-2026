@@ -7,6 +7,10 @@
     "STEP4": "Confirmación",
     "STEP5": "Recibido"
   },
+  "TOPBAR": {
+    "Completed": "¡Registro completado!",
+    "Of": "de"
+  },
   "INFO": {
     "TITLE": "Información general",
     "EVENT": "Feja | Union Pacífico 2026",
