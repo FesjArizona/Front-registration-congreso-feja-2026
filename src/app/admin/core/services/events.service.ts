@@ -4,7 +4,7 @@ import { RegisteredUsers } from '../models/events.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../../../environment/environment';
-import { StatCard } from '../models/dashboard.model';
+import { RecentActivity, StatCard } from '../models/dashboard.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,10 @@ export class EventsService {
 
   public getResumen(eventId: number): Observable<ApiResponse<StatCard[]>> {
     return this.httpClient.get<ApiResponse<StatCard[]>>(`${URL_API}/resumen/event/${eventId}`)
+  }
+
+  public getRecentActivities(eventId: number): Observable<ApiResponse<RecentActivity[]>> {
+    return this.httpClient.get<ApiResponse<RecentActivity[]>>(`${URL_API}/events/recent-activity/${eventId}`)
   }
 
 }

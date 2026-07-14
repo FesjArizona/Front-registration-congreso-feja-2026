@@ -6,10 +6,11 @@ export interface StatCard {
 }
 
 export interface RecentActivity {
-  usuario: string;
-  contacto: string;
-  fecha: string;
-  checkIn: 'Completado' | 'In Progress' | 'Registered';
+  nombre: string;
+  apellidos: string;
+  conferencia: string;
+  correo: string;
+  created_at: string;
 }
 
 export interface StaffMember {

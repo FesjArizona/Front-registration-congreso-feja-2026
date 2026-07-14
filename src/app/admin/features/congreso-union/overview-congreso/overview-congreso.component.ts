@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { StatCard, RecentActivity, StaffMember } from '../../../core/models/dashboard.model';
@@ -26,6 +26,7 @@ import {
   ApexTheme,
   NgApexchartsModule,
 } from 'ng-apexcharts';
+import { URL_API } from '../../../../environment/environment';
 
 export type ChartOptions = {
   series?: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -58,8 +59,7 @@ export type ChartOptions = {
   styleUrls: ['./overview-congreso.component.scss'],
 })
 export class OverviewCongresoComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+  implements OnInit, AfterViewInit, OnDestroy {
   public chartOptionsTshirts: Partial<ChartOptions> = {
     series: [44, 55, 67, 83],
     chart: {
@@ -253,14 +253,11 @@ export class OverviewCongresoComponent
     };
   }
 
-  ngOnDestroy() {
-    // no cleanup needed
-  }
-
   baseUrlIcon: string = '../../../../../assets/icons/admin/';
 
   private dashboardService = inject(DashboardService);
   private eventsService = inject(EventsService);
+  private cdr = inject(ChangeDetectorRef);
 
   // ---------- estado de carga ----------
   cargandoStats = true;
@@ -272,10 +269,41 @@ export class OverviewCongresoComponent
   public statsList: StatCard[] = [];
   public activitiesList: RecentActivity[] = [];
   public staffList: StaffMember[] = [];
+  actividadReciente: any[] = [];
+  private eventSource!: EventSource;
 
   ngOnInit(): void {
     this.loadDashboardData();
+    this.conectarSSE();
+
   }
+
+  conectarSSE() {
+    this.eventSource = new EventSource(`${URL_API}/events/stream`);
+
+    this.eventSource.onmessage = (event) => {
+      const nuevoRegistro = JSON.parse(event.data);
+
+      this.activitiesList.unshift(nuevoRegistro);
+
+      if (this.activitiesList.length > 5) {
+        this.activitiesList.pop();
+      }
+
+      this.cdr.detectChanges();
+    };
+
+    this.eventSource.onerror = (error) => {
+      console.error('Error en SSE:', error);
+    };
+  }
+
+  ngOnDestroy() {
+    if (this.eventSource) {
+      this.eventSource.close();
+    }
+  }
+
 
   private loadDashboardData(): void {
     // Ejemplo consumiendo los endpoints por separado:
@@ -294,8 +322,8 @@ export class OverviewCongresoComponent
     });
 
     this.cargandoActivities = true;
-    this.dashboardService.getRecentActivities().subscribe({
-      next: (data) => (this.activitiesList = data),
+    this.eventsService.getRecentActivities(2).subscribe({
+      next: (resoponse) => (this.activitiesList = resoponse.data),
       error: (err) => {
         console.error('Error al cargar actividades', err);
         this.cargandoActivities = false;
@@ -317,17 +345,33 @@ export class OverviewCongresoComponent
       },
     });
   }
+  public isoADdmmyyyy(fecha: string | null): string {
+    if (!fecha) return '';
 
-  getBadgeClass(status: RecentActivity['checkIn']): string {
-    switch (status) {
-      case 'Completado':
-        return 'badge-completed';
-      case 'In Progress':
-        return 'badge-progress';
-      case 'Registered':
-        return 'badge-registered';
-      default:
-        return '';
-    }
+    const dateObj = new Date(fecha);
+
+    if (isNaN(dateObj.getTime())) return fecha;
+
+    const d = String(dateObj.getDate()).padStart(2, '0');
+    const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+    const y = dateObj.getFullYear();
+
+    let resultado = `${d}/${m}/${y}`;
+
+    /* if (fecha.includes('T')) {
+      let horas = dateObj.getHours();
+      const minutos = String(dateObj.getMinutes()).padStart(2, '0');
+      const ampm = horas >= 12 ? 'PM' : 'AM';
+
+      horas = horas % 12;
+      horas = horas ? horas : 12;
+
+      const horasStr = String(horas).padStart(2, '0');
+
+      resultado += ` ${horasStr}:${minutos} ${ampm}`;
+    } */
+
+    return resultado;
   }
+
 }
