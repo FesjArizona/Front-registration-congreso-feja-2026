@@ -44,7 +44,7 @@
   </div>
 
   <div
-    class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between gap-3 gap-lg-2 my-5"
+    class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between gap-3 gap-lg-4 my-5"
   >
     <div class="col-12 col-lg-6">
       <div class="panel h-100 rounded-4">
@@ -58,37 +58,67 @@
             <span class="col-header">FECHA REGISTRO</span>
           </div>
 
-          <div class="activity-row" *ngFor="let item of activitiesList">
-            <div class="activity-cell activity-usuario">
-              <span class="mobile-label d-md-none">NOMBRE</span>
-              {{ item.nombre }} {{ item.apellidos }}
+          <!-- ESTADO: CARGANDO -->
+          <ng-container *ngIf="cargandoActivities; else contenidoReal">
+            <div class="activity-row placeholder-glow" *ngFor="let skeleton of skeletonTable">
+              <div class="activity-cell activity-usuario">
+                <span class="mobile-label d-md-none">NOMBRE</span>
+                <span class="placeholder col-8"></span>
+              </div>
+              <div class="activity-cell activity-contacto">
+                <span class="mobile-label d-md-none">CONFERENCIA</span>
+                <span class="placeholder col-7"></span>
+              </div>
+              <div class="activity-cell activity-fecha">
+                <span class="mobile-label d-md-none">CORREO</span>
+                <span class="placeholder col-9"></span>
+              </div>
+              <div class="activity-cell activity-checkin">
+                <span class="mobile-label d-md-none">FECHA REGISTRO</span>
+                <span class="status-badge placeholder col-5"></span>
+              </div>
             </div>
-            <div class="activity-cell activity-contacto">
-              <span class="mobile-label d-md-none">CONFERENCIA</span>
-              {{ item.conferencia }}
+          </ng-container>
+
+          <!-- ESTADO: CONTENIDO REAL -->
+          <ng-template #contenidoReal>
+            <div class="activity-row" *ngFor="let item of activitiesList">
+              <div class="activity-cell activity-usuario">
+                <span class="mobile-label d-md-none">NOMBRE</span>
+                {{ item.nombre }} {{ item.apellidos }}
+              </div>
+              <div class="activity-cell activity-contacto">
+                <span class="mobile-label d-md-none">CONFERENCIA</span>
+                {{ item.conferencia }}
+              </div>
+              <div class="activity-cell activity-fecha">
+                <span class="mobile-label d-md-none">CORREO</span>
+                {{ item.correo }}
+              </div>
+              <div class="activity-cell activity-checkin">
+                <span class="mobile-label d-md-none">FECHA REGISTRO</span>
+                <span class="status-badge">
+                  {{ isoADdmmyyyy(item.created_at) }}
+                </span>
+              </div>
             </div>
-            <div class="activity-cell activity-fecha">
-              <span class="mobile-label d-md-none">CORREO</span>
-              {{ item.correo }}
+
+            <!-- Opcional: mensaje si no hay actividades -->
+            <div class="text-center text-muted py-3" *ngIf="activitiesList.length === 0">
+              No hay actividad reciente.
             </div>
-            <div class="activity-cell activity-checkin">
-              <span class="mobile-label d-md-none">FECHA REGISTRO</span>
-              <span class="status-badge">
-                {{ isoADdmmyyyy(item.created_at) }}
-              </span>
-            </div>
-          </div>
+          </ng-template>
         </div>
       </div>
     </div>
 
     <div
-      class="d-flex flex-column align-items-stretch justify-content-center gap-4 col"
+      class="d-flex flex-column flex-md-row flex-lg-column align-items-stretch justify-content-center gap-1 gap-md-3 gap-lg-4 col-md-12 col-lg"
     >
       <div
-        class="d-flex flex-column flex-lg-row align-items-stretch justify-content-start gap-4 col-12"
+        class="d-flex flex-column flex-lg-row align-items-stretch justify-content-center gap-1 col-12 col-md-6 col-lg-12 card border-0 shadow-sm rounded-4 p-3"
       >
-        <div id="chart-spark3 col-12 col-lg-7">
+        <div id="chart-spark3" class="col-md-12 col-lg-7 d-flex align-items-center justify-content-center">
           <apx-chart
             [series]="chartOptions3.series!"
             [chart]="chartOptions3.chart!"
@@ -100,7 +130,7 @@
             [subtitle]="chartOptions3.subtitle!"
           ></apx-chart>
         </div>
-        <div id="chart-tshirts col-12 col-lg-4">
+        <div id="chart-tshirts" class="col-md-12 col-lg d-flex align-items-center justify-content-center">
           <apx-chart
             [series]="chartOptionsTshirts.series!"
             [chart]="chartOptionsTshirts.chart!"
@@ -111,9 +141,10 @@
         </div>
       </div>
 
-      <div class="col-12">
-        <div id="chart">
+      <div class="col-12 col-md-6 col-lg-12 card shadow-sm border-0 p-3 rounded-4 align-items-stretch justify-content-center">
+        <div id="chart" class="d-flex align-items-center justify-content-center">
           <apx-chart
+            class="w-100"
             [series]="chartOptions.series!"
             [chart]="chartOptions.chart!"
             [plotOptions]="chartOptions.plotOptions!"

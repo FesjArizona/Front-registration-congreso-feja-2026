@@ -71,6 +71,9 @@ export class OverviewCongresoComponent
     },
     plotOptions: {
       radialBar: {
+        hollow: {
+          size: '50%',
+        },
         dataLabels: {
           name: {
             fontSize: '20px',
@@ -104,16 +107,17 @@ export class OverviewCongresoComponent
     series: [
       {
         name: 'Hombres',
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
+        data: [44, 55, 57, 56, 70, 58, 63, 114, 66],
       },
       {
         name: 'Mujeres',
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
+        data: [76, 85, 101, 40, 50, 105, 91, 60, 94],
       },
     ],
     chart: {
       type: 'bar',
       height: 350,
+      width: '95%',
     },
     plotOptions: {
       bar: {
@@ -201,6 +205,7 @@ export class OverviewCongresoComponent
     chart: {
       type: 'area',
       height: 190,
+      width: '90%',
       sparkline: {
         enabled: true,
       },
@@ -264,6 +269,7 @@ export class OverviewCongresoComponent
   cargandoActivities = true;
   cargandoStaff = true;
   skeletonCards = Array.from({ length: 4 });
+  skeletonTable = Array.from({ length: 6 });
 
   // Variables fuertemente tipadas gracias al modelo
   public statsList: StatCard[] = [];
