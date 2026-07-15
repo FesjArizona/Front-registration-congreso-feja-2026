@@ -212,6 +212,7 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
           series: data.series,
           labels: data.labels
         };
+        this.forceChartResize();
       },
       error: (err) => console.error('Error al cargar stats de camisas', err)
     });
@@ -286,7 +287,7 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
     return `${d}/${m}/${y}`;
   }
 
-  calcularTiempoTranscurrido(fecha: string | null): string {
+  public calcularTiempoTranscurrido(fecha: string | null): string {
     if (!fecha) return '';
 
     const registro = new Date(fecha);

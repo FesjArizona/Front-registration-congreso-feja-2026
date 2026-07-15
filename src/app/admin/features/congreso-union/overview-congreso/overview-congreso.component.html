@@ -98,15 +98,9 @@
               <div class="activity-cell activity-checkin">
                 <span class="mobile-label d-md-none">FECHA REGISTRO</span>
                 <span class="status-badge">
-                  {{ isoADdmmyyyy(item.created_at) }}
+                  {{ calcularTiempoTranscurrido(item.created_at) }}
                 </span>
               </div>
-            </div>
-            <div class="activity-cell activity-checkin">
-              <span class="mobile-label d-md-none">FECHA REGISTRO</span>
-              <span class="status-badge">
-                {{ calcularTiempoTranscurrido(item.created_at) }}
-              </span>
             </div>
           </ng-template>
         </div>
