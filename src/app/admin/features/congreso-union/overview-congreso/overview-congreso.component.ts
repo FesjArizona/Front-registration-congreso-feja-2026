@@ -71,6 +71,9 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
     fill: { colors: ['#CD7F32', '#FFAC1C', '#CC5500', '#E49B0F'] },
     plotOptions: {
       radialBar: {
+        hollow: {
+          size: '50%',
+        },
         dataLabels: {
           name: { fontSize: '20px' },
           value: { offsetY: 10, fontSize: '16px' },
@@ -149,6 +152,7 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
   cargandoActivities = true;
   cargandoStaff = true;
   skeletonCards = Array.from({ length: 4 });
+  skeletonTable = Array.from({ length: 6 });
 
   public statsList: StatCard[] = [];
   public activitiesList: RecentActivity[] = [];
