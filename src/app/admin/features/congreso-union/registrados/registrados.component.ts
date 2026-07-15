@@ -147,6 +147,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     return this.participantes.filter(p => {
       const coincideBusqueda = !termino ||
         p.nombre.toLowerCase().includes(termino) ||
+        p.apellidos.toLowerCase().includes(termino) ||
         p.telefono.includes(termino) ||
         p.correo.includes(termino);
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
@@ -395,4 +396,5 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   }
 
 
+ 
 }

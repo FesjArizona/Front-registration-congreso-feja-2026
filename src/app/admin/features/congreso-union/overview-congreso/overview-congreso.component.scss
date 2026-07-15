@@ -1,20 +1,19 @@
-
 // ── Variables ────────────────────────────────────────────────────────────────
-$bg-page:       #f4f5f7;
-$bg-panel:      #ffffff;
-$color-primary: #4f46e5;   // icon accent
-$color-text:    #1a1a2e;
-$color-muted:   #6b7280;
-$color-border:  #e5e7eb;
+$bg-page: #f4f5f7;
+$bg-panel: #ffffff;
+$color-primary: #4f46e5; // icon accent
+$color-text: #1a1a2e;
+$color-muted: #6b7280;
+$color-border: #e5e7eb;
 
-$radius-card:   12px;
-$radius-badge:  6px;
+$radius-card: 12px;
+$radius-badge: 6px;
 
 // Badge palette
-$completed-bg:  #dcfce7;
-$completed-fg:  #15803d;
-$progress-bg:   #e0e7ff;
-$progress-fg:   #4338ca;
+$completed-bg: #dcfce7;
+$completed-fg: #15803d;
+$progress-bg: #e0e7ff;
+$progress-fg: #4338ca;
 $registered-bg: #fee2e2;
 $registered-fg: #b91c1c;
 
@@ -121,11 +120,11 @@ $registered-fg: #b91c1c;
   display: flex;
   gap: 0;
   padding: 15px;
-  border-bottom: 1px solid #E6E7EB;
-  background: #F9FAFC;
-  border-top: 1px solid #E6E7EB;
-  border-left: 1px solid #E6E7EB;
-  border-right: 1px solid #E6E7EB;
+  border-bottom: 1px solid #e6e7eb;
+  background: #f9fafc;
+  border-top: 1px solid #e6e7eb;
+  border-left: 1px solid #e6e7eb;
+  border-right: 1px solid #e6e7eb;
   border-top-right-radius: 18px;
   border-top-left-radius: 18px;
   position: sticky;
@@ -277,4 +276,11 @@ $registered-fg: #b91c1c;
   display: inline-block;
   margin-right: 8px;
   background-color: #ced4da !important;
+}
+
+#chart,
+#chart-spark3,
+#chart-tshirts {
+  min-height: 200px; /* Ajusta según el height de cada gráfica */
+  width: 100%;
 }

@@ -102,10 +102,11 @@
                 </span>
               </div>
             </div>
-
-            <!-- Opcional: mensaje si no hay actividades -->
-            <div class="text-center text-muted py-3" *ngIf="activitiesList.length === 0">
-              No hay actividad reciente.
+            <div class="activity-cell activity-checkin">
+              <span class="mobile-label d-md-none">FECHA REGISTRO</span>
+              <span class="status-badge">
+                {{ calcularTiempoTranscurrido(item.created_at) }}
+              </span>
             </div>
           </ng-template>
         </div>

@@ -2,7 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 // Importamos tus interfaces
-import { DashboardData, StatCard, RecentActivity, StaffMember } from '../models/dashboard.model';
+import { DashboardData, StatCard, RecentActivity, StaffMember, WeeklyRegistrationsData, GenderByMonthData, TshirtSizesData } from '../models/dashboard.model';
+import { ApiResponse } from '../../../core/models/api-response.interface';
+import { URL_API } from '../../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +39,15 @@ export class DashboardService {
     return this.http.get<DashboardData>(this.jsonUrl).pipe(
       map(response => response.staff)
     );
+  }
+
+  public getWeeklyRegistrations(eventId: number): Observable<ApiResponse<WeeklyRegistrationsData>> {
+    return this.http.get<ApiResponse<WeeklyRegistrationsData>>(`${URL_API}/weekly-registrations/event/${eventId}`)
+  }
+  public getGenderByMonth(eventId: number): Observable<ApiResponse<GenderByMonthData>> {
+    return this.http.get<ApiResponse<GenderByMonthData>>(`${URL_API}/gender-by-month/event/${eventId}`)
+  }
+  public getTshirtSizes(eventId: number): Observable<ApiResponse<TshirtSizesData>> {
+    return this.http.get<ApiResponse<TshirtSizesData>>(`${URL_API}/tshirt-sizes/event/${eventId}`)
   }
 }
