@@ -76,7 +76,7 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
           value: { offsetY: 10, fontSize: '16px' },
           total: {
             show: true,
-            label: 'Tallas',
+            label: 'Camisas',
             formatter: (w: any) => {
               const totals = w.globals?.seriesTotals ?? [];
               if (!totals.length) return '0';
@@ -159,7 +159,7 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
   ngOnInit(): void {
     this.loadDashboardData();
     this.conectarSSE();
-    
+
     // Suponiendo que el ID del evento es dinámico más adelante, por ahora pasamos 2
     const eventId = 2;
     this.getWeeklyRegistrations(eventId);
@@ -246,7 +246,7 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
         console.error('Error al cargar stats', err);
         this.cargandoStats = false;
       },
-      complete: () => { this.cargandoStats = false; },
+      complete: () => { this.cargandoStats = false; this.forceChartResize() },
     });
 
     this.cargandoActivities = true;
@@ -256,7 +256,7 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
         console.error('Error al cargar actividades', err);
         this.cargandoActivities = false;
       },
-      complete: () => { this.cargandoActivities = false; },
+      complete: () => { this.cargandoActivities = false; this.forceChartResize() },
     });
 
     this.cargandoStaff = true;
@@ -266,7 +266,7 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
         console.error('Error al cargar staff', err);
         this.cargandoStaff = false;
       },
-      complete: () => { this.cargandoStaff = false; },
+      complete: () => { this.cargandoStaff = false; this.forceChartResize() },
     });
   }
 
@@ -281,4 +281,31 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
 
     return `${d}/${m}/${y}`;
   }
+
+  calcularTiempoTranscurrido(fecha: string | null): string {
+    if (!fecha) return '';
+
+    const registro = new Date(fecha);
+    const hoy = new Date();
+
+    // Normalizamos ambas fechas a las 00:00:00 para comparar solo el calendario
+    registro.setHours(0, 0, 0, 0);
+    hoy.setHours(0, 0, 0, 0);
+
+    const diffTime = hoy.getTime() - registro.getTime();
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) return 'Hoy';
+    if (diffDays === 1) return 'Hace 1 día';
+    if (diffDays > 1) return `Hace ${diffDays} días`;
+
+    return this.isoADdmmyyyy(fecha);
+  }
+
+  private forceChartResize() {
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 500); // Esperamos 500ms para que el DOM esté listo
+  }
+
 }
