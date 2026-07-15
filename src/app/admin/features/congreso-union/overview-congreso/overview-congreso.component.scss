@@ -283,5 +283,6 @@ $registered-fg: #b91c1c;
 #chart-spark3,
 #chart-tshirts {
   min-height: 200px; /* Ajusta según el height de cada gráfica */
-  width: 100%;
+  min-width: 200px;
+  /* width: 100%; */
 }

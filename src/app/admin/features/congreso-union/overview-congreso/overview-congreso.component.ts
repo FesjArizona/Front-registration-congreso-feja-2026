@@ -58,7 +58,9 @@ export type ChartOptions = {
   templateUrl: './overview-congreso.component.html',
   styleUrls: ['./overview-congreso.component.scss'],
 })
-export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestroy {
+export class OverviewCongresoComponent
+  implements OnInit, AfterViewInit, OnDestroy
+{
   @ViewChild('chart') chart!: ChartComponent;
 
   // ---------- ESTADOS INICIALES (VACÍOS) DE LAS GRÁFICAS ----------
@@ -83,7 +85,10 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
             formatter: (w: any) => {
               const totals = w.globals?.seriesTotals ?? [];
               if (!totals.length) return '0';
-              const sum = totals.reduce((acc: number, value: number) => acc + value, 0);
+              const sum = totals.reduce(
+                (acc: number, value: number) => acc + value,
+                0,
+              );
               return Math.round(sum / totals.length).toString();
             },
           },
@@ -131,7 +136,6 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
     yaxis: { min: 0 },
     subtitle: { text: 'Inscripciones', offsetX: 0, style: { fontSize: '14px' } },
   };
-
 
   ngAfterViewInit() {
     (window as any).Apex = {
@@ -312,5 +316,4 @@ export class OverviewCongresoComponent implements OnInit, AfterViewInit, OnDestr
       window.dispatchEvent(new Event('resize'));
     }, 500); // Esperamos 500ms para que el DOM esté listo
   }
-
 }
