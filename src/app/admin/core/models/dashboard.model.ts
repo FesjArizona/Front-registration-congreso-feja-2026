@@ -26,3 +26,26 @@ export interface DashboardData {
   activities: RecentActivity[];
   staff: StaffMember[];
 }
+
+
+export interface WeeklyRegistrationsData {
+  categories: string[];
+  seriesData: number[];
+  total: number;
+}
+
+export interface ChartSeries {
+  name: string;
+  data: number[];
+}
+
+export interface GenderByMonthData {
+  categories: string[];
+  series: ChartSeries[];
+}
+
+export interface TshirtSizesData {
+  labels: string[];
+  series: number[];
+  total: number;
+}
