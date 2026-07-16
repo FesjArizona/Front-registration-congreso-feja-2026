@@ -19,7 +19,7 @@ interface AuthUser {
   id: number;
   name: string;
   email: string;
-  role: 'superadmin' | 'finanzas' | 'staff';
+  role: 'superadmin' | 'finanzas' | 'staff' | 'admin' | 'vicePresident';
 }
 @Component({
   standalone: true,
@@ -396,5 +396,5 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   }
 
 
- 
+
 }

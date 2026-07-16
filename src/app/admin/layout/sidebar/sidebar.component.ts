@@ -21,7 +21,7 @@ interface AuthUser {
   id: number;
   name: string;
   email: string;
-  role: 'superadmin' | 'finanzas' | 'staff';
+  role: 'superadmin' | 'finanzas' | 'staff' | 'vicePresident' | 'admin';
 }
 
 @Component({
@@ -49,17 +49,17 @@ export class SidebarComponent {
           {
             label: 'Resumen',
             route: 'congreso/overview',
-            roles: ['superadmin', 'staff', 'finanzas']
+            roles: ['superadmin', 'staff', 'finanzas', 'vicePresident']
           },
           {
             label: 'Registros',
             route: 'congreso/registered',
-            roles: ['superadmin', 'finanzas']
+            roles: ['superadmin', 'finanzas', 'admin', 'vicePresident']
           },
           {
             label: 'Check-in',
             route: 'congreso/checkin',
-            roles: ['superadmin', 'staff']
+            roles: ['superadmin', 'staff', 'admin', 'vicePresident']
           },
         ],
       }

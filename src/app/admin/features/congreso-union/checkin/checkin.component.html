@@ -34,14 +34,20 @@
       <table class="table table-hover align-middle mb-0">
         <thead>
           <tr class="text-uppercase">
-            <th>Check In</th>
+            @if (authUser.role !== "admin") {
+              <th>Check In</th>
+            }
             <th>Nombre</th>
             <th>Conferencia</th>
             <th>Camiseta</th>
             <th>Talla</th>
             <th>Comida</th>
             <th>Tipo de alimento</th>
-            <th>Acciones</th>
+            @if (
+              authUser.role !== "admin" && authUser.role !== "vicePresident"
+            ) {
+              <th>Acciones</th>
+            }
           </tr>
         </thead>
         <tbody>
@@ -95,16 +101,20 @@
               </td>
             </tr>
             <tr *ngFor="let p of participantesPagina">
-              <td>
-                <input
-                  type="checkbox"
-                  class="form-check-input checkin-checkbox"
-                  [checked]="p.checkin_at"
-                  (change)="toggleCheckin(p)"
-                  [attr.aria-label]="'Confirmar check-in de ' + p.nombre"
-                  [disabled]="p.checkin_at"
-                />
-              </td>
+              @if (
+                authUser.role !== "admin" && authUser.role 
+              ) {
+                <td>
+                  <input
+                    type="checkbox"
+                    class="form-check-input checkin-checkbox"
+                    [checked]="p.checkin_at"
+                    (change)="toggleCheckin(p)"
+                    [attr.aria-label]="'Confirmar check-in de ' + p.nombre"
+                    [disabled]="p.checkin_at"
+                  />
+                </td>
+              }
               <td>
                 <div class="d-flex align-items-center gap-2">
                   <span
@@ -165,18 +175,26 @@
                 }}
               </td>
               <td>
-                <button
-                  class="icon-action edit-btn"
-                  title="Editar"
-                  (click)="abrirModalEditar(p)"
-                >
-                  <img
-                    src="../../../../../assets/icons/registered/edit.svg"
-                    alt="Edit Icon"
-                    style="width: 16px"
-                  />
-                </button>
-                @if (authUser.role !== "finanzas") {
+                @if (
+                  authUser.role !== "admin" && authUser.role !== "vicePresident"
+                ) {
+                  <button
+                    class="icon-action edit-btn"
+                    title="Editar"
+                    (click)="abrirModalEditar(p)"
+                  >
+                    <img
+                      src="../../../../../assets/icons/registered/edit.svg"
+                      alt="Edit Icon"
+                      style="width: 16px"
+                    />
+                  </button>
+                }
+                @if (
+                  authUser.role !== "finanzas" &&
+                  authUser.role !== "admin" &&
+                  authUser.role !== "vicePresident"
+                ) {
                   <button
                     class="icon-action delete"
                     title="Eliminar"
@@ -408,11 +426,7 @@
           <strong>{{ participanteAEliminar?.nombre }}</strong> de la lista.
         </p>
         <div class="d-flex justify-content-center gap-2">
-          <button
-            type="button"
-            class="btn btn-light"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">
             Cancelar
           </button>
           <button class="btn btn-danger px-4" (click)="confirmarEliminar()">
