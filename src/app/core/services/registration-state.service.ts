@@ -18,4 +18,5 @@ export class RegistrationStateService {
   setStep(step: number) {
     this.currentStep.set(step);
   }
+
 }

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer-bar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './footer-bar.component.html',
   styleUrls: ['./footer-bar.component.scss']
 })
@@ -28,7 +29,6 @@ export class FooterBarComponent {
   onNext(): void {
     if (this.isCurrentStepValid) {
       this.next.emit();
-      console.log('En este paso ' + this.isCurrentStepValid + ' se pasan los siguientes datos: ' + this.isCurrentStepValid);
     }
   }
 }

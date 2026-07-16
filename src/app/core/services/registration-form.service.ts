@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
@@ -6,6 +6,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationFormService {
   public stepperForm: FormGroup;
+  public selectedStateName = signal<string>('')
+  public selectedSizeName = signal<string>('')
+  public selectedConferenceName = signal<string>('')
 
   constructor(private fb: FormBuilder) {
     this.stepperForm = this.fb.group({
@@ -22,10 +25,13 @@ export class RegistrationFormService {
         church: ['', Validators.required],
         sizeShirt: ['', Validators.required],
         includesLunch: ['', Validators.required],
+        foodPreference: [null],
+        foodPreferenceDetails: [null],
+        includesTshirt: ['', Validators.required],
         isChaperone: ['', Validators.required]
       }),
       paso2: this.fb.group({
-        nameContact: ['',   Validators.required],
+        nameContact: ['', Validators.required],
         phoneContact: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(12)]],
         relationship: ['', Validators.required]
       }),
@@ -35,5 +41,30 @@ export class RegistrationFormService {
       paso4: this.fb.group({}),
       paso5: this.fb.group({})
     });
+  }
+
+  setSelectedStateName(name: string) {
+    this.selectedStateName.set(name)
+  }
+
+  setSelectedConferenceName(name: string) {
+    this.selectedConferenceName.set(name)
+  }
+
+  setSizeName(name: string) {
+    this.selectedSizeName.set(name)
+  }
+
+  setEmptySelectedNames() {
+    this.selectedStateName.set('')
+    this.selectedSizeName.set('')
+  }
+
+  getSelectednames(): { stateName: string, sizeName: string, conferenceName: string } {
+    return {
+      "stateName": this.selectedStateName(),
+      "sizeName": this.selectedSizeName(),
+      "conferenceName": this.selectedConferenceName()
+    }
   }
 }

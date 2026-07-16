@@ -1,10 +1,12 @@
 import { Component, Input, inject } from '@angular/core';
 import { RegistrationFormService } from '../../../core/services/registration-form.service';
+import { LanguageService } from '../../../core/services/language.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-stepper-sidebar',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './stepper-sidebar.component.html',
   styleUrl: './stepper-sidebar.component.scss'
 })
