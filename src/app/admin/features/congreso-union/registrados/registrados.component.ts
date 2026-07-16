@@ -283,7 +283,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       ciudad: p.ciudad,
       pago_camiseta: p.pago_camiseta,
       tipo_alimento: p.tipo_alimento,
-      talla_camiseta_id: p.talla_camiseta_id,
+      talla_camiseta_id: p.talla_camiseta_id ? p.talla_camiseta_id : 7,
       pago_lunchtime: p.pago_lunchtime,
       checkin_at: p.checkin_at != null,
     });
