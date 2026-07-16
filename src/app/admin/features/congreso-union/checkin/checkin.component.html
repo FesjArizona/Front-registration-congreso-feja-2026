@@ -49,19 +49,35 @@
           <ng-container *ngIf="cargando; else contenidoReal">
             <tr *ngFor="let i of skeletonRows" class="placeholder-glow">
               <td class="col">
-                <span class="placeholder col-3" style="height: 18px;"></span>
+                <span class="placeholder col-3" style="height: 18px"></span>
               </td>
               <td class="col-3">
                 <div class="d-flex align-items-center gap-2">
-                  <span class="placeholder rounded-circle skeleton-avatar"></span>
-                  <span class="placeholder col-10" style="height: 12px;"></span>
+                  <span
+                    class="placeholder rounded-circle skeleton-avatar"
+                  ></span>
+                  <span class="placeholder col-10" style="height: 12px"></span>
                 </div>
               </td>
-              <td class="col-3"><span class="placeholder col-10" style="height: 12px;"></span></td>
-              <td class="col"><span class="placeholder rounded-pill col-12 skeleton-badge"></span></td>
-              <td class="col"><span class="placeholder col-7" style="height: 12px;"></span></td>
-              <td class="col"><span class="placeholder rounded-pill col-10 skeleton-badge"></span></td>
-              <td class="col"><span class="placeholder col-10" style="height: 12px;"></span></td>
+              <td class="col-3">
+                <span class="placeholder col-10" style="height: 12px"></span>
+              </td>
+              <td class="col">
+                <span
+                  class="placeholder rounded-pill col-12 skeleton-badge"
+                ></span>
+              </td>
+              <td class="col">
+                <span class="placeholder col-7" style="height: 12px"></span>
+              </td>
+              <td class="col">
+                <span
+                  class="placeholder rounded-pill col-10 skeleton-badge"
+                ></span>
+              </td>
+              <td class="col">
+                <span class="placeholder col-10" style="height: 12px"></span>
+              </td>
               <td class="col">
                 <div class="d-flex gap-2 justify-content-center">
                   <span class="placeholder skeleton-icon"></span>
@@ -80,58 +96,98 @@
             </tr>
             <tr *ngFor="let p of participantesPagina">
               <td>
-                <input type="checkbox" class="form-check-input checkin-checkbox" [checked]="p.checkin_at"
-                  (change)="toggleCheckin(p)" [attr.aria-label]="'Confirmar check-in de ' + p.nombre"
-                  [disabled]="p.checkin_at" />
+                <input
+                  type="checkbox"
+                  class="form-check-input checkin-checkbox"
+                  [checked]="p.checkin_at"
+                  (change)="toggleCheckin(p)"
+                  [attr.aria-label]="'Confirmar check-in de ' + p.nombre"
+                  [disabled]="p.checkin_at"
+                />
               </td>
               <td>
                 <div class="d-flex align-items-center gap-2">
-                  <span class="avatar-circle" [style.background]="colorAvatar(p.nombre)">{{ inicial(p.nombre) }}
+                  <span
+                    class="avatar-circle"
+                    [style.background]="colorAvatar(p.nombre)"
+                    >{{ inicial(p.nombre) }}
                   </span>
-                  <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
+                  <span class="fw-medium"
+                    >{{ p.nombre }} {{ p.apellidos }}</span
+                  >
                 </div>
               </td>
               <td>{{ p.conferencia }}</td>
               <td>
-                <span class="badge rounded-pill px-3 py-2" [ngClass]="
-                            p.pago_camiseta === 'pagado'
-                              ? 'badge-soft-success'
-                              : 'badge-soft-danger'
-                          ">
-                  <i class="bi" [ngClass]="
-                              p.pago_camiseta === 'pagado'
-                                ? 'bi-check-circle-fill'
-                                : 'bi-x-circle-fill'
-                            "></i>
+                <span
+                  class="badge rounded-pill px-3 py-2"
+                  [ngClass]="
+                    p.pago_camiseta === 'pagado'
+                      ? 'badge-soft-success'
+                      : 'badge-soft-danger'
+                  "
+                >
+                  <i
+                    class="bi"
+                    [ngClass]="
+                      p.pago_camiseta === 'pagado'
+                        ? 'bi-check-circle-fill'
+                        : 'bi-x-circle-fill'
+                    "
+                  ></i>
                   {{ p.pago_camiseta?.replace("_", " ") }}
                 </span>
               </td>
               <td>{{ p.talla }}</td>
               <td>
-                <span class="badge rounded-pill px-3 py-2" [ngClass]="
-                            p.pago_lunchtime === 'pagado'
-                              ? 'badge-soft-success'
-                              : 'badge-soft-danger'
-                          ">
-                  <i class="bi" [ngClass]="
-                              p.pago_lunchtime === 'pagado'
-                                ? 'bi-check-circle-fill'
-                                : 'bi-x-circle-fill'
-                            "></i>
+                <span
+                  class="badge rounded-pill px-3 py-2"
+                  [ngClass]="
+                    p.pago_lunchtime === 'pagado'
+                      ? 'badge-soft-success'
+                      : 'badge-soft-danger'
+                  "
+                >
+                  <i
+                    class="bi"
+                    [ngClass]="
+                      p.pago_lunchtime === 'pagado'
+                        ? 'bi-check-circle-fill'
+                        : 'bi-x-circle-fill'
+                    "
+                  ></i>
                   {{ p.pago_lunchtime?.replace("_", " ") }}
                 </span>
               </td>
               <td>
-                {{ p.tipo_alimento == "normal" ? "No aplica" : p.tipo_alimento }}
+                {{
+                  p.tipo_alimento == "normal" ? "No aplica" : p.tipo_alimento
+                }}
               </td>
               <td>
-                <button class="icon-action edit-btn" title="Editar" (click)="abrirModalEditar(p)">
-                  <img src="../../../../../assets/icons/registered/edit.svg" alt="Edit Icon" style="width: 16px" />
+                <button
+                  class="icon-action edit-btn"
+                  title="Editar"
+                  (click)="abrirModalEditar(p)"
+                >
+                  <img
+                    src="../../../../../assets/icons/registered/edit.svg"
+                    alt="Edit Icon"
+                    style="width: 16px"
+                  />
                 </button>
                 @if (authUser.role !== "finanzas") {
-                <button class="icon-action delete" title="Eliminar" (click)="abrirModalEliminar(p)">
-                  <img src="../../../../../assets/icons/registered/delete.svg" alt="Delete Icon" style="width: 16px" />
-                </button>
+                  <button
+                    class="icon-action delete"
+                    title="Eliminar"
+                    (click)="abrirModalEliminar(p)"
+                  >
+                    <img
+                      src="../../../../../assets/icons/registered/delete.svg"
+                      alt="Delete Icon"
+                      style="width: 16px"
+                    />
+                  </button>
                 }
               </td>
             </tr>
@@ -324,11 +380,7 @@
         </form>
       </div>
       <div class="modal-footer border-0">
-        <button
-          type="button"
-          class="btn btn-light"
-          (click)="cerrarModalEditar()"
-        >
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
           Cancelar
         </button>
         <button class="btn btn-brand" (click)="guardar()">
@@ -359,7 +411,7 @@
           <button
             type="button"
             class="btn btn-light"
-            (click)="cerrarModalEditar()"
+            data-bs-dismiss="modal"
           >
             Cancelar
           </button>
