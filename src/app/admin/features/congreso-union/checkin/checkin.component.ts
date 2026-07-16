@@ -29,7 +29,7 @@ interface AuthUser {
   id: number;
   name: string;
   email: string;
-  role: 'superadmin' | 'finanzas' | 'staff';
+  role: 'superadmin' | 'finanzas' | 'staff' | 'admin' | 'vicePresident';
 }
 
 @Component({
@@ -281,6 +281,7 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   abrirModalEditar(p: RegisteredUsers): void {
     this.editandoId = p.id;
     this.participanteOriginal = p;
+    console.log(p)
     this.form.setValue({
       nombre: p.nombre,
       apellidos: p.apellidos,
@@ -290,7 +291,7 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
       ciudad: p.ciudad,
       tipo_alimento: p.tipo_alimento,
       pago_camiseta: p.pago_camiseta,
-      talla_camiseta_id: p.talla_camiseta_id,
+      talla_camiseta_id: p.talla_camiseta_id ? p.talla_camiseta_id : 7,
       pago_lunchtime: p.pago_lunchtime,
       checkin_at: p.checkin_at != null,
     });
