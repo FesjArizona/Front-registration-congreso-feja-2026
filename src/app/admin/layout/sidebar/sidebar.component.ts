@@ -49,7 +49,7 @@ export class SidebarComponent {
           {
             label: 'Resumen',
             route: 'congreso/overview',
-            roles: ['superadmin', 'staff', 'finanzas', 'vicePresident']
+            roles: ['superadmin', 'staff', 'finanzas', 'vicePresident', 'admin']
           },
           {
             label: 'Registros',
