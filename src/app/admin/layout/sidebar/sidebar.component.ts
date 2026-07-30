@@ -61,6 +61,11 @@ export class SidebarComponent {
             route: 'congreso/checkin',
             roles: ['superadmin', 'staff', 'admin', 'vicePresident']
           },
+          {
+            label: 'Logs-Admin',
+            route: 'congreso/logs',
+            roles: ['superadmin']
+          },
         ],
       }
     ];

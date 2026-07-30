@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard, eventGuard } from './auth/auth/guard/auth.guard';
+import { LogsAdminComponent } from './features/congreso-union/logs-admin/logs-admin.component';
 
 export const ADMIN_ROUTES: Routes = [
   {
@@ -43,6 +44,13 @@ export const ADMIN_ROUTES: Routes = [
             loadComponent: () =>
               import('./features/congreso-union/checkin/checkin.component')
                 .then(m => m.CheckinComponent),
+          },
+          {
+            path: 'logs',
+            data: { event: 'congreso' },
+            loadComponent: () =>
+              import('./features/congreso-union/logs-admin/logs-admin.component')
+                .then(m => m.LogsAdminComponent),
           },
         ],
       },
