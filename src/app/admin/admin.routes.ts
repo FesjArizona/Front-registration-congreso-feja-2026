@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { authGuard, eventGuard } from './auth/auth/guard/auth.guard';
+import { LogsAdminComponent } from './features/congreso-union/logs-admin/logs-admin.component';
 
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
-    canActivate: [authGuard], // ← todas las rutas admin requieren login
+    canActivate: [authGuard], 
     loadComponent: () =>
       import('./layout/admin-layout/admin-layout.component').then(
         (m) => m.AdminLayoutComponent,
@@ -19,7 +20,7 @@ export const ADMIN_ROUTES: Routes = [
       // ── Congreso Union ─────────────────────────────────────────────────────
       {
         path: 'congreso',
-        canActivateChild: [eventGuard], // ← solo admin o admin_event soccer
+        canActivateChild: [eventGuard], 
         data: { event: 'congreso' },
         children: [
           /* { path: '', redirectTo: 'overview', pathMatch: 'full' }, */
@@ -43,6 +44,13 @@ export const ADMIN_ROUTES: Routes = [
             loadComponent: () =>
               import('./features/congreso-union/checkin/checkin.component')
                 .then(m => m.CheckinComponent),
+          },
+          {
+            path: 'logs',
+            data: { event: 'congreso' },
+            loadComponent: () =>
+              import('./features/congreso-union/logs-admin/logs-admin.component')
+                .then(m => m.LogsAdminComponent),
           },
         ],
       },

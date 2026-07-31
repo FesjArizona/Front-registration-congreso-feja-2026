@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../../../environment/environment';
 import { RecentActivity, StatCard } from '../models/dashboard.model';
+import { AdminLog } from '../models/log.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class EventsService {
 
   public getRecentActivities(eventId: number): Observable<ApiResponse<RecentActivity[]>> {
     return this.httpClient.get<ApiResponse<RecentActivity[]>>(`${URL_API}/events/recent-activity/${eventId}`)
+  }
+
+  public getLogs(): Observable<ApiResponse<AdminLog[]>> {
+    return this.httpClient.get<ApiResponse<AdminLog[]>>(`${URL_API}/logs`)
   }
 
 }
