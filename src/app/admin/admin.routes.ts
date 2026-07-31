@@ -5,7 +5,7 @@ import { LogsAdminComponent } from './features/congreso-union/logs-admin/logs-ad
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
-    canActivate: [authGuard], // ← todas las rutas admin requieren login
+    canActivate: [authGuard], 
     loadComponent: () =>
       import('./layout/admin-layout/admin-layout.component').then(
         (m) => m.AdminLayoutComponent,
@@ -20,7 +20,7 @@ export const ADMIN_ROUTES: Routes = [
       // ── Congreso Union ─────────────────────────────────────────────────────
       {
         path: 'congreso',
-        canActivateChild: [eventGuard], // ← solo admin o admin_event soccer
+        canActivateChild: [eventGuard], 
         data: { event: 'congreso' },
         children: [
           /* { path: '', redirectTo: 'overview', pathMatch: 'full' }, */

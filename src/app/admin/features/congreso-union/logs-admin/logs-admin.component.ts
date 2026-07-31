@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminLog, LogAccion } from '../../../core/models/log.model';
 import { LogsService } from '../../../core/services/logs.service';
+import { EventsService } from '../../../core/services/events.service';
+import { ApiResponse } from '../../../../core/models/api-response.interface';
 
 
 @Component({
@@ -39,17 +41,20 @@ export class LogsAdminComponent implements OnInit {
   porPagina = 10;
   opcionesPorPagina = [5, 10, 20, 50, 100];
 
-  constructor(private logsService: LogsService) {}
+  private readonly eventsService = inject(EventsService)
+
+  constructor(private logsService: LogsService) { }
 
   ngOnInit(): void {
     this.getLogs();
   }
 
   getLogs(): void {
+
     this.cargando = true;
-    this.logsService.getLogs().subscribe({
-      next: (data: AdminLog[]) => {
-        this.logs = data;
+    this.eventsService.getLogs().subscribe({
+      next: (response: ApiResponse<AdminLog[]>) => {
+        this.logs = response.data
       },
       error: (error: HttpErrorResponse) => {
         this.cargando = false;
@@ -57,7 +62,7 @@ export class LogsAdminComponent implements OnInit {
       complete: () => {
         this.cargando = false;
       },
-    });
+    })
   }
 
   // ---------- datos derivados (filtros + paginación) ----------
@@ -65,10 +70,8 @@ export class LogsAdminComponent implements OnInit {
     const termino = this.busqueda.trim().toLowerCase();
     if (!termino) return this.logs;
     return this.logs.filter(l =>
-      l.admin.toLowerCase().includes(termino) ||
-      l.accion.toLowerCase().includes(termino) ||
-      l.registro_afectado.toLowerCase().includes(termino) ||
-      (l.detalles ?? '').toLowerCase().includes(termino)
+      l.adminName.toLowerCase().includes(termino) ||
+      l.action.toLowerCase().includes(termino)
     );
   }
 

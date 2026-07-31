@@ -49,3 +49,4 @@ export interface TshirtSizesData {
   series: number[];
   total: number;
 }
+
