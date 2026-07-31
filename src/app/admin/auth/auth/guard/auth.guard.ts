@@ -30,8 +30,8 @@ export const eventGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
   if (user && (user.role === 'superadmin' ||
     user.role === "finanzas" ||
     user.role === "staff" ||
-    user.role === "admin" ||
-    user.role === "vicePresident"
+    user.role === "vicePresident" ||
+    user.role === "developer"
   )) {
     return true;
   }

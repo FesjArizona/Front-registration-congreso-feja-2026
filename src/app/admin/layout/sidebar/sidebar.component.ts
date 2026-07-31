@@ -21,7 +21,7 @@ interface AuthUser {
   id: number;
   name: string;
   email: string;
-  role: 'superadmin' | 'finanzas' | 'staff' | 'vicePresident' | 'admin';
+  role: 'superadmin' | 'finanzas' | 'staff' | 'vicePresident' | 'admin' | 'developer';
 }
 
 @Component({
@@ -49,22 +49,22 @@ export class SidebarComponent {
           {
             label: 'Resumen',
             route: 'congreso/overview',
-            roles: ['superadmin', 'staff', 'finanzas', 'vicePresident', 'admin']
+            roles: ['developer', 'superadmin', 'staff', 'finanzas', 'vicePresident', 'admin']
           },
           {
             label: 'Registros',
             route: 'congreso/registered',
-            roles: ['superadmin', 'finanzas', 'admin', 'vicePresident']
+            roles: ['developer', 'superadmin', 'finanzas', 'admin', 'vicePresident']
           },
           {
             label: 'Check-in',
             route: 'congreso/checkin',
-            roles: ['superadmin', 'staff', 'admin', 'vicePresident']
+            roles: ['developer', 'superadmin', 'staff', 'admin', 'vicePresident']
           },
           {
             label: 'Logs-Admin',
             route: 'congreso/logs',
-            roles: ['superadmin']
+            roles: ['developer']
           },
         ],
       }
@@ -76,7 +76,7 @@ export class SidebarComponent {
 
       if (itemFiltrado.children) {
         itemFiltrado.children = itemFiltrado.children.filter(child => {
-          return rolUsuario === 'superadmin' || (child.roles && child.roles.includes(rolUsuario));
+          return rolUsuario === 'developer' || (child.roles && child.roles.includes(rolUsuario));
         });
       }
 
