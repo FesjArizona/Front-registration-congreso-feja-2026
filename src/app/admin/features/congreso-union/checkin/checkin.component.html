@@ -101,9 +101,7 @@
               </td>
             </tr>
             <tr *ngFor="let p of participantesPagina">
-              @if (
-                authUser.role !== "admin" && authUser.role 
-              ) {
+              @if (authUser.role !== "admin" && authUser.role) {
                 <td>
                   <input
                     type="checkbox"
@@ -175,6 +173,17 @@
                 }}
               </td>
               <td>
+                <button
+                  class="icon-action scan-btn"
+                  title="Escanear QR"
+                  (click)="openQRScanner()"
+                >
+                  <img
+                    src="../../../../../assets/icons/admin/camera.svg"
+                    alt="Scan Icon"
+                    style="width: 16px"
+                  />
+                </button>
                 @if (
                   authUser.role !== "admin" && authUser.role !== "vicePresident"
                 ) {
@@ -437,3 +446,60 @@
     </div>
   </div>
 </div>
+
+@if (showScanner) {
+  <!-- El fondo oscuro semitransparente -->
+  <div
+    class="modal fade show"
+    tabindex="-1"
+    style="display: block; background: rgba(0, 0, 0, 0.5)"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Escanear Código QR</h5>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="closeScanner()"
+          ></button>
+        </div>
+
+        <div class="modal-body text-center">
+          <p class="mb-3 text-muted">
+            Apunta la cámara al código QR del asistente.
+          </p>
+
+          <div
+            class="scanner-wrapper rounded overflow-hidden shadow-sm"
+            style="max-width: 100%; margin: 0 auto; background: #000"
+          >
+            <zxing-scanner
+              [enable]="showScanner"
+              (scanSuccess)="onCodeResult($event)"
+            >
+            </zxing-scanner>
+          </div>
+
+          @if (IdFromScanner) {
+            <div class="alert alert-success mt-3 mb-0">
+              ID Escaneado: <strong>{{ IdFromScanner }}</strong
+              >. Procesando...
+            </div>
+          }
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeScanner()"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
