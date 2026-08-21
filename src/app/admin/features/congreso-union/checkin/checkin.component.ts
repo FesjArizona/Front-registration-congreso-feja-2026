@@ -83,7 +83,8 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly authService = inject(AuthService)
 
   public showScanner: boolean = false;
-  public IdFromScanner: string = '';
+  public IdFromScanner: number = -1;
+  public wasFoodPaid: boolean = false;
 
   constructor(
     private participantesService: ParticipantesService,
@@ -414,15 +415,28 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
 
   openQRScanner() {
     this.showScanner = true
-    this.IdFromScanner = ''
+    this.IdFromScanner = -1
   }
 
   closeScanner() {
     this.showScanner = false;
   }
   onCodeResult(resultString: string) {
-    this.IdFromScanner = resultString;
-    console.log('QR Detectado:', resultString);
+    const parsedId = parseInt(resultString, 10);
+    if (isNaN(parsedId)) {
+      console.error('El código QR escaneado no es un ID válido:', resultString);
+      return;
+    }
+    this.IdFromScanner = parsedId;
+    this.apiService.wasFoodPaid(this.IdFromScanner).subscribe({
+      next: (response: ApiResponse<boolean>) => {
+        this.wasFoodPaid = response.data
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
 
+    })
   }
 }

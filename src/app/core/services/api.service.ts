@@ -39,4 +39,8 @@ export class ApiService {
     public saveRegister(body: UserDataRegister, eventId: string | null): Observable<ApiResponse<number>> {
         return this.httpClient.post<ApiResponse<number>>(`${URL_API}/events/${eventId}/register`, body)
     }
+
+    public wasFoodPaid(registerId: number): Observable<ApiResponse<boolean>> {
+        return this.httpClient.get<ApiResponse<boolean>>(`${URL_API}/events/register/${registerId}/was-food-paid`)
+    }
 }

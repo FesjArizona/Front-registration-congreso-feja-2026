@@ -7,8 +7,9 @@
   </div>
 
   <div class="card border-0 shadow-sm rounded-4 p-3 p-md-4">
-    <!-- Búsqueda -->
-    <div class="row g-2 mb-3">
+    <!-- Búsqueda y Acciones Principales -->
+    <div class="row g-2 mb-3 justify-content-between align-items-center">
+      <!-- Columna del Buscador (Tu código original) -->
       <div class="col-12 col-md-5">
         <div class="input-group">
           <span class="input-group-text bg-white border-end-0">
@@ -27,6 +28,24 @@
           />
         </div>
       </div>
+
+      <!-- Columna del Botón Escáner -->
+      @if (authUser.role !== "admin" && authUser.role) {
+        <div class="col-12 col-md-auto">
+          <button
+            class="btn btn-dark w-100 d-flex align-items-center justify-content-center gap-2 px-4 py-2"
+            title="Escanear pulsera para verificar comida"
+            (click)="openQRScanner()"
+          >
+            <img
+              src="../../../../../assets/icons/admin/camera.svg"
+              alt="Scan Icon"
+              style="width: 18px; filter: invert(1)"
+            />
+            <span class="fw-medium">Verificar Comida</span>
+          </button>
+        </div>
+      }
     </div>
 
     <!-- Tabla -->
@@ -173,17 +192,6 @@
                 }}
               </td>
               <td>
-                <button
-                  class="icon-action scan-btn"
-                  title="Escanear QR"
-                  (click)="openQRScanner()"
-                >
-                  <img
-                    src="../../../../../assets/icons/admin/camera.svg"
-                    alt="Scan Icon"
-                    style="width: 16px"
-                  />
-                </button>
                 @if (
                   authUser.role !== "admin" && authUser.role !== "vicePresident"
                 ) {
@@ -482,10 +490,12 @@
             </zxing-scanner>
           </div>
 
-          @if (IdFromScanner) {
-            <div class="alert alert-success mt-3 mb-0">
-              ID Escaneado: <strong>{{ IdFromScanner }}</strong
-              >. Procesando...
+          @if (IdFromScanner > -1) {
+            <div
+              class="alert mt-3 mb-0"
+              [ngClass]="wasFoodPaid ? 'alert-success' : 'alert-danger'"
+            >
+              Comida <strong>{{ wasFoodPaid ? "Pagada" : "No pagada" }}</strong>
             </div>
           }
         </div>
