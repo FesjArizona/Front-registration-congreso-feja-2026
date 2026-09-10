@@ -22,6 +22,7 @@ export class Step4ConfirmacionComponent {
   private route = inject(ActivatedRoute);
   private apiService = inject(ApiService);
   private translate = inject(TranslateService);
+  isSaving: boolean = false
   eventId: string | null = null;
 
   ngOnInit() {
@@ -140,6 +141,9 @@ export class Step4ConfirmacionComponent {
   }
 
   finalizar(): void {
+
+    if (this.isSaving) return;
+    this.isSaving = true;
     const data: UserDataRegister = {
       conferencia_id: this.paso1Value.conference,
       nombre_conferencia: this.formService.getSelectednames().conferenceName,
@@ -168,15 +172,18 @@ export class Step4ConfirmacionComponent {
 
 
     this.apiService.saveRegister(data, this.eventId).subscribe({
+
       next: (response: ApiResponse<number>) => {
         if (response.data != null) {
           this.router.navigate(['/registro', this.eventId, 'recibido']);
         }
       },
       error: (error: HttpErrorResponse) => {
+        this.isSaving = false;
         console.error('Error al guardar el registro', error);
       },
       complete: () => {
+        this.isSaving = false;
       },
     });
   }
