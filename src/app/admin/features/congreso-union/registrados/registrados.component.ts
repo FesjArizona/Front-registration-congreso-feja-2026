@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
 import { ApiService } from '../../../../core/services/api.service';
 import { AuthService } from '../../../auth/auth/service/auth.service';
+import { PdfExportService } from '../../../core/services/pdf-export.service';
 import { Churches } from '../../../core/models/dashboard.model';
 
 
@@ -27,24 +28,35 @@ interface AuthUser {
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   selector: 'app-registrados',
   templateUrl: './registrados.component.html',
-  styleUrls: ['./registrados.component.scss']
+  styleUrls: ['./registrados.component.scss'],
 })
 export class RegistradosComponent implements OnInit, OnDestroy {
+  private pdfExportService = inject(PdfExportService);
 
   participantes: RegisteredUsers[] = [];
 
-  conferenciasDisponibles: Conferencia[] = ['Arizona Conference',
+  conferenciasDisponibles: Conferencia[] = [
+    'Arizona Conference',
     'Central California Conference',
     'Hawaii Conference',
     'Nevada-Utah Conference',
     'Northern California Conference',
     'Southeastern California Conference',
-    'Southern California Conference'];
+    'Southern California Conference',
+  ];
   estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
 
   private readonly avatarPalette: string[] = [
-    '#F2994A', '#2D9CDB', '#9B51E0', '#EB5757', '#F2C94C',
-    '#27AE60', '#5B6FE0', '#EE6C9B', '#56C2C0', '#BB6BD9'
+    '#F2994A',
+    '#2D9CDB',
+    '#9B51E0',
+    '#EB5757',
+    '#F2C94C',
+    '#27AE60',
+    '#5B6FE0',
+    '#EE6C9B',
+    '#56C2C0',
+    '#BB6BD9',
   ];
 
   // ---------- estado de carga ----------
@@ -76,17 +88,17 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   private participanteOriginal: RegisteredUsers | null = null;
   participanteAEliminar: RegisteredUsers | null = null;
   eventId: string | null = null;
-  authUser: AuthUser = {} as AuthUser
+  authUser: AuthUser = {} as AuthUser;
   private participantModal: any;
   private deleteModal: any;
   private suscripcion?: Subscription;
-  private readonly route = inject(ActivatedRoute)
-  private readonly apiService = inject(ApiService)
-  private readonly authService = inject(AuthService)
+  private readonly route = inject(ActivatedRoute);
+  private readonly apiService = inject(ApiService);
+  private readonly authService = inject(AuthService);
   constructor(
     private participantesService: ParticipantesService,
     private fb: FormBuilder,
-    private eventsService: EventsService
+    private eventsService: EventsService,
   ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
@@ -104,9 +116,9 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.parent?.paramMap.subscribe(params => {
+    this.route.parent?.paramMap.subscribe((params) => {
       this.eventId = params.get('id');
-      this.getRegisteredUsers(this.eventId)
+      this.getRegisteredUsers(this.eventId);
     });
     this.authUser = this.authService.getUser() as AuthUser;
     const modalEl = document.getElementById('participantModal');
@@ -119,7 +131,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   addStateEvent() {
     this.form.get('estado_id')?.valueChanges.subscribe((stateId) => {
-      this.form.get('ciudad')?.setValue('')
+      this.form.get('ciudad')?.setValue('');
       this.loadConferencesAndCities(stateId);
     });
   }
@@ -142,7 +154,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     this.cargando = true;
     this.eventsService.getRegisteredUsers(eventId).subscribe({
       next: (response: ApiResponse<RegisteredUsers[]>) => {
-        this.participantes = response.data
+        this.participantes = response.data;
       },
       error: (error: HttpErrorResponse) => {
         this.cargando = false;
@@ -150,7 +162,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       complete: () => {
         this.cargando = false;
       },
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -178,9 +190,9 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
       // Filtro por Check-in
       let coincideCheckin = true;
-      if (this.filtroCheckin === "Pendiente") {
+      if (this.filtroCheckin === 'Pendiente') {
         coincideCheckin = !p.checkin_at;
-      } else if (this.filtroCheckin === "Completado") {
+      } else if (this.filtroCheckin === 'Completado') {
         coincideCheckin = !!p.checkin_at;
       }
 
@@ -190,7 +202,10 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   }
 
   get totalPaginas(): number {
-    return Math.max(1, Math.ceil(this.participantesFiltrados.length / this.porPagina));
+    return Math.max(
+      1,
+      Math.ceil(this.participantesFiltrados.length / this.porPagina),
+    );
   }
 
   get participantesPagina(): RegisteredUsers[] {
@@ -213,8 +228,12 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     return rango;
   }
 
-  onBusquedaChange(): void { this.paginaActual = 1; }
-  onFiltroChange(): void { this.paginaActual = 1; }
+  onBusquedaChange(): void {
+    this.paginaActual = 1;
+  }
+  onFiltroChange(): void {
+    this.paginaActual = 1;
+  }
 
   onPorPaginaChange(): void {
     this.paginaActual = 1;
@@ -227,8 +246,12 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     this.paginaActual = destino;
   }
 
-  anterior(): void { this.irAPagina(this.paginaActual - 1); }
-  siguiente(): void { this.irAPagina(this.paginaActual + 1); }
+  anterior(): void {
+    this.irAPagina(this.paginaActual - 1);
+  }
+  siguiente(): void {
+    this.irAPagina(this.paginaActual + 1);
+  }
 
   // ---------- helpers visuales ----------
   colorAvatar(nombre: string): string {
@@ -248,7 +271,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
           this.loadConferencesAndCities(currentStateId);
         }
       },
-      error: (error: HttpErrorResponse) => { },
+      error: (error: HttpErrorResponse) => {},
     });
   }
   getSizes() {
@@ -256,24 +279,22 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       next: (response: ApiResponse<Sizes[]>) => {
         this.sizes.set(response.data);
       },
-      error: (error: HttpErrorResponse) => { },
+      error: (error: HttpErrorResponse) => {},
     });
   }
-
 
   loadConferencesAndCities(stateId: string | number) {
     if (!stateId) return;
 
     const parsedId = typeof stateId === 'string' ? parseInt(stateId) : stateId;
 
-    const state = this.states().find(s => s.id === parsedId);
+    const state = this.states().find((s) => s.id === parsedId);
     if (state != undefined) {
-
       this.apiService.getCities(state.nombre).subscribe({
         next: (response: ApiResponse<string[]>) => {
           this.cities.set(response.data);
         },
-        error: (error: HttpErrorResponse) => { },
+        error: (error: HttpErrorResponse) => {},
       });
     }
 
@@ -281,7 +302,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       next: (response: ApiResponse<Conferences[]>) => {
         this.conferences.set(response.data);
       },
-      error: (error: HttpErrorResponse) => { },
+      error: (error: HttpErrorResponse) => {},
     });
   }
 
@@ -315,21 +336,19 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       pago_lunchtime: p.pago_lunchtime,
       checkin_at: p.checkin_at != null,
     });
-    if (this.authUser.role === "finanzas") {
-      this.form.get("nombre")?.disable()
-      this.form.get("apellidos")?.disable()
-      this.form.get("registro")?.disable()
-      this.form.get("estado_id")?.disable()
-      this.form.get("conferencia_id")?.disable()
-      this.form.get("ciudad")?.disable()
-      this.form.get("checkin_at")?.disable()
+    if (this.authUser.role === 'finanzas') {
+      this.form.get('nombre')?.disable();
+      this.form.get('apellidos')?.disable();
+      this.form.get('registro')?.disable();
+      this.form.get('estado_id')?.disable();
+      this.form.get('conferencia_id')?.disable();
+      this.form.get('ciudad')?.disable();
+      this.form.get('checkin_at')?.disable();
     }
     this.participantModal?.show();
-    this.getStates()
-    this.getSizes()
+    this.getStates();
+    this.getSizes();
   }
-
-
 
   guardar(): void {
     if (this.form.invalid || !this.participanteOriginal) {
@@ -337,7 +356,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       return;
     }
     const payloadActualizado: any = {};
-    Object.keys(this.form.controls).forEach(key => {
+    Object.keys(this.form.controls).forEach((key) => {
       const control = this.form.get(key);
 
       if (control && control.dirty) {
@@ -349,15 +368,15 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       this.participantModal?.hide();
       return;
     }
-    this.eventsService.updateRegister(payloadActualizado, this.participanteOriginal.id).subscribe({
-      next: (response: ApiResponse<any>) => {
-        this.getRegisteredUsers(this.eventId)
-      },
-      error: (error: HttpErrorResponse) => {
-      },
-      complete: () => {
-      },
-    })
+    this.eventsService
+      .updateRegister(payloadActualizado, this.participanteOriginal.id)
+      .subscribe({
+        next: (response: ApiResponse<any>) => {
+          this.getRegisteredUsers(this.eventId);
+        },
+        error: (error: HttpErrorResponse) => {},
+        complete: () => {},
+      });
 
     this.participantModal?.hide();
   }
@@ -370,15 +389,15 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   confirmarEliminar(): void {
     if (this.participanteAEliminar) {
-      this.eventsService.removeRegister(this.participanteAEliminar.id).subscribe({
-        next: (response: ApiResponse<RegisteredUsers[]>) => {
-          this.getRegisteredUsers(this.eventId)
-        },
-        error: (error: HttpErrorResponse) => {
-        },
-        complete: () => {
-        },
-      })
+      this.eventsService
+        .removeRegister(this.participanteAEliminar.id)
+        .subscribe({
+          next: (response: ApiResponse<RegisteredUsers[]>) => {
+            this.getRegisteredUsers(this.eventId);
+          },
+          error: (error: HttpErrorResponse) => {},
+          complete: () => {},
+        });
       this.participanteAEliminar = null;
     }
     this.deleteModal?.hide();
@@ -423,6 +442,38 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     return resultado;
   }
 
+  /* EXPORTAR INFORME EN PDF */
+  exportPdf(): void {
+    const headers = [
+      'ID',
+      'Nombre',
+      'Teléfono',
+      'Conferencia',
+      'Estado',
+      'Check-in',
+      'Registro',
+    ];
 
+    const rows: (string | number)[][] = this.participantesFiltrados.map((p) => [
+      p.id,
 
+      `${p.nombre ?? ''} ${p.apellidos ?? ''}`.trim(),
+
+      p.telefono ?? '',
+
+      p.conferencia ?? '',
+
+      p.estado ?? '',
+
+      p.checkin_at ? 'Completado' : 'Pendiente',
+
+      this.isoADdmmyyyy(p.created_at),
+    ]);
+
+    this.pdfExportService.exportParticipantsReport(rows, {
+      conferencia: this.filtroConferencia,
+      checkin: this.filtroCheckin,
+      busqueda: this.busqueda,
+    });
+  }
 }

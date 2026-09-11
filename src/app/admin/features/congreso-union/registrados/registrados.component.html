@@ -1,6 +1,6 @@
 <div class="container-fluid py-4" style="max-width: 1180px">
   <div
-    class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4"
+    class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4"
   >
     <div>
       <h1 class="h4 fw-bold mb-1">Participantes Registrados</h1>
@@ -8,7 +8,13 @@
         Registrar, actualizar y borrar participantes
       </p>
     </div>
+    <div>
+      <button class="btn btn-brand-primary" type="button" (click)="exportPdf()">
+        Export PDF
+      </button>
+    </div>
   </div>
+
 
   <div class="card border-0 shadow-sm rounded-4 p-3 p-md-4">
     <!-- Filtros -->
@@ -83,7 +89,7 @@
       <table class="table table-hover align-middle mb-0">
         <thead>
           <tr class="text-uppercase">
-            <th>ID</th>
+            <th>Noº</th>
             <th>Nombre</th>
             <th>Teléfono</th>
             <th>Conferencia</th>
@@ -101,8 +107,8 @@
           <!-- ===== SKELETON mientras carga ===== -->
           <ng-container *ngIf="cargando; else contenidoReal">
             <tr *ngFor="let i of skeletonRows" class="placeholder-glow">
-              <td class="col-1">
-                <span class="placeholder col-6" style="height: 14px"></span>
+              <td class="col">
+                <span class="placeholder col-3" style="height: 14px"></span>
               </td>
               <td class="col-3">
                 <div class="d-flex align-items-center gap-2">
@@ -145,8 +151,9 @@
                 No se encontraron participantes con esos filtros.
               </td>
             </tr>
-            <tr *ngFor="let p of participantesPagina">
-              <td>{{ p.id }}</td>
+            <tr *ngFor="let p of participantesPagina; let i = index">
+              <!-- <td>{{ p.id }}</td> -->
+              <td>{{ i + 1 }}</td>
               <td>
                 <div class="d-flex align-items-center gap-2">
                   <span
