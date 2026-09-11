@@ -19,7 +19,8 @@
   <div class="card border-0 shadow-sm rounded-4 p-3 p-md-4">
     <!-- Filtros -->
     <div class="row g-2 mb-3">
-      <div class="col-12 col-md-5">
+      <!-- Búsqueda -->
+      <div class="col-12 col-md-6 col-lg-3">
         <div class="input-group">
           <span class="input-group-text bg-white border-end-0">
             <img
@@ -37,7 +38,9 @@
           />
         </div>
       </div>
-      <div class="col-6 col-md-3">
+
+      <!-- Filtro: Conferencia -->
+      <!-- <div class="col-12 col-md-6 col-lg-3">
         <select
           class="form-select"
           [(ngModel)]="filtroConferencia"
@@ -51,8 +54,24 @@
             {{ conferencia }}
           </option>
         </select>
+      </div> -->
+
+      <!-- Filtro: Iglesia (NUEVO) -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <select
+          class="form-select"
+          [(ngModel)]="filtroIglesia"
+          (ngModelChange)="onFiltroChange()"
+        >
+          <option value="">Todas las iglesias</option>
+          <option *ngFor="let iglesia of availableChurches" [value]="iglesia">
+            {{ iglesia }}
+          </option>
+        </select>
       </div>
-      <div class="col-6 col-md-4">
+
+      <!-- Filtro: Check-in -->
+      <div class="col-12 col-md-6 col-lg-3">
         <select
           class="form-select"
           [(ngModel)]="filtroCheckin"
@@ -78,8 +97,7 @@
             <th>Check-in</th>
             <th>Registro</th>
             @if (
-              authUser.role !== "admin" &&
-              authUser.role !== "vicePresident"
+              authUser.role !== "admin" && authUser.role !== "vicePresident"
             ) {
               <th>Acciones</th>
             }
