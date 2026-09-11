@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
 import { ApiService } from '../../../../core/services/api.service';
 import { AuthService } from '../../../auth/auth/service/auth.service';
+import { Churches } from '../../../core/models/dashboard.model';
 
 
 declare var bootstrap: any;
@@ -55,7 +56,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   filtroEstado = '';
   filtroConferencia = '';
   filtroCheckin = '';
-
+  filtroIglesia: string = '';
 
   states = signal<States[]>([]);
   conferences = signal<Conferences[]>([]);
@@ -66,6 +67,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   paginaActual = 1;
   porPagina = 5;
   opcionesPorPagina = [5, 10, 20, 50, 100];
+  availableChurches: String[] = []
 
   // ---------- formulario del modal ----------
   form: FormGroup;
@@ -111,7 +113,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     const deleteEl = document.getElementById('deleteModal');
     if (modalEl) this.participantModal = new bootstrap.Modal(modalEl);
     if (deleteEl) this.deleteModal = new bootstrap.Modal(deleteEl);
-
+    this.getChurches()
     this.addStateEvent()
   }
 
@@ -120,6 +122,20 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       this.form.get('ciudad')?.setValue('')
       this.loadConferencesAndCities(stateId);
     });
+  }
+
+  getChurches() {
+    this.eventsService.getChurches().subscribe({
+      next: (response: ApiResponse<Churches[]>) => {
+        this.availableChurches = response.data.map(church => church.iglesia)
+      },
+      error: (error: HttpErrorResponse) => {
+        this.cargando = false;
+      },
+      complete: () => {
+        this.cargando = false;
+      },
+    })
   }
 
   getRegisteredUsers(eventId: any) {
@@ -144,20 +160,32 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   // ---------- datos derivados (filtros + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
     const termino = this.busqueda.trim().toLowerCase();
+
     return this.participantes.filter(p => {
+      // Búsqueda por texto
       const coincideBusqueda = !termino ||
         p.nombre.toLowerCase().includes(termino) ||
         p.apellidos.toLowerCase().includes(termino) ||
         p.telefono.includes(termino) ||
         p.correo.includes(termino);
+
+      // Filtro por Conferencia
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
+      console.log(this.filtroIglesia)
+      console.log(p.iglesia)
+      // Filtro por Iglesia (NUEVO)
+      const coincideIglesia = !this.filtroIglesia || p.iglesia === this.filtroIglesia;
+
+      // Filtro por Check-in
       let coincideCheckin = true;
       if (this.filtroCheckin === "Pendiente") {
         coincideCheckin = !p.checkin_at;
       } else if (this.filtroCheckin === "Completado") {
         coincideCheckin = !!p.checkin_at;
       }
-      return coincideBusqueda && coincideConferencia && coincideCheckin;
+
+      // Retornamos combinando todas las condiciones
+      return coincideBusqueda && coincideConferencia && coincideIglesia && coincideCheckin;
     });
   }
 

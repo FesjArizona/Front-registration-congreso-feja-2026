@@ -50,3 +50,7 @@ export interface TshirtSizesData {
   total: number;
 }
 
+export interface Churches {
+  iglesia: string
+}
+
