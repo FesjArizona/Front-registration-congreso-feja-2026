@@ -6,6 +6,7 @@ export interface ReportFilters {
   conferencia: string;
   checkin: string;
   busqueda: string;
+  iglesia?: string;
 }
 
 @Injectable({
@@ -27,7 +28,7 @@ export class PdfExportService {
     const pageWidth = doc.internal.pageSize.getWidth();
 
     // =========================================================
-    // TÍTULO
+    // HEADER - SOLO PRIMERA PÁGINA
     // =========================================================
 
     doc.setFont('helvetica', 'bold');
@@ -48,7 +49,11 @@ export class PdfExportService {
     doc.setFontSize(10);
     doc.setTextColor(33, 37, 41);
 
-    doc.text('Filtros aplicados:', 14, 25);
+    doc.text(
+      'Filtros aplicados:',
+      14,
+      25
+    );
 
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
@@ -63,6 +68,9 @@ export class PdfExportService {
     const busqueda =
       filters.busqueda?.trim() || 'Sin búsqueda';
 
+    const iglesia =
+      filters.iglesia?.trim() || 'Todas las iglesias';
+
     doc.text(
       `Conferencia: ${conferencia}`,
       14,
@@ -70,15 +78,21 @@ export class PdfExportService {
     );
 
     doc.text(
-      `Check-in: ${checkin}`,
+      `Iglesia: ${iglesia}`,
       14,
       37
     );
 
     doc.text(
-      `Búsqueda: ${busqueda}`,
+      `Check-in: ${checkin}`,
       14,
       43
+    );
+
+    doc.text(
+      `Búsqueda: ${busqueda}`,
+      14,
+      49
     );
 
     // =========================================================
@@ -103,13 +117,13 @@ export class PdfExportService {
     doc.text(
       `Total encontrados: ${rows.length}`,
       14,
-      51
+      57
     );
 
     doc.text(
       `Generado: ${fechaGeneracion}`,
       pageWidth - 14,
-      51,
+      57,
       {
         align: 'right'
       }
@@ -124,9 +138,9 @@ export class PdfExportService {
 
     doc.line(
       14,
-      56,
+      62,
       pageWidth - 14,
-      56
+      62
     );
 
     // =========================================================
@@ -134,9 +148,10 @@ export class PdfExportService {
     // =========================================================
 
     const headers = [
-      'ID',
+      'NOº',
       'Nombre',
       'Teléfono',
+      'Iglesia',
       'Conferencia',
       'Estado',
       'Check-in',
@@ -144,26 +159,29 @@ export class PdfExportService {
     ];
 
     autoTable(doc, {
-
       head: [headers],
-
       body: rows,
 
-      startY: 61,
+      // Primera página empieza después del header
+      startY: 67,
 
       theme: 'striped',
 
       margin: {
-        top: 61,
+        top: 12,
         right: 14,
         bottom: 18,
         left: 14
       },
 
+      // IMPORTANTE:
+      // Esto permite controlar el margen superior de cada página.
+      pageBreak: 'auto',
+
       styles: {
         font: 'helvetica',
-        fontSize: 8,
-        cellPadding: 2.5,
+        fontSize: 7.5,
+        cellPadding: 2.2,
         textColor: [50, 50, 50],
         lineColor: [225, 225, 225],
         lineWidth: 0.2,
@@ -174,7 +192,7 @@ export class PdfExportService {
         fillColor: [239, 201, 112],
         textColor: [255, 255, 255],
         fontStyle: 'bold',
-        fontSize: 8
+        fontSize: 7.5
       },
 
       alternateRowStyles: {
@@ -183,34 +201,51 @@ export class PdfExportService {
 
       columnStyles: {
         0: {
-          cellWidth: 15,
+          cellWidth: 12,
           halign: 'center'
         },
 
         1: {
-          cellWidth: 48
+          cellWidth: 40
         },
 
         2: {
-          cellWidth: 32
+          cellWidth: 28
         },
 
         3: {
-          cellWidth: 58
+          cellWidth: 45
         },
 
         4: {
-          cellWidth: 30
+          cellWidth: 50
         },
 
         5: {
-          cellWidth: 30,
-          halign: 'center'
+          cellWidth: 30
         },
 
         6: {
           cellWidth: 28,
           halign: 'center'
+        },
+
+        7: {
+          cellWidth: 28,
+          halign: 'center'
+        }
+      },
+
+      // =======================================================
+      // CONTROL DEL SALTO DE PÁGINA
+      // =======================================================
+
+      didDrawPage: (data) => {
+
+        // Si estamos en páginas posteriores,
+        // NO dibujamos el header del reporte.
+        if (data.pageNumber > 1) {
+          return;
         }
       }
     });
@@ -252,6 +287,6 @@ export class PdfExportService {
     // DESCARGA
     // =========================================================
 
-    doc.save('participantes-registrados.pdf');
+    doc.save('Registro-participantes.pdf');
   }
 }

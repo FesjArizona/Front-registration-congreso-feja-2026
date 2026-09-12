@@ -445,21 +445,23 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   /* EXPORTAR INFORME EN PDF */
   exportPdf(): void {
     const headers = [
-      'ID',
+      'NOº',
       'Nombre',
       'Teléfono',
-      'Conferencia',
+      'Iglesia',
       'Estado',
       'Check-in',
       'Registro',
     ];
 
-    const rows: (string | number)[][] = this.participantesFiltrados.map((p) => [
-      p.id,
+    const rows: (string | number)[][] = this.participantesFiltrados.map((p, i) => [
+      i + 1,
 
       `${p.nombre ?? ''} ${p.apellidos ?? ''}`.trim(),
 
       p.telefono ?? '',
+
+      p.iglesia ?? '',
 
       p.conferencia ?? '',
 
@@ -472,8 +474,10 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
     this.pdfExportService.exportParticipantsReport(rows, {
       conferencia: this.filtroConferencia,
+      iglesia: this.filtroIglesia,
       checkin: this.filtroCheckin,
       busqueda: this.busqueda,
     });
+
   }
 }

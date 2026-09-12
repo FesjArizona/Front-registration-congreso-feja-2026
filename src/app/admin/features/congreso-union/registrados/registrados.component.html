@@ -8,11 +8,15 @@
         Registrar, actualizar y borrar participantes
       </p>
     </div>
-    <div>
-      <button class="btn btn-brand-primary" type="button" (click)="exportPdf()">
-        Export PDF
-      </button>
-    </div>
+    @if (
+          authUser.role !== "admin" && authUser.role !== "vicePresident"
+        ) {
+          <div>
+            <button class="btn btn-brand-primary" type="button" (click)="exportPdf()">
+              Export PDF
+            </button>
+          </div>
+        }
   </div>
 
 
@@ -92,8 +96,8 @@
             <th>Noº</th>
             <th>Nombre</th>
             <th>Teléfono</th>
+            <th>Iglesia</th>
             <th>Conferencia</th>
-            <th>Estado</th>
             <th>Check-in</th>
             <th>Registro</th>
             @if (
@@ -167,6 +171,7 @@
                 </div>
               </td>
               <td>{{ p.telefono }}</td>
+              <td>{{ p.iglesia }}</td>
               <td>
                 <span
                   class="d-inline-flex align-items-center gap-1 text-secondary"
@@ -174,7 +179,6 @@
                   <i class="bi bi-envelope"></i>{{ p.conferencia }}
                 </span>
               </td>
-              <td>{{ p.estado }}</td>
               <td>
                 <span
                   class="badge rounded-pill px-3 py-2"
