@@ -4,7 +4,7 @@ import { RegisteredUsers } from '../models/events.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../../../environment/environment';
-import { RecentActivity, StatCard } from '../models/dashboard.model';
+import { Churches, RecentActivity, StatCard } from '../models/dashboard.model';
 import { AdminLog } from '../models/log.model';
 
 @Injectable({
@@ -40,6 +40,10 @@ export class EventsService {
 
   public getLogs(): Observable<ApiResponse<AdminLog[]>> {
     return this.httpClient.get<ApiResponse<AdminLog[]>>(`${URL_API}/logs`)
+  }
+
+  public getChurches(): Observable<ApiResponse<Churches[]>> {
+    return this.httpClient.get<ApiResponse<Churches[]>>(`${URL_API}/churches`)
   }
 
 }

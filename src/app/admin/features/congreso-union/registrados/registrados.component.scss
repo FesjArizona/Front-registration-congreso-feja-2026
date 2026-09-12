@@ -8,6 +8,20 @@
   color: #1f2330;
 }
 
+.btn-brand-primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+  font-weight: 500;
+
+  &:hover,
+  &:focus {
+    background: var(--brand-dark);
+    border-color: var(--brand-dark);
+    color: #fff;
+  }
+}
+
 .btn-brand {
   background: #efc970;
   border-color: #beab7e;

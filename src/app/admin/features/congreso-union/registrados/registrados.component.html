@@ -1,6 +1,6 @@
 <div class="container-fluid py-4" style="max-width: 1180px">
   <div
-    class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4"
+    class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4"
   >
     <div>
       <h1 class="h4 fw-bold mb-1">Participantes Registrados</h1>
@@ -8,12 +8,23 @@
         Registrar, actualizar y borrar participantes
       </p>
     </div>
+    @if (
+          authUser.role !== "admin" && authUser.role !== "vicePresident"
+        ) {
+          <div>
+            <button class="btn btn-brand-primary" type="button" (click)="exportPdf()">
+              Export PDF
+            </button>
+          </div>
+        }
   </div>
+
 
   <div class="card border-0 shadow-sm rounded-4 p-3 p-md-4">
     <!-- Filtros -->
     <div class="row g-2 mb-3">
-      <div class="col-12 col-md-5">
+      <!-- Búsqueda -->
+      <div class="col-12 col-md-6 col-lg-3">
         <div class="input-group">
           <span class="input-group-text bg-white border-end-0">
             <img
@@ -31,7 +42,9 @@
           />
         </div>
       </div>
-      <div class="col-6 col-md-3">
+
+      <!-- Filtro: Conferencia -->
+      <!-- <div class="col-12 col-md-6 col-lg-3">
         <select
           class="form-select"
           [(ngModel)]="filtroConferencia"
@@ -45,8 +58,24 @@
             {{ conferencia }}
           </option>
         </select>
+      </div> -->
+
+      <!-- Filtro: Iglesia (NUEVO) -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <select
+          class="form-select"
+          [(ngModel)]="filtroIglesia"
+          (ngModelChange)="onFiltroChange()"
+        >
+          <option value="">Todas las iglesias</option>
+          <option *ngFor="let iglesia of availableChurches" [value]="iglesia">
+            {{ iglesia }}
+          </option>
+        </select>
       </div>
-      <div class="col-6 col-md-4">
+
+      <!-- Filtro: Check-in -->
+      <div class="col-12 col-md-6 col-lg-3">
         <select
           class="form-select"
           [(ngModel)]="filtroCheckin"
@@ -64,16 +93,15 @@
       <table class="table table-hover align-middle mb-0">
         <thead>
           <tr class="text-uppercase">
-            <th>ID</th>
+            <th>Noº</th>
             <th>Nombre</th>
             <th>Teléfono</th>
+            <th>Iglesia</th>
             <th>Conferencia</th>
-            <th>Estado</th>
             <th>Check-in</th>
             <th>Registro</th>
             @if (
-              authUser.role !== "admin" &&
-              authUser.role !== "vicePresident"
+              authUser.role !== "admin" && authUser.role !== "vicePresident"
             ) {
               <th>Acciones</th>
             }
@@ -83,8 +111,8 @@
           <!-- ===== SKELETON mientras carga ===== -->
           <ng-container *ngIf="cargando; else contenidoReal">
             <tr *ngFor="let i of skeletonRows" class="placeholder-glow">
-              <td class="col-1">
-                <span class="placeholder col-6" style="height: 14px"></span>
+              <td class="col">
+                <span class="placeholder col-3" style="height: 14px"></span>
               </td>
               <td class="col-3">
                 <div class="d-flex align-items-center gap-2">
@@ -127,8 +155,9 @@
                 No se encontraron participantes con esos filtros.
               </td>
             </tr>
-            <tr *ngFor="let p of participantesPagina">
-              <td>{{ p.id }}</td>
+            <tr *ngFor="let p of participantesPagina; let i = index">
+              <!-- <td>{{ p.id }}</td> -->
+              <td>{{ i + 1 }}</td>
               <td>
                 <div class="d-flex align-items-center gap-2">
                   <span
@@ -142,6 +171,7 @@
                 </div>
               </td>
               <td>{{ p.telefono }}</td>
+              <td>{{ p.iglesia }}</td>
               <td>
                 <span
                   class="d-inline-flex align-items-center gap-1 text-secondary"
@@ -149,7 +179,6 @@
                   <i class="bi bi-envelope"></i>{{ p.conferencia }}
                 </span>
               </td>
-              <td>{{ p.estado }}</td>
               <td>
                 <span
                   class="badge rounded-pill px-3 py-2"

@@ -20,7 +20,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../core/services/api.service';
 import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
 import { AuthService } from '../../../auth/auth/service/auth.service';
-
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 // El bundle JS de Bootstrap se carga globalmente (angular.json > scripts),
 // por eso se declara así en lugar de importarlo como módulo de Angular.
@@ -34,7 +34,7 @@ interface AuthUser {
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ZXingScannerModule],
   selector: 'app-checkin',
   templateUrl: './checkin.component.html',
   styleUrls: ['./checkin.component.scss']
@@ -81,6 +81,10 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly route = inject(ActivatedRoute)
   private readonly apiService = inject(ApiService)
   private readonly authService = inject(AuthService)
+
+  public showScanner: boolean = false;
+  public IdFromScanner: number = -1;
+  public wasFoodPaid: boolean = false;
 
   constructor(
     private participantesService: ParticipantesService,
@@ -409,4 +413,30 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
     return resultado;
   }
 
+  openQRScanner() {
+    this.showScanner = true
+    this.IdFromScanner = -1
+  }
+
+  closeScanner() {
+    this.showScanner = false;
+  }
+  onCodeResult(resultString: string) {
+    const parsedId = parseInt(resultString, 10);
+    if (isNaN(parsedId)) {
+      console.error('El código QR escaneado no es un ID válido:', resultString);
+      return;
+    }
+    this.IdFromScanner = parsedId;
+    this.apiService.wasFoodPaid(this.IdFromScanner).subscribe({
+      next: (response: ApiResponse<boolean>) => {
+        this.wasFoodPaid = response.data
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+
+    })
+  }
 }
