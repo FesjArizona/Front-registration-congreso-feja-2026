@@ -50,7 +50,7 @@
   <div
     class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between gap-3 gap-lg-4 my-5"
   >
-  <div class="d-flex flex-column gap-4 col">
+  <div class="d-flex flex-column gap-4 col-12 col-lg">
     <div class="col-12">
       <div class="panel h-100 rounded-4">
         <h6 class="panel-title mb-4">Conferencias</h6>
@@ -83,7 +83,7 @@
 
           <!-- ESTADO: CONTENIDO REAL -->
           <ng-template #conferencias>
-            <div class="activity-row" *ngFor="let conference of conferencesRegistered">
+            <div class="activity-row d-flex flex-row align-items-center justify-content-between" *ngFor="let conference of conferencesRegistered">
               <div class="activity-cell activity-usuario">
                 <!-- <img src="assets/icons/admin/conferences-svg/arizona.svg" alt="Arizona" style="width: 150px;"> -->
                 <img [src]="obtenerLogoConferencia(conference.nombre)" [alt]="conference.nombre" class="conference-logo">

@@ -292,3 +292,9 @@ $registered-fg: #b91c1c;
   height: auto;
   display: block;
 }
+
+@media (max-width: 768px) {
+  .conference-logo {
+    width: 60px;
+  }
+}

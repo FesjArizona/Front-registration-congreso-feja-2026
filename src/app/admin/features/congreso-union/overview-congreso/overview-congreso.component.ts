@@ -234,24 +234,7 @@ export class OverviewCongresoComponent
     );
   }
 
-  /* private readonly conferenceLogos: Record<string, string> = {
-    'Arizona Conference': 'assets/icons/admin/conferences-svg/arizona.svg',
-    'Central California Conference':
-      'assets/icons/admin/conferences-svg/central.svg',
-    'Hawaii Conference': 'assets/icons/admin/conferences-svg/hawaii.svg',
-    'Nevada-Utah Conference':
-      'assets/icons/admin/conferences-svg/nevada-utah.svg',
-    'Northern California Conference':
-      'assets/icons/admin/conferences-svg/northern.svg',
-    'Southeastern California Conference':
-      'assets/icons/admin/conferences-svg/southeastern.svg',
-    'Southern California Conference':
-      'assets/icons/admin/conferences-svg/southern.svg',
-  }; */
-
   public obtenerLogoConferencia(nombre: string): string {
-
-    /* console.log('Buscando logo para:', JSON.stringify(nombre)); */
 
     const nombreNormalizado = nombre.trim().toLowerCase();
 
