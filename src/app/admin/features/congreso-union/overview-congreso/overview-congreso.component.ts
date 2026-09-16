@@ -1,9 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../../core/services/dashboard.service';
-import { StatCard, RecentActivity, RegisteredUsers, ConferenceRegistered, StaffMember } from '../../../core/models/dashboard.model';
+import { StatCard, RecentActivity, ConferenceRegistered, StaffMember } from '../../../core/models/dashboard.model';
 import { EventsService } from '../../../core/services/events.service';
 import { ParticipantesService } from '../../../core/services/participants.service';
+import { RegisteredUsers } from '../../../core/models/events.model';
 
 import {
   ChartComponent,
@@ -28,6 +29,7 @@ import {
   NgApexchartsModule,
 } from 'ng-apexcharts';
 import { URL_API } from '../../../../environment/environment';
+import { ApiResponse } from '../../../../core/models/api-response.interface';
 
 export type ChartOptions = {
   series?: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -60,8 +62,7 @@ export type ChartOptions = {
   styleUrls: ['./overview-congreso.component.scss'],
 })
 export class OverviewCongresoComponent
-  implements OnInit, AfterViewInit, OnDestroy
-{
+  implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chart') chart!: ChartComponent;
 
   // ---------- ESTADOS INICIALES (VACÍOS) DE LAS GRÁFICAS ----------
@@ -167,7 +168,6 @@ export class OverviewCongresoComponent
 
   public statsList: StatCard[] = [];
   public activitiesList: RecentActivity[] = [];
-  public participants: RegisteredUsers[] = [];
   public conferencesRegistered: ConferenceRegistered[] = [];
   public staffList: StaffMember[] = [];
   actividadReciente: any[] = [];
@@ -181,24 +181,23 @@ export class OverviewCongresoComponent
     this.conectarSSE();
 
     // Conferencias y usuarios registrados
-    this.loadConferencesRegistered();
 
     // Gráficas
     const eventId = 2;
 
+    this.loadConferencesRegistered(eventId);
     this.getWeeklyRegistrations(eventId);
     this.getGenderByMonth(eventId);
     this.getTshirtSizes(eventId);
   }
 
-  private loadConferencesRegistered(): void {
+  private loadConferencesRegistered(eventId: number): void {
     this.cargandoConferences = true;
 
-    this.participantesService.getParticipantes().subscribe({
-      next: (participants) => {
-        this.participants = participants;
-        this.conferencesRegistered = this.agruparPorConferencia(participants);
-      },
+    this.eventsService.getRegisteredUsers(eventId).subscribe({
+      next: ((participants: ApiResponse<RegisteredUsers[]>) => {
+        this.conferencesRegistered = this.agruparPorConferencia(participants.data);
+      }),
       error: (err) => {
         console.error('Error al cargar participantes:', err);
 
@@ -235,14 +234,14 @@ export class OverviewCongresoComponent
   }
 
   public obtenerLogoConferencia(nombre: string): string {
-
     const nombreNormalizado = nombre.trim().toLowerCase();
 
+    console.log(nombreNormalizado)
     if (nombreNormalizado.includes('arizona')) {
       return 'assets/icons/admin/conferences-svg/arizona.svg';
     }
 
-    if (nombreNormalizado.includes('california centro')) {
+    if (nombreNormalizado.includes('central california conference')) {
       return 'assets/icons/admin/conferences-svg/california centro.svg';
     }
 
@@ -254,15 +253,15 @@ export class OverviewCongresoComponent
       return 'assets/icons/admin/conferences-svg/nevada.svg';
     }
 
-    if (nombreNormalizado.includes('california norte')) {
+    if (nombreNormalizado.includes('northern california conference')) {
       return 'assets/icons/admin/conferences-svg/california norte.svg';
     }
 
-    if (nombreNormalizado.includes('california sureste')) {
+    if (nombreNormalizado.includes('southeastern california conference')) {
       return 'assets/icons/admin/conferences-svg/california sureste.svg';
     }
 
-    if (nombreNormalizado.includes('california sur')) {
+    if (nombreNormalizado.includes('southern california conference')) {
       return 'assets/icons/admin/conferences-svg/california sur.svg';
     }
 
