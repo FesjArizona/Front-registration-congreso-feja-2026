@@ -1,8 +1,9 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardService } from '../../../core/services/dashboard.service';
-import { StatCard, RecentActivity, StaffMember } from '../../../core/models/dashboard.model';
+import { StatCard, RecentActivity, RegisteredUsers, ConferenceRegistered, StaffMember } from '../../../core/models/dashboard.model';
 import { EventsService } from '../../../core/services/events.service';
+import { ParticipantesService } from '../../../core/services/participants.service';
 
 import {
   ChartComponent,
@@ -134,7 +135,11 @@ export class OverviewCongresoComponent
     stroke: { curve: 'smooth' },
     fill: { opacity: 0.3, colors: ['#FFA500', '#E49B0F', '#DAA520'] },
     yaxis: { min: 0 },
-    subtitle: { text: 'Inscripciones', offsetX: 0, style: { fontSize: '14px' } },
+    subtitle: {
+      text: 'Inscripciones',
+      offsetX: 0,
+      style: { fontSize: '14px' },
+    },
   };
 
   ngAfterViewInit() {
@@ -148,31 +153,137 @@ export class OverviewCongresoComponent
   baseUrlIcon: string = '../../../../../assets/icons/admin/';
 
   private dashboardService = inject(DashboardService);
+  private participantesService = inject(ParticipantesService);
   private eventsService = inject(EventsService);
   private cdr = inject(ChangeDetectorRef);
 
   // ---------- estado de carga ----------
   cargandoStats = true;
   cargandoActivities = true;
+  cargandoConferences = true;
   cargandoStaff = true;
   skeletonCards = Array.from({ length: 4 });
   skeletonTable = Array.from({ length: 6 });
 
   public statsList: StatCard[] = [];
   public activitiesList: RecentActivity[] = [];
+  public participants: RegisteredUsers[] = [];
+  public conferencesRegistered: ConferenceRegistered[] = [];
   public staffList: StaffMember[] = [];
   actividadReciente: any[] = [];
   private eventSource!: EventSource;
 
   ngOnInit(): void {
+    // Datos originales del dashboard
     this.loadDashboardData();
+
+    // SSE para actividades
     this.conectarSSE();
 
-    // Suponiendo que el ID del evento es dinámico más adelante, por ahora pasamos 2
+    // Conferencias y usuarios registrados
+    this.loadConferencesRegistered();
+
+    // Gráficas
     const eventId = 2;
+
     this.getWeeklyRegistrations(eventId);
     this.getGenderByMonth(eventId);
     this.getTshirtSizes(eventId);
+  }
+
+  private loadConferencesRegistered(): void {
+    this.cargandoConferences = true;
+
+    this.participantesService.getParticipantes().subscribe({
+      next: (participants) => {
+        this.participants = participants;
+        this.conferencesRegistered = this.agruparPorConferencia(participants);
+      },
+      error: (err) => {
+        console.error('Error al cargar participantes:', err);
+
+        this.cargandoConferences = false;
+      },
+
+      complete: () => {
+        this.cargandoConferences = false;
+      },
+    });
+  }
+
+  private agruparPorConferencia(
+    participants: RegisteredUsers[],
+  ): ConferenceRegistered[] {
+    const grupos = new Map<string, number>();
+
+    participants.forEach((participant) => {
+      const conferencia = participant.conferencia;
+
+      if (!conferencia) {
+        return;
+      }
+
+      grupos.set(conferencia, (grupos.get(conferencia) ?? 0) + 1);
+    });
+
+    return Array.from(grupos.entries()).map(
+      ([nombre, usuariosRegistrados]) => ({
+        nombre,
+        usuariosRegistrados,
+      }),
+    );
+  }
+
+  /* private readonly conferenceLogos: Record<string, string> = {
+    'Arizona Conference': 'assets/icons/admin/conferences-svg/arizona.svg',
+    'Central California Conference':
+      'assets/icons/admin/conferences-svg/central.svg',
+    'Hawaii Conference': 'assets/icons/admin/conferences-svg/hawaii.svg',
+    'Nevada-Utah Conference':
+      'assets/icons/admin/conferences-svg/nevada-utah.svg',
+    'Northern California Conference':
+      'assets/icons/admin/conferences-svg/northern.svg',
+    'Southeastern California Conference':
+      'assets/icons/admin/conferences-svg/southeastern.svg',
+    'Southern California Conference':
+      'assets/icons/admin/conferences-svg/southern.svg',
+  }; */
+
+  public obtenerLogoConferencia(nombre: string): string {
+
+    /* console.log('Buscando logo para:', JSON.stringify(nombre)); */
+
+    const nombreNormalizado = nombre.trim().toLowerCase();
+
+    if (nombreNormalizado.includes('arizona')) {
+      return 'assets/icons/admin/conferences-svg/arizona.svg';
+    }
+
+    if (nombreNormalizado.includes('california centro')) {
+      return 'assets/icons/admin/conferences-svg/california centro.svg';
+    }
+
+    if (nombreNormalizado.includes('hawaii')) {
+      return 'assets/icons/admin/conferences-svg/hawaii.svg';
+    }
+
+    if (nombreNormalizado.includes('nevada')) {
+      return 'assets/icons/admin/conferences-svg/nevada.svg';
+    }
+
+    if (nombreNormalizado.includes('california norte')) {
+      return 'assets/icons/admin/conferences-svg/california norte.svg';
+    }
+
+    if (nombreNormalizado.includes('california sureste')) {
+      return 'assets/icons/admin/conferences-svg/california sureste.svg';
+    }
+
+    if (nombreNormalizado.includes('california sur')) {
+      return 'assets/icons/admin/conferences-svg/california sur.svg';
+    }
+
+    return '';
   }
 
   // ---------- LLAMADAS A LA API DE GRÁFICAS ----------
@@ -186,10 +297,10 @@ export class OverviewCongresoComponent
           ...this.chartOptions3,
           series: [{ name: 'Inscripciones', data: data.seriesData }],
           xaxis: { ...this.chartOptions3.xaxis, categories: data.categories },
-          title: { ...this.chartOptions3.title, text: `${data.total}` }
+          title: { ...this.chartOptions3.title, text: `${data.total}` },
         };
       },
-      error: (err) => console.error('Error al cargar stats semanales', err)
+      error: (err) => console.error('Error al cargar stats semanales', err),
     });
   }
 
@@ -200,10 +311,10 @@ export class OverviewCongresoComponent
         this.chartOptions = {
           ...this.chartOptions,
           series: data.series,
-          xaxis: { ...this.chartOptions.xaxis, categories: data.categories }
+          xaxis: { ...this.chartOptions.xaxis, categories: data.categories },
         };
       },
-      error: (err) => console.error('Error al cargar stats por género', err)
+      error: (err) => console.error('Error al cargar stats por género', err),
     });
   }
 
@@ -214,11 +325,11 @@ export class OverviewCongresoComponent
         this.chartOptionsTshirts = {
           ...this.chartOptionsTshirts,
           series: data.series,
-          labels: data.labels
+          labels: data.labels,
         };
         this.forceChartResize();
       },
-      error: (err) => console.error('Error al cargar stats de camisas', err)
+      error: (err) => console.error('Error al cargar stats de camisas', err),
     });
   }
 
@@ -250,22 +361,33 @@ export class OverviewCongresoComponent
   private loadDashboardData(): void {
     this.cargandoStats = true;
     this.eventsService.getResumen(2).subscribe({
-      next: (result) => { this.statsList = result.data; },
+      next: (result) => {
+        this.statsList = result.data;
+      },
       error: (err) => {
         console.error('Error al cargar stats', err);
         this.cargandoStats = false;
       },
-      complete: () => { this.cargandoStats = false; this.forceChartResize() },
+      complete: () => {
+        this.cargandoStats = false;
+        this.forceChartResize();
+      },
     });
 
     this.cargandoActivities = true;
+
     this.eventsService.getRecentActivities(2).subscribe({
-      next: (response) => (this.activitiesList = response.data),
+      next: (response) => {
+        this.activitiesList = response.data;
+      },
       error: (err) => {
         console.error('Error al cargar actividades', err);
         this.cargandoActivities = false;
       },
-      complete: () => { this.cargandoActivities = false; this.forceChartResize() },
+      complete: () => {
+        this.cargandoActivities = false;
+        this.forceChartResize();
+      },
     });
 
     this.cargandoStaff = true;
@@ -275,7 +397,10 @@ export class OverviewCongresoComponent
         console.error('Error al cargar staff', err);
         this.cargandoStaff = false;
       },
-      complete: () => { this.cargandoStaff = false; this.forceChartResize() },
+      complete: () => {
+        this.cargandoStaff = false;
+        this.forceChartResize();
+      },
     });
   }
 

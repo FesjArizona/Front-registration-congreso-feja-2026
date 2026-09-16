@@ -54,3 +54,13 @@ export interface Churches {
   iglesia: string
 }
 
+export interface RegisteredUsers {
+  id: number;
+  nombre: string;
+  conferencia: string;
+}
+
+export interface ConferenceRegistered {
+  nombre: string;
+  usuariosRegistrados: number;
+}
