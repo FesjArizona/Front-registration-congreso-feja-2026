@@ -5,7 +5,7 @@ import { LogsAdminComponent } from './features/congreso-union/logs-admin/logs-ad
 export const ADMIN_ROUTES: Routes = [
   {
     path: '',
-    canActivate: [authGuard], 
+    canActivate: [authGuard],
     loadComponent: () =>
       import('./layout/admin-layout/admin-layout.component').then(
         (m) => m.AdminLayoutComponent,
@@ -20,7 +20,7 @@ export const ADMIN_ROUTES: Routes = [
       // ── Congreso Union ─────────────────────────────────────────────────────
       {
         path: 'congreso',
-        canActivateChild: [eventGuard], 
+        canActivateChild: [eventGuard],
         data: { event: 'congreso' },
         children: [
           /* { path: '', redirectTo: 'overview', pathMatch: 'full' }, */
@@ -44,6 +44,13 @@ export const ADMIN_ROUTES: Routes = [
             loadComponent: () =>
               import('./features/congreso-union/checkin/checkin.component')
                 .then(m => m.CheckinComponent),
+          },
+          {
+            path: 'products',
+            data: { event: 'congreso' },
+            loadComponent: () =>
+              import('./features/congreso-union/productos/productos.component')
+                .then(m => m.ProductosComponent),
           },
           {
             path: 'logs',
