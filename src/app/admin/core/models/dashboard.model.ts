@@ -51,7 +51,9 @@ export interface TshirtSizesData {
 }
 
 export interface Churches {
-  iglesia: string
+  iglesia: string,
+  conferenciaId: number,
+  nombreConferencia: string
 }
 
 export interface RegisteredUsers {

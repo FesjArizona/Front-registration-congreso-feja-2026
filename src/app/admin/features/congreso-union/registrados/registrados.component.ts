@@ -35,7 +35,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
   participantes: RegisteredUsers[] = [];
 
-  conferenciasDisponibles: Conferencia[] = [
+  conferenciasBase: string[] = [
     'Arizona Conference',
     'Central California Conference',
     'Hawaii Conference',
@@ -64,7 +64,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   skeletonRows = Array.from({ length: 5 });
 
   // ---------- filtros ----------
-    busqueda = '';
+  busqueda = '';
   filtroEstado = '';
   filtroConferencia = '';
   filtroCheckin = '';
@@ -79,7 +79,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   paginaActual = 1;
   porPagina = 5;
   opcionesPorPagina = [5, 10, 20, 50, 100];
-  availableChurches: String[] = []
+  churchesMasterList: Churches[] = [];
 
   // ---------- formulario del modal ----------
   form: FormGroup;
@@ -139,7 +139,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   getChurches() {
     this.eventsService.getChurches().subscribe({
       next: (response: ApiResponse<Churches[]>) => {
-        this.availableChurches = response.data.map(church => church.iglesia)
+        this.churchesMasterList = response.data;
       },
       error: (error: HttpErrorResponse) => {
         this.cargando = false;
@@ -147,7 +147,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       complete: () => {
         this.cargando = false;
       },
-    })
+    });
   }
 
   getRegisteredUsers(eventId: any) {
@@ -169,6 +169,25 @@ export class RegistradosComponent implements OnInit, OnDestroy {
     this.suscripcion?.unsubscribe();
   }
 
+
+  get iglesiasVisibles(): string[] {
+    if (this.filtroConferencia) {
+      return this.churchesMasterList
+        .filter(c => c.nombreConferencia === this.filtroConferencia)
+        .map(c => c.iglesia);
+    }
+    return this.churchesMasterList.map(c => c.iglesia);
+  }
+
+  get conferenciasVisibles(): string[] {
+    if (this.filtroIglesia) {
+      const iglesia = this.churchesMasterList.find(c => c.iglesia === this.filtroIglesia);
+      if (iglesia) {
+        return [iglesia.nombreConferencia];
+      }
+    }
+    return this.conferenciasBase;
+  }
   // ---------- datos derivados (filtros + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
     const termino = this.busqueda.trim().toLowerCase();
@@ -183,10 +202,8 @@ export class RegistradosComponent implements OnInit, OnDestroy {
 
       // Filtro por Conferencia
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
-      console.log(this.filtroIglesia)
-      console.log(p.iglesia)
       // Filtro por Iglesia (NUEVO)
-      const coincideIglesia = !this.filtroIglesia || p.iglesia === this.filtroIglesia;
+      const coincideIglesia = !this.filtroIglesia || this.eventsService.normalizarIglesia(p.iglesia) === this.filtroIglesia;
 
       // Filtro por Check-in
       let coincideCheckin = true;
@@ -231,10 +248,35 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   onBusquedaChange(): void {
     this.paginaActual = 1;
   }
-  onFiltroChange(): void {
+
+
+  onIglesiaChange(): void {
     this.paginaActual = 1;
+
+    if (this.filtroIglesia) {
+      const iglesia = this.churchesMasterList.find(c => c.iglesia === this.filtroIglesia);
+      if (iglesia) {
+        this.filtroConferencia = iglesia.nombreConferencia;
+      }
+    }
   }
 
+  onConferenciaChange(): void {
+    this.paginaActual = 1;
+
+    if (this.filtroConferencia && this.filtroIglesia) {
+      const iglesiaValida = this.churchesMasterList.find(
+        c => c.iglesia === this.filtroIglesia && c.nombreConferencia === this.filtroConferencia
+      );
+      if (!iglesiaValida) {
+        this.filtroIglesia = '';
+      }
+    }
+  }
+
+  onFiltroChange() {
+    this.paginaActual = 1;
+  }
   onPorPaginaChange(): void {
     this.paginaActual = 1;
     this.skeletonRows = Array.from({ length: this.porPagina });
@@ -271,7 +313,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
           this.loadConferencesAndCities(currentStateId);
         }
       },
-      error: (error: HttpErrorResponse) => {},
+      error: (error: HttpErrorResponse) => { },
     });
   }
   getSizes() {
@@ -279,7 +321,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       next: (response: ApiResponse<Sizes[]>) => {
         this.sizes.set(response.data);
       },
-      error: (error: HttpErrorResponse) => {},
+      error: (error: HttpErrorResponse) => { },
     });
   }
 
@@ -294,7 +336,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
         next: (response: ApiResponse<string[]>) => {
           this.cities.set(response.data);
         },
-        error: (error: HttpErrorResponse) => {},
+        error: (error: HttpErrorResponse) => { },
       });
     }
 
@@ -302,7 +344,7 @@ export class RegistradosComponent implements OnInit, OnDestroy {
       next: (response: ApiResponse<Conferences[]>) => {
         this.conferences.set(response.data);
       },
-      error: (error: HttpErrorResponse) => {},
+      error: (error: HttpErrorResponse) => { },
     });
   }
 
@@ -374,8 +416,8 @@ export class RegistradosComponent implements OnInit, OnDestroy {
         next: (response: ApiResponse<any>) => {
           this.getRegisteredUsers(this.eventId);
         },
-        error: (error: HttpErrorResponse) => {},
-        complete: () => {},
+        error: (error: HttpErrorResponse) => { },
+        complete: () => { },
       });
 
     this.participantModal?.hide();
@@ -395,8 +437,8 @@ export class RegistradosComponent implements OnInit, OnDestroy {
           next: (response: ApiResponse<RegisteredUsers[]>) => {
             this.getRegisteredUsers(this.eventId);
           },
-          error: (error: HttpErrorResponse) => {},
-          complete: () => {},
+          error: (error: HttpErrorResponse) => { },
+          complete: () => { },
         });
       this.participanteAEliminar = null;
     }

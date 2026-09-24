@@ -38,16 +38,16 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
   participantes: RegisteredUsers[] = [];
 
-  conferenciasDisponibles: Conferencia[] = [
-      'Arizona Conference',
-      'Central California Conference',
-      'Hawaii Conference',
-      'Nevada-Utah Conference',
-      'Northern California Conference',
-      'Southeastern California Conference',
-      'Southern California Conference',
-    ];
-    estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
+  conferenciasBase: string[] = [
+    'Arizona Conference',
+    'Central California Conference',
+    'Hawaii Conference',
+    'Nevada-Utah Conference',
+    'Northern California Conference',
+    'Southeastern California Conference',
+    'Southern California Conference',
+  ];
+  estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
 
   tallasDisponibles: TallaCamiseta[] = TALLAS_DISPONIBLES;
   estadosPagoDisponibles: EstadoPago[] = ESTADOS_PAGO_DISPONIBLES;
@@ -80,7 +80,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   paginaActual = 1;
   porPagina = 5;
   opcionesPorPagina = [5, 10, 20, 50, 100];
-  availableChurches: String[] = []
+  churchesMasterList: Churches[] = [];
 
   // ---------- formulario del modal ----------
   form: FormGroup;
@@ -137,7 +137,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
       next: (response: ApiResponse<Sizes[]>) => {
         this.sizes.set(response.data);
       },
-      error: (error: HttpErrorResponse) => {},
+      error: (error: HttpErrorResponse) => { },
     });
   }
 
@@ -149,7 +149,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   getChurches() {
     this.eventsService.getChurches().subscribe({
       next: (response: ApiResponse<Churches[]>) => {
-        this.availableChurches = response.data.map(church => church.iglesia)
+        this.churchesMasterList = response.data
       },
       error: (error: HttpErrorResponse) => {
         this.cargando = false;
@@ -174,6 +174,25 @@ export class ProductosComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+  get iglesiasVisibles(): string[] {
+    if (this.filtroConferencia) {
+      return this.churchesMasterList
+        .filter(c => c.nombreConferencia === this.filtroConferencia)
+        .map(c => c.iglesia);
+    }
+    return this.churchesMasterList.map(c => c.iglesia);
+  }
+
+  get conferenciasVisibles(): string[] {
+    if (this.filtroIglesia) {
+      const iglesia = this.churchesMasterList.find(c => c.iglesia === this.filtroIglesia);
+      if (iglesia) {
+        return [iglesia.nombreConferencia];
+      }
+    }
+    return this.conferenciasBase;
+  }
   // ---------- datos derivados (búsqueda + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
     const termino = this.busqueda.trim().toLowerCase();
@@ -190,7 +209,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
       console.log(this.filtroIglesia)
       console.log(p.iglesia)
       // Filtro por Iglesia (NUEVO)
-      const coincideIglesia = !this.filtroIglesia || p.iglesia === this.filtroIglesia;
+      const coincideIglesia = !this.filtroIglesia || this.eventsService.normalizarIglesia(p.iglesia) === this.filtroIglesia;
 
       // Retornamos combinando todas las condiciones
       return coincideBusqueda && coincideConferencia && coincideIglesia;
@@ -227,6 +246,31 @@ export class ProductosComponent implements OnInit, OnDestroy {
   onBusquedaChange(): void {
     this.paginaActual = 1;
   }
+
+  onIglesiaChange(): void {
+    this.paginaActual = 1;
+
+    if (this.filtroIglesia) {
+      const iglesia = this.churchesMasterList.find(c => c.iglesia === this.filtroIglesia);
+      if (iglesia) {
+        this.filtroConferencia = iglesia.nombreConferencia;
+      }
+    }
+  }
+
+  onConferenciaChange(): void {
+    this.paginaActual = 1;
+
+    if (this.filtroConferencia && this.filtroIglesia) {
+      const iglesiaValida = this.churchesMasterList.find(
+        c => c.iglesia === this.filtroIglesia && c.nombreConferencia === this.filtroConferencia
+      );
+      if (!iglesiaValida) {
+        this.filtroIglesia = '';
+      }
+    }
+  }
+
 
   onFiltroChange(): void {
     this.paginaActual = 1;
@@ -265,8 +309,8 @@ export class ProductosComponent implements OnInit, OnDestroy {
       next: (response: ApiResponse<any>) => {
         this.getRegisteredUsers(this.eventId);
       },
-      error: (error: HttpErrorResponse) => {},
-      complete: () => {},
+      error: (error: HttpErrorResponse) => { },
+      complete: () => { },
     });
   }
 
