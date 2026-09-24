@@ -48,10 +48,10 @@
         <select
           class="form-select"
           [(ngModel)]="filtroIglesia"
-          (ngModelChange)="onFiltroChange()"
+          (ngModelChange)="onIglesiaChange()"
         >
           <option value="">Todas las iglesias</option>
-          <option *ngFor="let iglesia of availableChurches" [value]="iglesia">
+          <option *ngFor="let iglesia of iglesiasVisibles" [value]="iglesia">
             {{ iglesia }}
           </option>
         </select>
@@ -62,11 +62,11 @@
         <select
           class="form-select"
           [(ngModel)]="filtroConferencia"
-          (ngModelChange)="onFiltroChange()"
+          (ngModelChange)="onConferenciaChange()"
         >
           <option value="">Todas las conferencias</option>
           <option
-            *ngFor="let conferencia of conferenciasDisponibles"
+            *ngFor="let conferencia of conferenciasVisibles"
             [value]="conferencia"
           >
             {{ conferencia }}
