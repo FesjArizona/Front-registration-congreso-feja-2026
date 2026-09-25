@@ -35,7 +35,7 @@ export class PdfProductsService {
     doc.setTextColor(33, 37, 41);
 
     doc.text(
-      'PARTICIPANTES REGISTRADOS',
+      'REGISTRO DE PLAYERAS',
       14,
       16
     );
