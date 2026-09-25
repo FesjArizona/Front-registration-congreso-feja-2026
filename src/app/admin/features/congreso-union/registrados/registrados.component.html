@@ -13,7 +13,7 @@
         ) {
           <div>
             <button class="btn btn-brand-primary" type="button" (click)="exportPdf()">
-              Export PDF
+              Exportar Lista
             </button>
           </div>
         }
@@ -43,33 +43,33 @@
         </div>
       </div>
 
-      <!-- Filtro: Conferencia -->
-      <!-- <div class="col-12 col-md-6 col-lg-3">
-        <select
-          class="form-select"
-          [(ngModel)]="filtroConferencia"
-          (ngModelChange)="onFiltroChange()"
-        >
-          <option value="">Todas las conferencias</option>
-          <option
-            *ngFor="let conferencia of conferenciasDisponibles"
-            [value]="conferencia"
-          >
-            {{ conferencia }}
-          </option>
-        </select>
-      </div> -->
-
       <!-- Filtro: Iglesia (NUEVO) -->
       <div class="col-12 col-md-6 col-lg-3">
         <select
           class="form-select"
           [(ngModel)]="filtroIglesia"
-          (ngModelChange)="onFiltroChange()"
+          (ngModelChange)="onIglesiaChange()"
         >
           <option value="">Todas las iglesias</option>
-          <option *ngFor="let iglesia of availableChurches" [value]="iglesia">
+          <option *ngFor="let iglesia of iglesiasVisibles" [value]="iglesia">
             {{ iglesia }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Filtro: Conferencia -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <select
+          class="form-select"
+          [(ngModel)]="filtroConferencia"
+          (ngModelChange)="onConferenciaChange()"
+        >
+          <option value="">Todas las conferencias</option>
+          <option
+            *ngFor="let conferencia of conferenciasVisibles"
+            [value]="conferencia"
+          >
+            {{ conferencia }}
           </option>
         </select>
       </div>

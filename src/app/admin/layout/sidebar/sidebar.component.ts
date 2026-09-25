@@ -62,6 +62,11 @@ export class SidebarComponent {
             roles: ['developer', 'superadmin', 'staff', 'admin', 'vicePresident']
           },
           {
+            label: 'Productos',
+            route: 'congreso/products',
+            roles: ['developer', 'superadmin', 'staff', 'admin', 'vicePresident']
+          },
+          {
             label: 'Logs-Admin',
             route: 'congreso/logs',
             roles: ['developer']

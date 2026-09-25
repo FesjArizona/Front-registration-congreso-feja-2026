@@ -43,10 +43,64 @@
     </ng-template>
   </div>
 
+  <!-- <div>
+    <img src="assets/icons/admin/conferences-svg/arizona.svg" alt="Az svg">
+  </div> -->
+
   <div
     class="d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-between gap-3 gap-lg-4 my-5"
   >
-    <div class="col-12 col-lg-6">
+  <div class="d-flex flex-column gap-4 col-12 col-lg">
+    <div class="col-12">
+      <div class="panel h-100 rounded-4">
+        <h6 class="panel-title mb-4">Conferencias</h6>
+
+        <div class="overflow-clip" style="height: 100%;">
+          <div class="activity-table-header d-none d-md-flex">
+            <span class="col-header">ICON</span>
+            <span class="col-header">CONFERENCIA</span>
+            <span class="col-header">INSCRITOS</span>
+            <!-- <span class="col-header">FECHA REGISTRO</span> -->
+          </div>
+
+          <!-- ESTADO: CARGANDO -->
+          <ng-container *ngIf="cargandoActivities; else conferencias">
+            <div class="activity-row placeholder-glow" *ngFor="let skeleton of skeletonTable">
+              <div class="activity-cell activity-usuario">
+                <span class="mobile-label d-md-none">ICON</span>
+                <span class="placeholder col-8"></span>
+              </div>
+              <div class="activity-cell activity-contacto">
+                <span class="mobile-label d-md-none">CONFERENCIA</span>
+                <span class="placeholder col-7"></span>
+              </div>
+              <div class="activity-cell activity-checkin">
+                <span class="mobile-label d-md-none"></span>
+                <span class="status-badge placeholder col-5"></span>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- ESTADO: CONTENIDO REAL -->
+          <ng-template #conferencias>
+            <div class="activity-row d-flex flex-row align-items-center justify-content-between" *ngFor="let conference of conferencesRegistered">
+              <div class="activity-cell activity-usuario">
+                <!-- <img src="assets/icons/admin/conferences-svg/arizona.svg" alt="Arizona" style="width: 150px;"> -->
+                <img [src]="obtenerLogoConferencia(conference.nombre)" [alt]="conference.nombre" class="conference-logo">
+              </div>
+              <div class="activity-cell activity-contacto">
+                {{ conference.nombre }}
+              </div>
+              <div class="activity-cell activity-checkin">
+                {{ conference.usuariosRegistrados }}
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
       <div class="panel h-100 rounded-4">
         <h6 class="panel-title mb-4">Actividad reciente</h6>
 
@@ -106,6 +160,7 @@
         </div>
       </div>
     </div>
+  </div>
 
     <div
       class="d-flex flex-column flex-md-row flex-lg-column align-items-stretch justify-content-center gap-1 gap-md-3 gap-lg-4 col-md-12 col-lg"

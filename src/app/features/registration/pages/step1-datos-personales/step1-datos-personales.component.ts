@@ -8,6 +8,8 @@ import { ApiService } from './../../../../core/services/api.service';
 import { Conferences, Sizes, States } from '../../../../core/models/general.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
+import { EventsService } from '../../../../admin/core/services/events.service';
+import { Churches } from '../../../../admin/core/models/dashboard.model';
 
 @Component({
   selector: 'app-step1-datos-personales',
@@ -23,10 +25,12 @@ export class Step1DatosPersonalesComponent implements OnInit {
   conferences = signal<Conferences[]>([]);
   cities = signal<string[]>([]);
   sizes = signal<Sizes[]>([]);
+  availableChurches: String[] = []
 
   constructor(
     private registrationFormService: RegistrationFormService,
     private apiService: ApiService,
+    private eventsService: EventsService,
   ) { }
 
   ngOnInit() {
@@ -38,6 +42,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
     this.addStateEvent();
     this.addSizeEvent();
     this.addConferenceEvent()
+    this.getChurches()
 
     this.paso1Form.get('includesTshirt')?.valueChanges.subscribe((value) => {
       this.updateSizeShirtValidation(value);
@@ -57,6 +62,19 @@ export class Step1DatosPersonalesComponent implements OnInit {
     this.updateFoodPreferenceDetailsValidation(
       this.paso1Form.get('foodPreference')?.value,
     );
+  }
+
+
+  getChurches() {
+    this.eventsService.getChurches().subscribe({
+      next: (response: ApiResponse<Churches[]>) => {
+        this.availableChurches = response.data.map(church => church.iglesia)
+      },
+      error: (error: HttpErrorResponse) => {
+      },
+      complete: () => {
+      },
+    })
   }
 
   private updateSizeShirtValidation(value: boolean | null) {
