@@ -16,6 +16,7 @@ export interface RegisteredUsers {
     ciudad: string,
     iglesia: string,
     incluir_lunchtime: number,
+    incluir_camisa: number,
     es_chaperon: number,
     pago_camiseta: string,
     pago_lunchtime: string,
