@@ -80,12 +80,12 @@
         <div class="col-12 col-md-6 col-lg-3">
           <select
             class="form-select"
-            [(ngModel)]="filtroLunchTime"
+            [(ngModel)]="filtroProductos"
             (ngModelChange)="onFiltroChange()"
           >
-            <option value="">Comida</option>
+            <option value="">Productos</option>
             <option
-              *ngFor="let opcion of opcionesPagoLunchTime"
+              *ngFor="let opcion of opcionesProductos"
               [value]="opcion.valor"
             >
               {{ opcion.estatus }}
