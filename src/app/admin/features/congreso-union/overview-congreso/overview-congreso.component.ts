@@ -236,7 +236,6 @@ export class OverviewCongresoComponent
   public obtenerLogoConferencia(nombre: string): string {
     const nombreNormalizado = nombre.trim().toLowerCase();
 
-    console.log(nombreNormalizado)
     if (nombreNormalizado.includes('arizona')) {
       return 'assets/icons/admin/conferences-svg/arizona.svg';
     }

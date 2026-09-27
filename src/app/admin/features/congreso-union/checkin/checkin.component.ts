@@ -285,7 +285,6 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   abrirModalEditar(p: RegisteredUsers): void {
     this.editandoId = p.id;
     this.participanteOriginal = p;
-    console.log(p)
     this.form.setValue({
       nombre: p.nombre,
       apellidos: p.apellidos,
