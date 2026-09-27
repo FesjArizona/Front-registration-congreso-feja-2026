@@ -47,14 +47,14 @@ export class ProductosComponent implements OnInit, OnDestroy {
     'Southeastern California Conference',
     'Southern California Conference',
   ];
-  opcionesPagoLunchTime = [
+  opcionesProductos = [
     {
       "estatus": "Inluye comida",
-      "valor": 1
+      "valor": "comida"
     },
     {
-      "estatus": "No inluye comida",
-      "valor": 0
+      "estatus": "Incluye playera",
+      "valor": 'lunch'
     }
   ]
   estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
@@ -83,7 +83,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   busqueda = '';
   filtroEstado = '';
   filtroConferencia = '';
-  filtroLunchTime = '';
+  filtroProductos = '';
   filtroIglesia: string = '';
   sizes = signal<Sizes[]>([]);
 
@@ -207,7 +207,9 @@ export class ProductosComponent implements OnInit, OnDestroy {
   // ---------- datos derivados (búsqueda + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
     const termino = this.busqueda.trim().toLowerCase();
+
     return this.participantes.filter(p => {
+      let coincideProductos: boolean = true
       // Búsqueda por texto
       const coincideBusqueda = !termino ||
         p.nombre.toLowerCase().includes(termino) ||
@@ -215,17 +217,21 @@ export class ProductosComponent implements OnInit, OnDestroy {
         p.telefono.includes(termino) ||
         p.correo.includes(termino);
 
-      console.log(parseInt(this.filtroLunchTime))
-      console.log(p.incluir_lunchtime)
       // Filtro por Conferencia
-      const coincideLunchTime = !this.filtroLunchTime || p.incluir_lunchtime == parseInt(this.filtroLunchTime);
-      console.log(coincideLunchTime)
+      if (this.filtroProductos == 'comida') {
+
+        coincideProductos = !this.filtroProductos || p.incluir_lunchtime == 1;
+      } else {
+
+        coincideProductos = !this.filtroProductos || p.incluir_camisa == 1;
+      }
+
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
       // Filtro por Iglesia (NUEVO)
       const coincideIglesia = !this.filtroIglesia || this.eventsService.normalizarIglesia(p.iglesia) === this.filtroIglesia;
 
       // Retornamos combinando todas las condiciones
-      return coincideBusqueda && coincideConferencia && coincideIglesia && coincideLunchTime;
+      return coincideBusqueda && coincideConferencia && coincideIglesia && coincideProductos;
     });
   }
 
