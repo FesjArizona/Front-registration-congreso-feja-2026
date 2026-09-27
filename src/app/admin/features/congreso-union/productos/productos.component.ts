@@ -47,6 +47,16 @@ export class ProductosComponent implements OnInit, OnDestroy {
     'Southeastern California Conference',
     'Southern California Conference',
   ];
+  opcionesPagoLunchTime = [
+    {
+      "estatus": "Inluye comida",
+      "valor": 1
+    },
+    {
+      "estatus": "No inluye comida",
+      "valor": 0
+    }
+  ]
   estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
 
   tallasDisponibles: TallaCamiseta[] = TALLAS_DISPONIBLES;
@@ -73,6 +83,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   busqueda = '';
   filtroEstado = '';
   filtroConferencia = '';
+  filtroLunchTime = '';
   filtroIglesia: string = '';
   sizes = signal<Sizes[]>([]);
 
@@ -204,15 +215,17 @@ export class ProductosComponent implements OnInit, OnDestroy {
         p.telefono.includes(termino) ||
         p.correo.includes(termino);
 
+      console.log(parseInt(this.filtroLunchTime))
+      console.log(p.incluir_lunchtime)
       // Filtro por Conferencia
+      const coincideLunchTime = !this.filtroLunchTime || p.incluir_lunchtime == parseInt(this.filtroLunchTime);
+      console.log(coincideLunchTime)
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
-      console.log(this.filtroIglesia)
-      console.log(p.iglesia)
       // Filtro por Iglesia (NUEVO)
       const coincideIglesia = !this.filtroIglesia || this.eventsService.normalizarIglesia(p.iglesia) === this.filtroIglesia;
 
       // Retornamos combinando todas las condiciones
-      return coincideBusqueda && coincideConferencia && coincideIglesia;
+      return coincideBusqueda && coincideConferencia && coincideIglesia && coincideLunchTime;
     });
   }
 
