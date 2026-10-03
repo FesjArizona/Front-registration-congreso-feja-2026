@@ -119,7 +119,7 @@ export class Step1DatosPersonalesComponent implements OnInit {
 
   addConferenceEvent() {
     this.paso1Form.get('conference')?.valueChanges.subscribe((conferenceId) => {
-      const selectedConference = this.conferences().find((conference: Conferences) => conference.id = conferenceId)
+      const selectedConference = this.conferences().find((conference: Conferences) => conference.id == conferenceId)
       if (selectedConference) this.registrationFormService.setSelectedConferenceName(selectedConference.nombre)
     });
   }
