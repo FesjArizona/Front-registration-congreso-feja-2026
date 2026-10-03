@@ -13,19 +13,10 @@
       <div class="col-12 col-md-5">
         <div class="input-group">
           <span class="input-group-text bg-white border-end-0">
-            <img
-              src="../../../../../assets/icons/registered/search.svg"
-              alt="Find Icon"
-              style="width: 15px"
-            />
+            <img src="../../../../../assets/icons/registered/search.svg" alt="Find Icon" style="width: 15px" />
           </span>
-          <input
-            type="text"
-            class="form-control border-start-0 ps-0"
-            placeholder="Buscar por nombre"
-            [(ngModel)]="busqueda"
-            (ngModelChange)="onBusquedaChange()"
-          />
+          <input type="text" class="form-control border-start-0 ps-0" placeholder="Buscar por nombre"
+            [(ngModel)]="busqueda" (ngModelChange)="onBusquedaChange()" />
         </div>
       </div>
 
@@ -54,7 +45,7 @@
         <thead>
           <tr class="text-uppercase">
             @if (authUser.role !== "admin") {
-              <th>Check In</th>
+            <th>Check In</th>
             }
             <th>Nombre</th>
             <th>Conferencia</th>
@@ -63,9 +54,9 @@
             <th>Comida</th>
             <th>Tipo de alimento</th>
             @if (
-              authUser.role !== "admin" && authUser.role !== "vicePresident"
+            authUser.role !== "admin" && authUser.role !== "vicePresident"
             ) {
-              <th>Acciones</th>
+            <th>Acciones</th>
             }
           </tr>
         </thead>
@@ -78,9 +69,7 @@
               </td>
               <td class="col-3">
                 <div class="d-flex align-items-center gap-2">
-                  <span
-                    class="placeholder rounded-circle skeleton-avatar"
-                  ></span>
+                  <span class="placeholder rounded-circle skeleton-avatar"></span>
                   <span class="placeholder col-10" style="height: 12px"></span>
                 </div>
               </td>
@@ -88,17 +77,13 @@
                 <span class="placeholder col-10" style="height: 12px"></span>
               </td>
               <td class="col">
-                <span
-                  class="placeholder rounded-pill col-12 skeleton-badge"
-                ></span>
+                <span class="placeholder rounded-pill col-12 skeleton-badge"></span>
               </td>
               <td class="col">
                 <span class="placeholder col-7" style="height: 12px"></span>
               </td>
               <td class="col">
-                <span
-                  class="placeholder rounded-pill col-10 skeleton-badge"
-                ></span>
+                <span class="placeholder rounded-pill col-10 skeleton-badge"></span>
               </td>
               <td class="col">
                 <span class="placeholder col-10" style="height: 12px"></span>
@@ -121,108 +106,73 @@
             </tr>
             <tr *ngFor="let p of participantesPagina">
               @if (authUser.role !== "admin" && authUser.role) {
-                <td>
-                  <input
-                    type="checkbox"
-                    class="form-check-input checkin-checkbox"
-                    [checked]="p.checkin_at"
-                    (change)="toggleCheckin(p)"
-                    [attr.aria-label]="'Confirmar check-in de ' + p.nombre"
-                    [disabled]="p.checkin_at"
-                  />
-                </td>
+              <td>
+                <input type="checkbox" class="form-check-input checkin-checkbox" [checked]="p.checkin_at"
+                  (change)="toggleCheckin(p)" [attr.aria-label]="'Confirmar check-in de ' + p.nombre"
+                  [disabled]="p.checkin_at" />
+              </td>
               }
               <td>
                 <div class="d-flex align-items-center gap-2">
-                  <span
-                    class="avatar-circle"
-                    [style.background]="colorAvatar(p.nombre)"
-                    >{{ inicial(p.nombre) }}
+                  <span class="avatar-circle" [style.background]="colorAvatar(p.nombre)">{{ inicial(p.nombre) }}
                   </span>
-                  <span class="fw-medium"
-                    >{{ p.nombre }} {{ p.apellidos }}</span
-                  >
+                  <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
                 </div>
               </td>
               <td>{{ p.conferencia }}</td>
               <td>
-                <span
-                  class="badge rounded-pill px-3 py-2"
-                  [ngClass]="
+                <span class="badge rounded-pill px-3 py-2" [ngClass]="
                     p.pago_camiseta === 'pagado'
-                      ? 'badge-soft-success'
-                      : 'badge-soft-danger'
-                  "
-                >
-                  <i
-                    class="bi"
-                    [ngClass]="
+                      ? 'badge-soft-success' : 'badge-soft-secondary'
+                  ">
+                  <i class="bi" [ngClass]="
                       p.pago_camiseta === 'pagado'
-                        ? 'bi-check-circle-fill'
-                        : 'bi-x-circle-fill'
-                    "
-                  ></i>
+                        ? 'bi-check-circle-fill' : 'bi-clock-fill'
+                    "></i>
                   {{ p.pago_camiseta?.replace("_", " ") }}
                 </span>
               </td>
               <td>{{ p.talla }}</td>
               <td>
-                <span
-                  class="badge rounded-pill px-3 py-2"
-                  [ngClass]="
+                <span class="badge rounded-pill px-3 py-2" [ngClass]="
                     p.pago_lunchtime === 'pagado'
                       ? 'badge-soft-success'
-                      : 'badge-soft-danger'
-                  "
-                >
-                  <i
-                    class="bi"
-                    [ngClass]="
+                      : p.pago_lunchtime === 'pendiente'
+                        ? 'badge-soft-secondary'
+                        : 'badge-soft-danger'
+                  ">
+                  <i class="bi" [ngClass]="
                       p.pago_lunchtime === 'pagado'
                         ? 'bi-check-circle-fill'
-                        : 'bi-x-circle-fill'
-                    "
-                  ></i>
+                        : p.pago_lunchtime === 'pendiente'
+                          ? 'bi-clock-fill'
+                          : 'bi-x-circle-fill'
+                    "></i>
+
                   {{ p.pago_lunchtime?.replace("_", " ") }}
                 </span>
               </td>
               <td>
                 {{
-                  p.tipo_alimento == "normal" ? "No aplica" : p.tipo_alimento
+                p.tipo_alimento == "normal" ? "No aplica" : p.tipo_alimento
                 }}
               </td>
               <td>
                 @if (
-                  authUser.role !== "admin" && authUser.role !== "vicePresident"
+                authUser.role !== "admin" && authUser.role !== "vicePresident"
                 ) {
-                  <button
-                    class="icon-action edit-btn"
-                    title="Editar"
-                    (click)="abrirModalEditar(p)"
-                  >
-                    <img
-                      src="../../../../../assets/icons/registered/edit.svg"
-                      alt="Edit Icon"
-                      style="width: 16px"
-                    />
-                  </button>
+                <button class="icon-action edit-btn" title="Editar" (click)="abrirModalEditar(p)">
+                  <img src="../../../../../assets/icons/registered/edit.svg" alt="Edit Icon" style="width: 16px" />
+                </button>
                 }
                 @if (
-                  authUser.role !== "finanzas" &&
-                  authUser.role !== "admin" &&
-                  authUser.role !== "vicePresident"
+                authUser.role !== "finanzas" &&
+                authUser.role !== "admin" &&
+                authUser.role !== "vicePresident"
                 ) {
-                  <button
-                    class="icon-action delete"
-                    title="Eliminar"
-                    (click)="abrirModalEliminar(p)"
-                  >
-                    <img
-                      src="../../../../../assets/icons/registered/delete.svg"
-                      alt="Delete Icon"
-                      style="width: 16px"
-                    />
-                  </button>
+                <button class="icon-action delete" title="Eliminar" (click)="abrirModalEliminar(p)">
+                  <img src="../../../../../assets/icons/registered/delete.svg" alt="Delete Icon" style="width: 16px" />
+                </button>
                 }
               </td>
             </tr>
@@ -232,50 +182,34 @@
     </div>
 
     <!-- Footer: total + paginación -->
-    <div
-      class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-3 pt-2"
-    >
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-3 pt-2">
       <div class="text-secondary small">
         Total encontrados: {{ participantesFiltrados.length }}
       </div>
       <ul class="pagination mb-0">
         <li class="page-item" [class.disabled]="paginaActual === 1">
           <button class="page-link" (click)="anterior()">
-            <img
-              src="../../../../../assets/icons/registered/chevron-left.svg"
-            />
+            <img src="../../../../../assets/icons/registered/chevron-left.svg" />
           </button>
         </li>
-        <li
-          *ngFor="let p of rangoPaginas"
-          class="page-item"
-          [class.disabled]="p === '...'"
-          [class.active]="p === paginaActual"
-        >
+        <li *ngFor="let p of rangoPaginas" class="page-item" [class.disabled]="p === '...'"
+          [class.active]="p === paginaActual">
           <button *ngIf="p !== '...'" class="page-link" (click)="irAPagina(p)">
             {{ p }}
           </button>
-          <span *ngIf="p === '...'" class="page-link border-0 bg-transparent"
-            >…</span
-          >
+          <span *ngIf="p === '...'" class="page-link border-0 bg-transparent">…</span>
         </li>
         <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
           <button class="page-link" (click)="siguiente()">
-            <img
-              src="../../../../../assets/icons/registered/chevron-right.svg"
-            />
+            <img src="../../../../../assets/icons/registered/chevron-right.svg" />
           </button>
         </li>
       </ul>
       <div class="d-flex align-items-center gap-3 flex-wrap">
         <div class="d-flex align-items-center gap-2 text-secondary small">
           <span>Mostrar por página</span>
-          <select
-            class="form-select form-select-sm"
-            style="width: auto"
-            [(ngModel)]="porPagina"
-            (ngModelChange)="onPorPaginaChange()"
-          >
+          <select class="form-select form-select-sm" style="width: auto" [(ngModel)]="porPagina"
+            (ngModelChange)="onPorPaginaChange()">
             <option *ngFor="let opcion of opcionesPorPagina" [ngValue]="opcion">
               {{ opcion }}
             </option>
@@ -292,33 +226,19 @@
     <div class="modal-content rounded-4">
       <div class="modal-header border-0 pb-0">
         <h5 class="modal-title fw-bold">Editar Check-in</h5>
-        <button
-          type="button"
-          class="btn-close"
-          (click)="cerrarModalEditar()"
-        ></button>
+        <button type="button" class="btn-close" (click)="cerrarModalEditar()"></button>
       </div>
       <div class="modal-body">
         <form [formGroup]="form" novalidate>
           <div class="mb-3">
             <label class="form-label">Nombre</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="nombre"
-              [class.is-invalid]="
+            <input type="text" class="form-control" formControlName="nombre" [class.is-invalid]="
                 form.get('nombre')?.invalid && form.get('nombre')?.touched
-              "
-            />
+              " />
             <label class="form-label">Apellidos</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="apellidos"
-              [class.is-invalid]="
+            <input type="text" class="form-control" formControlName="apellidos" [class.is-invalid]="
                 form.get('apellidos')?.invalid && form.get('apellidos')?.touched
-              "
-            />
+              " />
 
             <label class="form-label">Preferencia alimento</label>
             <select class="form-select" formControlName="tipo_alimento">
@@ -334,9 +254,9 @@
               <label class="form-label">Estado</label>
               <select class="form-select" formControlName="estado_id">
                 @for (state of states(); track state.id) {
-                  <option [value]="state.id">{{ state.nombre }}</option>
+                <option [value]="state.id">{{ state.nombre }}</option>
                 } @empty {
-                  <option disabled>Cargando estados...</option>
+                <option disabled>Cargando estados...</option>
                 }
               </select>
             </div>
@@ -345,31 +265,24 @@
               <select class="form-select" formControlName="conferencia_id">
                 <option selected disabled>Conferencia</option>
                 @for (conference of conferences(); track conference.id) {
-                  <option [value]="conference.id">
-                    {{ conference.nombre }}
-                  </option>
+                <option [value]="conference.id">
+                  {{ conference.nombre }}
+                </option>
                 } @empty {
-                  <option disabled>Cargando conferencias...</option>
+                <option disabled>Cargando conferencias...</option>
                 }
               </select>
             </div>
             <div class="col-md-4 mb-3">
               <label class="form-label">ciudad</label>
-              <input
-                type="text"
-                class="form-control"
-                id="ciudad"
-                list="ciudadesList"
-                placeholder="ciudad"
-                formControlName="ciudad"
-                [class.is-invalid]="
+              <input type="text" class="form-control" id="ciudad" list="ciudadesList" placeholder="ciudad"
+                formControlName="ciudad" [class.is-invalid]="
                   form.get('ciudad')?.invalid && form.get('ciudad')?.touched
-                "
-              />
+                " />
 
               <datalist id="ciudadesList">
                 @for (city of cities(); track city) {
-                  <option [value]="city"></option>
+                <option [value]="city"></option>
                 }
               </datalist>
             </div>
@@ -387,11 +300,11 @@
               <label class="form-label">Talla</label>
               <select class="form-select" formControlName="talla_camiseta_id">
                 @for (size of sizes(); track size.id) {
-                  <option [value]="size.id">
-                    {{ size.talla }}
-                  </option>
+                <option [value]="size.id">
+                  {{ size.talla }}
+                </option>
                 } @empty {
-                  <option disabled>Cargando tallas...</option>
+                <option disabled>Cargando tallas...</option>
                 }
               </select>
             </div>
@@ -405,11 +318,7 @@
             </div>
             <div style="display: flex; gap: 10px; align-items: center">
               <label class="form-label">Check-in</label>
-              <input
-                type="checkbox"
-                class="form-check-input checkin-checkbox"
-                formControlName="checkin_at"
-              />
+              <input type="checkbox" class="form-check-input checkin-checkbox" formControlName="checkin_at" />
             </div>
           </div>
         </form>
@@ -427,12 +336,7 @@
 </div>
 
 <!-- Modal: Confirmar eliminación -->
-<div
-  class="modal fade"
-  id="checkinDeleteModal"
-  tabindex="-1"
-  aria-hidden="true"
->
+<div class="modal fade" id="checkinDeleteModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content rounded-4">
       <div class="modal-body text-center p-4">
@@ -456,60 +360,39 @@
 </div>
 
 @if (showScanner) {
-  <!-- El fondo oscuro semitransparente -->
-  <div
-    class="modal fade show"
-    tabindex="-1"
-    style="display: block; background: rgba(0, 0, 0, 0.5)"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Escanear Código QR</h5>
-          <button
-            type="button"
-            class="btn-close"
-            aria-label="Close"
-            (click)="closeScanner()"
-          ></button>
+<!-- El fondo oscuro semitransparente -->
+<div class="modal fade show" tabindex="-1" style="display: block; background: rgba(0, 0, 0, 0.5)">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Escanear Código QR</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeScanner()"></button>
+      </div>
+
+      <div class="modal-body text-center">
+        <p class="mb-3 text-muted">
+          Apunta la cámara al código QR del asistente.
+        </p>
+
+        <div class="scanner-wrapper rounded overflow-hidden shadow-sm"
+          style="max-width: 100%; margin: 0 auto; background: #000">
+          <zxing-scanner [enable]="showScanner" (scanSuccess)="onCodeResult($event)">
+          </zxing-scanner>
         </div>
 
-        <div class="modal-body text-center">
-          <p class="mb-3 text-muted">
-            Apunta la cámara al código QR del asistente.
-          </p>
-
-          <div
-            class="scanner-wrapper rounded overflow-hidden shadow-sm"
-            style="max-width: 100%; margin: 0 auto; background: #000"
-          >
-            <zxing-scanner
-              [enable]="showScanner"
-              (scanSuccess)="onCodeResult($event)"
-            >
-            </zxing-scanner>
-          </div>
-
-          @if (IdFromScanner > -1) {
-            <div
-              class="alert mt-3 mb-0"
-              [ngClass]="wasFoodPaid ? 'alert-success' : 'alert-danger'"
-            >
-              Comida <strong>{{ wasFoodPaid ? "Pagada" : "No pagada" }}</strong>
-            </div>
-          }
+        @if (IdFromScanner > -1) {
+        <div class="alert mt-3 mb-0" [ngClass]="wasFoodPaid ? 'alert-success' : 'alert-danger'">
+          Comida <strong>{{ wasFoodPaid ? "Pagada" : "No pagada" }}</strong>
         </div>
+        }
+      </div>
 
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="closeScanner()"
-          >
-            Cancelar
-          </button>
-        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeScanner()">
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
+</div>
 }
