@@ -208,13 +208,11 @@ export class CheckinComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   // ---------- datos derivados (búsqueda + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
-    const termino = this.busqueda.trim().toLowerCase();
+    const terminos = this.busqueda.trim().toLowerCase().split(/\s+/).filter(Boolean);
     return this.participantes.filter(p => {
-      const coincideBusqueda = !termino ||
-        p.nombre.toLowerCase().includes(termino) ||
-        p.apellidos.toLowerCase().includes(termino) ||
-        p.telefono.includes(termino);
-      return coincideBusqueda
+      const textoCompleto = `${p.nombre ?? ''} ${p.apellidos ?? ''} ${p.telefono ?? ''} ${p.correo ?? ''}`.toLowerCase();
+      const coincideBusqueda = terminos.length === 0 || terminos.every(t => textoCompleto.includes(t));
+      return coincideBusqueda;
     });
   }
 

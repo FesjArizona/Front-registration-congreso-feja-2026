@@ -123,16 +123,25 @@
               <td>
                 <span class="badge rounded-pill px-3 py-2" [ngClass]="
                     p.pago_camiseta === 'pagado'
-                      ? 'badge-soft-success' : 'badge-soft-secondary'
+                      ? 'badge-soft-success'
+                      : p.pago_camiseta === 'pendiente'
+                        ? 'badge-soft-secondary'
+                        : 'badge-soft-danger'
                   ">
                   <i class="bi" [ngClass]="
                       p.pago_camiseta === 'pagado'
-                        ? 'bi-check-circle-fill' : 'bi-clock-fill'
+                        ? 'bi-check-circle-fill'
+                        : p.pago_camiseta === 'pendiente'
+                          ? 'bi-clock-fill'
+                          : 'bi-x-circle-fill'
                     "></i>
+
                   {{ p.pago_camiseta?.replace("_", " ") }}
                 </span>
               </td>
+
               <td>{{ p.talla }}</td>
+
               <td>
                 <span class="badge rounded-pill px-3 py-2" [ngClass]="
                     p.pago_lunchtime === 'pagado'

@@ -190,15 +190,12 @@ export class RegistradosComponent implements OnInit, OnDestroy {
   }
   // ---------- datos derivados (filtros + paginación) ----------
   get participantesFiltrados(): RegisteredUsers[] {
-    const termino = this.busqueda.trim().toLowerCase();
+    const terminos = this.busqueda.trim().toLowerCase().split(/\s+/).filter(Boolean);
 
     return this.participantes.filter(p => {
-      // Búsqueda por texto
-      const coincideBusqueda = !termino ||
-        p.nombre.toLowerCase().includes(termino) ||
-        p.apellidos.toLowerCase().includes(termino) ||
-        p.telefono.includes(termino) ||
-        p.correo.includes(termino);
+      // Búsqueda por texto (todas las palabras deben coincidir en cualquier orden)
+      const textoCompleto = `${p.nombre ?? ''} ${p.apellidos ?? ''} ${p.telefono ?? ''} ${p.correo ?? ''}`.toLowerCase();
+      const coincideBusqueda = terminos.length === 0 || terminos.every(t => textoCompleto.includes(t));
 
       // Filtro por Conferencia
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
