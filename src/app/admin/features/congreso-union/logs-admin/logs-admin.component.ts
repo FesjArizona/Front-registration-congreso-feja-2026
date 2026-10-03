@@ -67,12 +67,12 @@ export class LogsAdminComponent implements OnInit {
 
   // ---------- datos derivados (filtros + paginación) ----------
   get logsFiltrados(): AdminLog[] {
-    const termino = this.busqueda.trim().toLowerCase();
-    if (!termino) return this.logs;
-    return this.logs.filter(l =>
-      l.adminName.toLowerCase().includes(termino) ||
-      l.action.toLowerCase().includes(termino)
-    );
+    const terminos = this.busqueda.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    if (terminos.length === 0) return this.logs;
+    return this.logs.filter(l => {
+      const textoCompleto = `${l.adminName ?? ''} ${l.action ?? ''} ${l.afectedRegister ?? ''} ${l.details ?? ''}`.toLowerCase();
+      return terminos.every(t => textoCompleto.includes(t));
+    });
   }
 
   get totalPaginas(): number {
