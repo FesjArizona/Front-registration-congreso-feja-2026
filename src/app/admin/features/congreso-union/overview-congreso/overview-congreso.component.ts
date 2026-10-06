@@ -67,31 +67,51 @@ export class OverviewCongresoComponent
 
   // ---------- ESTADOS INICIALES (VACÍOS) DE LAS GRÁFICAS ----------
 
-  // 1. Gráfica de Tallas de Camisas (RadialBar)
+  // 1. Gráfica de Tallas de Camisas
   public chartOptionsTshirts: Partial<ChartOptions> = {
     series: [], // Se llena dinámicamente
     labels: [], // Se llena dinámicamente
-    chart: { height: 200, type: 'radialBar' },
-    fill: { colors: ['#CD7F32', '#FFAC1C', '#CC5500', '#E49B0F'] },
+    chart: { height: 250, type: 'radialBar' },
+    colors: ['#CD7F32', '#FFAC1C', '#CC5500', '#E49B0F'],
+    legend: {
+      show: true,
+      position: 'bottom',
+      horizontalAlign: 'center',
+      floating: false,
+    },
     plotOptions: {
       radialBar: {
+        startAngle: -90,
+        endAngle: 90,
         hollow: {
-          size: '50%',
+          size: '35%',
+        },
+        track: {
+          background: '#f3e5d3',
+          strokeWidth: '100%',
         },
         dataLabels: {
-          name: { fontSize: '20px' },
-          value: { offsetY: 10, fontSize: '16px' },
+          name: {
+            show: true,
+            fontSize: '12px',
+            color: '#4b2e1f',
+          },
+          value: {
+            show: true,
+            fontSize: '18px',
+            fontWeight: 700,
+            color: '#2e1d12',
+            formatter: (val: number) => `${Math.round(val)}`,
+          },
           total: {
             show: true,
             label: 'Camisas',
+            color: '#2e1d12',
             formatter: (w: any) => {
               const totals = w.globals?.seriesTotals ?? [];
-              if (!totals.length) return '0';
-              const sum = totals.reduce(
-                (acc: number, value: number) => acc + value,
-                0,
-              );
-              return Math.round(sum / totals.length).toString();
+              return totals
+                .reduce((sum: number, value: number) => sum + value, 0)
+                .toString();
             },
           },
         },
@@ -305,8 +325,8 @@ export class OverviewCongresoComponent
         const data = result.data;
         this.chartOptionsTshirts = {
           ...this.chartOptionsTshirts,
-          series: data.series,
-          labels: data.labels,
+          series: data.series ?? [],
+          labels: data.labels ?? [],
         };
         this.forceChartResize();
       },

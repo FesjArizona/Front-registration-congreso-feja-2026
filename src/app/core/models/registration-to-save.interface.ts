@@ -12,11 +12,11 @@ export interface UserDataRegister {
     nombre_estado: string,
     ciudad: string,
     iglesia: string
-    incluir_lunchtime: boolean,
+    incluir_lunchtime: boolean| null,
     es_chaperon: boolean,
-    incluir_camisa: boolean,
-    alimento_especial_nota: string,
-    tipo_alimento: string
+    incluir_camisa: boolean | null,
+    alimento_especial_nota: string | null,
+    tipo_alimento: string | null
     contacto_emergencia: EmergencyData
 }
 

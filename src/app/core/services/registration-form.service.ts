@@ -23,11 +23,11 @@ export class RegistrationFormService {
         conference: ['', Validators.required],
         city: ['', Validators.required],
         church: ['', Validators.required],
-        sizeShirt: ['', Validators.required],
-        includesLunch: ['', Validators.required],
+        sizeShirt: ['', null],
+        includesLunch: ['', null],
         foodPreference: [null],
         foodPreferenceDetails: [null],
-        includesTshirt: ['', Validators.required],
+        includesTshirt: ['', null],
         isChaperone: ['', Validators.required]
       }),
       paso2: this.fb.group({

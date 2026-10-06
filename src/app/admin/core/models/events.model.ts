@@ -3,7 +3,7 @@ export interface RegisteredUsers {
     evento_id: number,
     conferencia: string,
     conferencia_id: number
-    talla: number,
+    talla: string,
     talla_camiseta_id: number
     nombre: string,
     apellidos: string,
