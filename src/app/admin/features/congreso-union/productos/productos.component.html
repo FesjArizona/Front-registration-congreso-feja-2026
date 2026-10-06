@@ -1,5 +1,7 @@
 <div class="container-fluid py-4" style="max-width: 1180px">
-  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+  <div
+    class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4"
+  >
     <div>
       <h1 class="h4 fw-bold mb-1">Lista de Adquisición</h1>
       <p class="text-secondary small mb-0">
@@ -7,11 +9,15 @@
       </p>
     </div>
     @if (authUser.role !== "admin" && authUser.role !== "vicePresident") {
-    <div>
-      <button class="btn btn-brand-primary" type="button" (click)="exportPdf()">
-        Exportar Lista
-      </button>
-    </div>
+      <div>
+        <button
+          class="btn btn-brand-primary"
+          type="button"
+          (click)="exportPdf()"
+        >
+          Exportar Lista
+        </button>
+      </div>
     }
   </div>
 
@@ -23,17 +29,29 @@
         <div class="col-12 col-md-6 col-lg-3">
           <div class="input-group">
             <span class="input-group-text bg-white border-end-0">
-              <img src="../../../../../assets/icons/registered/search.svg" alt="Find Icon" style="width: 15px" />
+              <img
+                src="../../../../../assets/icons/registered/search.svg"
+                alt="Find Icon"
+                style="width: 15px"
+              />
             </span>
-            <input type="text" class="form-control border-start-0 ps-0"
-              placeholder="Buscar por nombre, teléfono o correo..." [(ngModel)]="busqueda"
-              (ngModelChange)="onBusquedaChange()" />
+            <input
+              type="text"
+              class="form-control border-start-0 ps-0"
+              placeholder="Buscar por nombre, teléfono o correo..."
+              [(ngModel)]="busqueda"
+              (ngModelChange)="onBusquedaChange()"
+            />
           </div>
         </div>
 
         <!-- Filtro: Iglesia -->
-        <div class="col-12 col-md-6 col-lg-3">
-          <select class="form-select" [(ngModel)]="filtroIglesia" (ngModelChange)="onIglesiaChange()">
+        <div class="col-12 col-md-6 col-lg-2">
+          <select
+            class="form-select"
+            [(ngModel)]="filtroIglesia"
+            (ngModelChange)="onIglesiaChange()"
+          >
             <option value="">Todas las iglesias</option>
             <option *ngFor="let iglesia of iglesiasVisibles" [value]="iglesia">
               {{ iglesia }}
@@ -43,23 +61,52 @@
 
         <!-- Filtro: Conferencia -->
         <div class="col-12 col-md-6 col-lg-3">
-          <select class="form-select" [(ngModel)]="filtroConferencia" (ngModelChange)="onConferenciaChange()">
+          <select
+            class="form-select"
+            [(ngModel)]="filtroConferencia"
+            (ngModelChange)="onConferenciaChange()"
+          >
             <option value="">Todas las conferencias</option>
-            <option *ngFor="let conferencia of conferenciasVisibles" [value]="conferencia">
+            <option
+              *ngFor="let conferencia of conferenciasVisibles"
+              [value]="conferencia"
+            >
               {{ conferencia }}
             </option>
           </select>
         </div>
 
         <!-- Filtro: Lunch Time -->
-        <div class="col-12 col-md-6 col-lg-3">
-          <select class="form-select" [(ngModel)]="filtroProductos" (ngModelChange)="onFiltroChange()">
+        <div class="col-12 col-md-6 col-lg-2">
+          <select
+            class="form-select"
+            [(ngModel)]="filtroProductos"
+            (ngModelChange)="onFiltroChange()"
+          >
             <option value="">Productos</option>
-            <option *ngFor="let opcion of opcionesProductos" [value]="opcion.valor">
+            <option
+              *ngFor="let opcion of opcionesProductos"
+              [value]="opcion.valor"
+            >
               {{ opcion.estatus }}
             </option>
           </select>
         </div>
+
+        @if (filtroProductos == "playera") {
+          <div class="col-12 col-md-6 col-lg-2">
+            <select
+              class="form-select"
+              [(ngModel)]="filtroTalla"
+              (ngModelChange)="onProductoChange()"
+            >
+              <option value="">Talla</option>
+              <option *ngFor="let opcion of opcionesTalla" [value]="opcion">
+                {{ opcion }}
+              </option>
+            </select>
+          </div>
+        }
       </div>
 
       <!-- Tabla -->
@@ -88,25 +135,40 @@
                 <!-- Nombre -->
                 <td>
                   <div class="d-flex align-items-center gap-2">
-                    <span class="placeholder rounded-circle flex-shrink-0" style="width: 32px; height: 32px">
+                    <span
+                      class="placeholder rounded-circle flex-shrink-0"
+                      style="width: 32px; height: 32px"
+                    >
                     </span>
-                    <span class="placeholder" style="width: 130px; height: 12px">
+                    <span
+                      class="placeholder"
+                      style="width: 130px; height: 12px"
+                    >
                     </span>
                   </div>
                 </td>
                 <!-- Camiseta -->
                 <td>
-                  <span class="placeholder rounded-pill" style="width: 80px; height: 24px">
+                  <span
+                    class="placeholder rounded-pill"
+                    style="width: 80px; height: 24px"
+                  >
                   </span>
                 </td>
                 <!-- Talla -->
                 <td>
-                  <span class="placeholder rounded-pill" style="width: 42px; height: 24px">
+                  <span
+                    class="placeholder rounded-pill"
+                    style="width: 42px; height: 24px"
+                  >
                   </span>
                 </td>
                 <!-- Comida -->
                 <td>
-                  <span class="placeholder rounded-pill" style="width: 80px; height: 24px">
+                  <span
+                    class="placeholder rounded-pill"
+                    style="width: 80px; height: 24px"
+                  >
                   </span>
                 </td>
                 <!-- Iglesia -->
@@ -135,26 +197,37 @@
                 </td>
                 <td>
                   <div class="d-flex align-items-center gap-2">
-                    <span class="avatar-circle" [style.background]="colorAvatar(p.nombre)">{{ inicial(p.nombre) }}
+                    <span
+                      class="avatar-circle"
+                      [style.background]="colorAvatar(p.nombre)"
+                      >{{ inicial(p.nombre) }}
                     </span>
-                    <span class="fw-medium">{{ p.nombre }} {{ p.apellidos }}</span>
+                    <span class="fw-medium"
+                      >{{ p.nombre }} {{ p.apellidos }}</span
+                    >
                   </div>
                 </td>
                 <td>
-                  <span class="badge rounded-pill px-3 py-2" [ngClass]="
+                  <span
+                    class="badge rounded-pill px-3 py-2"
+                    [ngClass]="
                       p.pago_camiseta === 'pagado'
                         ? 'badge-soft-success'
                         : p.pago_camiseta === 'pendiente'
                           ? 'badge-soft-secondary'
                           : 'badge-soft-danger'
-                    ">
-                    <i class="bi" [ngClass]="
+                    "
+                  >
+                    <i
+                      class="bi"
+                      [ngClass]="
                         p.pago_camiseta === 'pagado'
                           ? 'bi-check-circle-fill'
                           : p.pago_camiseta === 'pendiente'
                             ? 'bi-clock-fill'
                             : 'bi-x-circle-fill'
-                      "></i>
+                      "
+                    ></i>
 
                     {{ p.pago_camiseta?.replace("_", " ") }}
                   </span>
@@ -163,20 +236,26 @@
                 <td>{{ p.talla }}</td>
 
                 <td>
-                  <span class="badge rounded-pill px-3 py-2" [ngClass]="
+                  <span
+                    class="badge rounded-pill px-3 py-2"
+                    [ngClass]="
                       p.pago_lunchtime === 'pagado'
                         ? 'badge-soft-success'
                         : p.pago_lunchtime === 'pendiente'
                           ? 'badge-soft-secondary'
                           : 'badge-soft-danger'
-                    ">
-                    <i class="bi" [ngClass]="
+                    "
+                  >
+                    <i
+                      class="bi"
+                      [ngClass]="
                         p.pago_lunchtime === 'pagado'
                           ? 'bi-check-circle-fill'
                           : p.pago_lunchtime === 'pendiente'
                             ? 'bi-clock-fill'
                             : 'bi-x-circle-fill'
-                      "></i>
+                      "
+                    ></i>
 
                     {{ p.pago_lunchtime?.replace("_", " ") }}
                   </span>
@@ -190,35 +269,61 @@
       </div>
 
       <!-- Footer: total + paginación -->
-      <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-3 pt-2">
+      <div
+        class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-3 pt-2"
+      >
         <div class="text-secondary small">
           Total encontrados: {{ participantesFiltrados.length }}
         </div>
         <ul class="pagination mb-0">
           <li class="page-item" [class.disabled]="paginaActual === 1">
             <button class="page-link" (click)="anterior()">
-              <img src="../../../../../assets/icons/registered/chevron-left.svg" />
+              <img
+                src="../../../../../assets/icons/registered/chevron-left.svg"
+              />
             </button>
           </li>
-          <li *ngFor="let p of rangoPaginas" class="page-item" [class.disabled]="p === '...'"
-            [class.active]="p === paginaActual">
-            <button *ngIf="p !== '...'" class="page-link" (click)="irAPagina(p)">
+          <li
+            *ngFor="let p of rangoPaginas"
+            class="page-item"
+            [class.disabled]="p === '...'"
+            [class.active]="p === paginaActual"
+          >
+            <button
+              *ngIf="p !== '...'"
+              class="page-link"
+              (click)="irAPagina(p)"
+            >
               {{ p }}
             </button>
-            <span *ngIf="p === '...'" class="page-link border-0 bg-transparent">…</span>
+            <span *ngIf="p === '...'" class="page-link border-0 bg-transparent"
+              >…</span
+            >
           </li>
-          <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
+          <li
+            class="page-item"
+            [class.disabled]="paginaActual === totalPaginas"
+          >
             <button class="page-link" (click)="siguiente()">
-              <img src="../../../../../assets/icons/registered/chevron-right.svg" />
+              <img
+                src="../../../../../assets/icons/registered/chevron-right.svg"
+              />
             </button>
           </li>
         </ul>
         <div class="d-flex align-items-center gap-3 flex-wrap">
           <div class="d-flex align-items-center gap-2 text-secondary small">
             <span>Mostrar por página</span>
-            <select class="form-select form-select-sm" style="width: auto" [(ngModel)]="porPagina"
-              (ngModelChange)="onPorPaginaChange()">
-              <option *ngFor="let opcion of opcionesPorPagina" [ngValue]="opcion">
+            <select
+              class="form-select form-select-sm"
+              style="width: auto"
+              [(ngModel)]="porPagina"
+              (ngModelChange)="onPorPaginaChange()"
+            >
+              <option
+                *ngFor="let opcion of opcionesPorPagina"
+                [ngValue]="opcion"
+              >
                 {{ opcion }}
               </option>
             </select>

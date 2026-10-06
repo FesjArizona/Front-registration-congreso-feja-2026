@@ -47,6 +47,13 @@ export class ProductosComponent implements OnInit, OnDestroy {
     'Southeastern California Conference',
     'Southern California Conference',
   ];
+  opcionesTalla: string[] = [
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+  ]
   opcionesProductos = [
     {
       "estatus": "Inluye comida",
@@ -54,7 +61,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
     },
     {
       "estatus": "Incluye playera",
-      "valor": 'lunch'
+      "valor": 'playera'
     }
   ]
   estadosDisponibles: Estado[] = ESTADOS_DISPONIBLES;
@@ -84,6 +91,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
   filtroEstado = '';
   filtroConferencia = '';
   filtroProductos = '';
+  filtroTalla = '';
   filtroIglesia: string = '';
   sizes = signal<Sizes[]>([]);
 
@@ -186,6 +194,15 @@ export class ProductosComponent implements OnInit, OnDestroy {
     });
   }
 
+  onProductoChange() {
+    if (this.filtroProductos !== 'playera') {
+      this.filtroTalla = '';
+    }
+
+    this.onFiltroChange();
+    this.paginaActual = 1;
+  }
+
   get iglesiasVisibles(): string[] {
     if (this.filtroConferencia) {
       return this.churchesMasterList
@@ -210,6 +227,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
 
     return this.participantes.filter(p => {
       let coincideProductos: boolean = true
+      let coincideTalla: boolean = true
       // Búsqueda por texto (todas las palabras deben coincidir en cualquier orden)
       const textoCompleto = `${p.nombre ?? ''} ${p.apellidos ?? ''} ${p.telefono ?? ''} ${p.correo ?? ''}`.toLowerCase();
       const coincideBusqueda = terminos.length === 0 || terminos.every(t => textoCompleto.includes(t));
@@ -221,6 +239,9 @@ export class ProductosComponent implements OnInit, OnDestroy {
       } else {
 
         coincideProductos = !this.filtroProductos || p.incluir_camisa == 1;
+        if (this.filtroTalla) {
+          coincideTalla = p.talla === this.filtroTalla;
+        }
       }
 
       const coincideConferencia = !this.filtroConferencia || p.conferencia === this.filtroConferencia;
@@ -228,7 +249,7 @@ export class ProductosComponent implements OnInit, OnDestroy {
       const coincideIglesia = !this.filtroIglesia || this.eventsService.normalizarIglesia(p.iglesia) === this.filtroIglesia;
 
       // Retornamos combinando todas las condiciones
-      return coincideBusqueda && coincideConferencia && coincideIglesia && coincideProductos;
+      return coincideBusqueda && coincideConferencia && coincideIglesia && coincideProductos && coincideTalla;
     });
   }
 
