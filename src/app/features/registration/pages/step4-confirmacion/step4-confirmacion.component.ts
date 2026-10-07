@@ -158,9 +158,11 @@ export class Step4ConfirmacionComponent {
       nombre_estado: this.formService.getSelectednames().stateName,
       ciudad: this.paso1Value.city,
       iglesia: this.paso1Value.church,
-      incluir_lunchtime: this.paso1Value.includesLunch,
+      // incluir_lunchtime: this.paso1Value.includesLunch,
+      incluir_lunchtime: false,
       es_chaperon: this.paso1Value.isChaperone,
-      incluir_camisa: this.paso1Value.includesTshirt,
+      incluir_camisa: false,
+      // incluir_camisa: this.paso1Value.includesTshirt,
       tipo_alimento: this.paso1Value.foodPreference,
       alimento_especial_nota: this.paso1Value.foodPreferenceDetails,
       contacto_emergencia: {
