@@ -84,7 +84,7 @@ export class OverviewCongresoComponent
         startAngle: -90,
         endAngle: 90,
         hollow: {
-          size: '35%',
+          size: '45%',
         },
         track: {
           background: '#f3e5d3',
