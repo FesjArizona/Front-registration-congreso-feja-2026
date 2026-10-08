@@ -41,9 +41,9 @@ export class SidebarComponent {
     this.authUser = this.authService.getUser() as AuthUser;
     const menuMaestro = [
       {
-        label: 'Feja 2026 - Union',
-        icon: 'soccer',
-        route: '/soccer',
+        label: 'Feja Union - 2026',
+        icon: 'ticket',
+        route: '/feja-union-2026',
         expanded: true,
         children: [
           {
